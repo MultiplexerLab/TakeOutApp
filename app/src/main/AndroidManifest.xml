@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.anixtechnology.takeout">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LogInActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SignUpActivity"
+            android:label="SignUp" />
+        <activity
+            android:name=".MainActivity"
+            android:label="Home" />
+        <activity
+            android:name=".Item.ScanQRActivity"
+            android:label="Scan Your QR Code" />
+        <activity
+            android:name=".Item.ProfileActivity"
+            android:label="Profile" />
+        <activity
+            android:name=".Item.AboutUsActivity"
+            android:label="About Us" />
+        <activity
+            android:name=".Item.StoreLocatorActivity"
+            android:label="Store Locator" />
+        <activity
+            android:name=".Item.AddReferralActivity"
+            android:label="Add Referral" />
+        <activity android:name=".Item.MenuActivity"
+            android:label="Our Menu"></activity>
+    </application>
+
+</manifest>

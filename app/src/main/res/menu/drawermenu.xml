@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/grp1" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/ITM_Profile"
+        android:icon="@drawable/profileicon"
+        android:onClick="BtnProfile"
+        android:clickable="true"
+        android:title="Profile"
+        />
+    </group>
+
+    <group android:id="@+id/grp2" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/ITM_Aboutus"
+        android:icon="@drawable/aboutuslogo"
+        android:onClick="BtnAboutUs"
+        android:title="About Us" />
+    </group>
+
+    <group android:id="@+id/grp3" android:checkableBehavior="single" >
+    <item
+        android:id="@+id/ITM_Scan_QR"
+        android:icon="@drawable/qr_icon"
+        android:onClick="BtnScanQR"
+        android:clickable="true"
+        android:title="Scan QR" />
+
+    </group>
+
+    <group android:id="@+id/grp4" android:checkableBehavior="single" >
+
+    <item
+        android:id="@+id/ITM_Store_Locator"
+        android:icon="@drawable/store_locator_icon"
+        android:onClick="BtnStoreLocator"
+        android:title="Store Locator" />
+
+    </group>
+
+    <group android:id="@+id/grp5" android:checkableBehavior="single" >
+
+    <item
+        android:id="@+id/ITM_Home_Delivery"
+        android:icon="@drawable/home_delivery_icon"
+        android:title="Home Delivery"
+        android:onClick="BtnHomeDelivery"/>
+
+    </group>
+
+    <group android:id="@+id/grp6" android:checkableBehavior="single" >
+
+    <item
+        android:id="@+id/ITM_Referral"
+        android:icon="@drawable/referral_icon"
+        android:onClick="BtnAddReferral"
+        android:title="Add Referral" />
+    </group>
+
+    <group android:id="@+id/grp7" android:checkableBehavior="single" >
+
+    <item
+        android:id="@+id/ITMlogout"
+        android:clickable="true"
+        android:icon="@drawable/logout_icon"
+        android:onClick="BtnLogOut"
+        android:title="Log Out" />
+    </group>
+
+</menu>

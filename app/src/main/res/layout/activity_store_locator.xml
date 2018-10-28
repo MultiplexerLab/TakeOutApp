@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_back"
+    tools:context=".Item.StoreLocatorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_back"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:id="@+id/firstLL"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/search_icon"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search for places"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstLL"
+        android:background="@drawable/squareshape"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:elevation="10dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:id="@+id/IV_burger_pic_art"
+            android:layout_centerVertical="true"
+            android:background="@drawable/burgericon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TakeOut Banani"
+            android:id="@+id/TV_place_name"
+            android:layout_toRightOf="@+id/IV_burger_pic_art"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/TV_store_address"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Abedin Tower, 35 Kemal Ataturk Avenue, Banani"
+            android:layout_below="@+id/TV_place_name"
+            android:layout_toRightOf="@+id/IV_burger_pic_art"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"/>
+
+        <ImageView
+            android:id="@+id/IV_call"
+            android:layout_width="40dp"
+            android:layout_toRightOf="@+id/IV_direction"
+            android:layout_height="40dp"
+            android:background="@drawable/call_icon"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:id="@+id/IV_direction"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/TV_store_address"
+            android:background="@drawable/direction_icon"
+
+            android:layout_centerVertical="true"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
