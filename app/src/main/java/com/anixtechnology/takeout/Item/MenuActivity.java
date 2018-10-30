@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -32,15 +33,13 @@ public class MenuActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         cAdapter = new CustomAdapter(MenuActivity.this,menuList);
-        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(MenuActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(MenuActivity.this, LinearLayoutManager.VERTICAL, false);
 
-        recyclerView.setLayoutManager(cLayoutManager);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(cAdapter);
-
         input();
-
     }
 
 
@@ -58,5 +57,4 @@ public class MenuActivity extends AppCompatActivity {
         menuList.add(new Menu(R.drawable.pic2m, R.drawable.pic2b) );
         menuList.add(new Menu(R.drawable.pic3m, R.drawable.pic3b) );
     }
-
 }

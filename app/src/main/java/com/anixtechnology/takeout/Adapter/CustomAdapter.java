@@ -16,10 +16,6 @@ import com.anixtechnology.takeout.R;
 
 import java.util.List;
 
-/**
- * Created by Anix on 4/7/2018.
- */
-
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
 

@@ -12,10 +12,9 @@
         android:layout_height="200dp"
         android:id="@+id/RL_menu_detail"
         android:background="@drawable/squareshape"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="30dp"
         android:elevation="10dp">
 
         <ImageView
@@ -26,19 +25,14 @@
             android:scaleType="fitXY"
             android:background="@drawable/pic1b"/>
 
-
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/RL_menu_detail"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:orientation="horizontal"
-        android:scrollbars="horizontal" />
-
-
-
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:scrollbars="vertical" />
 </RelativeLayout>

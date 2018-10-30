@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BoomCustomize(){
-
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
             TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
                     .normalImageRes(iconList.get(i))
@@ -137,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     .pieceColorRes(R.color.deepred)
                     .textGravity(Gravity.CENTER)
                     .typeface(Typeface.DEFAULT_BOLD)
+                    .textSize(16)
                     .shadowEffect(true)
                     .rotateImage(true)
                     .rotateText(true)
