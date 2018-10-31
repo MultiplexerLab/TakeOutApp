@@ -4,7 +4,7 @@
     <item
         android:id="@+id/ITM_Profile"
         android:icon="@drawable/profileicon"
-        android:onClick="BtnProfile"
+        android:onClick="btnProfile"
         android:clickable="true"
         android:title="Profile"
         />
@@ -14,7 +14,7 @@
     <item
         android:id="@+id/ITM_Aboutus"
         android:icon="@drawable/aboutuslogo"
-        android:onClick="BtnAboutUs"
+        android:onClick="btnAboutUs"
         android:title="About Us" />
     </group>
 
@@ -22,7 +22,7 @@
     <item
         android:id="@+id/ITM_Scan_QR"
         android:icon="@drawable/qr_icon"
-        android:onClick="BtnScanQR"
+        android:onClick="btnScanQR"
         android:clickable="true"
         android:title="Scan QR" />
 
@@ -33,7 +33,7 @@
     <item
         android:id="@+id/ITM_Store_Locator"
         android:icon="@drawable/store_locator_icon"
-        android:onClick="BtnStoreLocator"
+        android:onClick="btnStoreLocator"
         android:title="Store Locator" />
 
     </group>
@@ -44,7 +44,7 @@
         android:id="@+id/ITM_Home_Delivery"
         android:icon="@drawable/home_delivery_icon"
         android:title="Home Delivery"
-        android:onClick="BtnHomeDelivery"/>
+        android:onClick="btnHomeDelivery"/>
 
     </group>
 
@@ -53,7 +53,7 @@
     <item
         android:id="@+id/ITM_Referral"
         android:icon="@drawable/referral_icon"
-        android:onClick="BtnAddReferral"
+        android:onClick="btnAddReferral"
         android:title="Add Referral" />
     </group>
 
@@ -63,7 +63,7 @@
         android:id="@+id/ITMlogout"
         android:clickable="true"
         android:icon="@drawable/logout_icon"
-        android:onClick="BtnLogOut"
+        android:onClick="btnLogOut"
         android:title="Log Out" />
     </group>
 

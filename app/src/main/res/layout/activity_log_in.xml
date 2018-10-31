@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/white"
     tools:context=".LogInActivity">
 
     <ImageView
@@ -32,97 +32,102 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:text="@string/text"
-        />
+        android:textColor="#757575"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/LL_input"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:orientation="vertical">
+        android:background="@drawable/squareshape"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:textColorHint="@color/lightyellow">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/lightyellow"
                 android:hint="USERNAME"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
-                android:textSize="15dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/lightyellow"
-                android:textColorHint="@color/lightyellow"/>
+                android:textSize="15dp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/lightyellow"
+            android:layout_marginBottom="70dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:textColorHint="@color/lightyellow">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/lightyellow"
                 android:hint="PASSWORD"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
-                android:textSize="15dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/lightyellow"
-                android:textColorHint="@color/lightyellow"/>
+                android:textSize="15dp" />
         </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/buttonlogin"
-            android:elevation="5dp"
-            android:textStyle="bold"
-            android:onClick="BtnLogIn"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:stateListAnimator="@null"
-            android:text="LOG IN"
-            android:textColor="#FFFFFF"/>
 
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"
+        android:background="@drawable/buttonlogin"
+        android:elevation="10dp"
+        android:onClick="btnLogIn"
+        android:stateListAnimator="@null"
+        android:text="LOG IN"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="BtnSignUp"
         android:layout_below="@+id/LL_input"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="60dp"
+        android:onClick="btnSignUp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dont have an account? "
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+            android:text="Don't have an account? "
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#757575"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/lightyellow"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+            android:textStyle="bold" />
     </LinearLayout>
-
 
 
 </RelativeLayout>

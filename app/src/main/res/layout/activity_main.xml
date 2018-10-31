@@ -57,6 +57,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="30dp"
                         android:gravity="center"
+                        android:textStyle="bold"
                         android:text="Welcome, Monjura Moula Anik"
                         android:textColor="@color/black"
                         android:textSize="15dp" />
@@ -70,8 +71,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="30dp"
                             android:layout_marginBottom="30dp"
-                            android:background="@color/yellow"
+                            android:background="@color/lightyellow"
                             android:elevation="5dp"
+                            android:textStyle="bold"
                             android:gravity="center"
                             android:paddingLeft="10dp"
                             android:paddingTop="10dp"
@@ -87,10 +89,11 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="30dp"
                             android:layout_marginBottom="30dp"
-                            android:background="@drawable/menutv"
+                            android:background="@drawable/tv_menu_home"
                             android:elevation="5dp"
                             android:gravity="center"
-                            android:onClick="BtnMenu"
+                            android:textStyle="bold"
+                            android:onClick="btnMenu"
                             android:paddingLeft="10dp"
                             android:paddingTop="10dp"
                             android:paddingRight="10dp"
@@ -136,7 +139,7 @@
             android:layout_marginBottom="10dp"
             app:bmb_boomEnum="boomParabola_1"
             app:bmb_boomInWholeScreen="true"
-            app:bmb_buttonEnum="textOutsideCircle"
+            app:bmb_buttonEnum="textInsideCircle"
             app:bmb_buttonPlaceEnum="buttonPlace_sc_7_1"
             app:bmb_frames="100"
             app:bmb_hideDuration="500"
@@ -163,4 +166,5 @@
         app:menu="@menu/drawermenu">
 
     </android.support.design.widget.NavigationView>
+
 </android.support.v4.widget.DrawerLayout>

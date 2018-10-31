@@ -11,10 +11,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/applogo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/applogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -31,27 +31,72 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
-            android:label="SignUp" />
+            android:label="SignUp"
+            android:parentActivityName=".LogInActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.LogInActivity"/>
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:label="Home" />
         <activity
-            android:name=".Item.ScanQRActivity"
-            android:label="Scan Your QR Code" />
+            android:name=".ItemActivity.ScanQRActivity"
+            android:label="Scan Your QR Code"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.MainActivity"/>
+        </activity>
+
         <activity
-            android:name=".Item.ProfileActivity"
-            android:label="Profile" />
+            android:name=".ItemActivity.ProfileActivity"
+            android:label="Profile"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.MainActivity"/>
+        </activity>
+
         <activity
-            android:name=".Item.AboutUsActivity"
-            android:label="About Us" />
+            android:name=".ItemActivity.AboutUsActivity"
+            android:label="About Us"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.MainActivity"/>
+
+        </activity>
+
         <activity
-            android:name=".Item.StoreLocatorActivity"
-            android:label="Store Locator" />
+            android:name=".ItemActivity.StoreLocatorActivity"
+            android:label="Store Locator"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.MainActivity"/>
+        </activity>
+
         <activity
-            android:name=".Item.AddReferralActivity"
-            android:label="Add Referral" />
-        <activity android:name=".Item.MenuActivity"
-            android:label="Our Menu"></activity>
+            android:name=".ItemActivity.AddReferralActivity"
+            android:label="Add Referral"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.MainActivity"/>
+        </activity>
+
+        <activity android:name=".ItemActivity.MenuActivity"
+            android:label="Our Menu"
+            android:parentActivityName=".MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.MainActivity"/>
+
+        </activity>
     </application>
 
 </manifest>

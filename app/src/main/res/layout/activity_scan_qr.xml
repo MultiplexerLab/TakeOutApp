@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Item.ScanQRActivity"
-    android:background="#FEFF99">
+    tools:context=".ItemActivity.ScanQRActivity"
+    android:background="@color/lightyellow">
 
     <ImageView
         android:layout_width="250dp"

@@ -14,12 +14,12 @@ public class LogInActivity extends AppCompatActivity {
     }
 
 
-    public void BtnLogIn(View view) {
+    public void btnLogIn(View view) {
         Intent intent = new Intent(LogInActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void BtnSignUp(View view) {
+    public void btnSignUp(View view) {
         Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
         startActivity(intent);
     }

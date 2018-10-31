@@ -8,159 +8,162 @@
     tools:context=".SignUpActivity">
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/squareshape"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:paddingBottom="30dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp">
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/squareshape"
-            android:elevation="10dp"
-            android:orientation="vertical"
-            android:paddingBottom="30dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="20dp">
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/lightyellow">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/ETSingupfullname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Full Name"
-
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/ETsignupemail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email Address"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/ETSignuppassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/ETSignupconpassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
-                    android:inputType="textPassword"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/ETsignupphoneno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Phone No"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
-            </android.support.design.widget.TextInputLayout>
-
-            <RadioGroup
-                android:id="@+id/RadioGroupgender"
+            <EditText
+                android:id="@+id/ETSingupfullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:backgroundTint="@color/deepred"
+                android:hint="Full Name"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
 
-                <me.omidh.liquidradiobutton.LiquidRadioButton
-                    android:id="@+id/Radiobtnmale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:paddingRight="90dp"
-                    android:text="Male"
-                    app:lrb_checkedColor="@color/black"
-                    app:lrb_explodeCount="3"
-                    app:lrb_inAnimDuration="500"
-                    app:lrb_innerCircleRadius="7dp"
-                    app:lrb_outAnimDuration="500"
-                    app:lrb_outterPadding="8dp"
-                    app:lrb_strokeRadius="15dp"
-                    app:lrb_strokeWidth="1dp"
-                    app:lrb_unCheckedColor="@color/black" />
+        </android.support.design.widget.TextInputLayout>
 
-                <me.omidh.liquidradiobutton.LiquidRadioButton
-                    android:id="@+id/Radiobtnfemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:paddingRight="10dp"
-                    android:text="Female"
-                    app:lrb_checkedColor="@color/black"
-                    app:lrb_explodeCount="3"
-                    app:lrb_inAnimDuration="500"
-                    app:lrb_innerCircleRadius="7dp"
-                    app:lrb_outAnimDuration="500"
-                    app:lrb_outterPadding="8dp"
-                    app:lrb_strokeRadius="15dp"
-                    app:lrb_strokeWidth="1dp"
-                    app:lrb_unCheckedColor="@color/black" />
-
-            </RadioGroup>
-
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="190dp"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="420dp"
-            android:background="@drawable/roundbutton"
-            android:elevation="10dp"
-            android:stateListAnimator="@null"
-            android:text="Sign Up"
-            android:onClick="BtnSignUp"
-            android:textColor="@color/white"
-            android:textSize="15dp" />
+            android:textColorHint="@color/lightyellow">
+
+            <EditText
+                android:id="@+id/ETsignupemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/deepred"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/lightyellow">
+
+            <EditText
+                android:id="@+id/ETSignuppassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/deepred"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/lightyellow">
+
+            <EditText
+                android:id="@+id/ETSignupconpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/deepred"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
+        </android.support.design.widget.TextInputLayout>
 
 
-    </RelativeLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/lightyellow">
+
+            <EditText
+                android:id="@+id/ETsignupphoneno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/deepred"
+                android:hint="Phone No"
+                android:inputType="number"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
+        </android.support.design.widget.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/RadioGroupgender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <me.omidh.liquidradiobutton.LiquidRadioButton
+                android:id="@+id/Radiobtnmale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:paddingRight="90dp"
+                android:text="Male"
+                app:lrb_checkedColor="@color/deepred"
+                app:lrb_explodeCount="3"
+                app:lrb_inAnimDuration="500"
+                app:lrb_innerCircleRadius="7dp"
+                app:lrb_outAnimDuration="500"
+                app:lrb_outterPadding="8dp"
+                app:lrb_strokeRadius="15dp"
+                app:lrb_strokeWidth="1dp"
+                app:lrb_unCheckedColor="@color/lightyellow" />
+
+            <me.omidh.liquidradiobutton.LiquidRadioButton
+                android:id="@+id/Radiobtnfemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:paddingRight="10dp"
+                android:text="Female"
+                app:lrb_checkedColor="@color/deepred"
+                app:lrb_explodeCount="3"
+                app:lrb_inAnimDuration="500"
+                app:lrb_innerCircleRadius="7dp"
+                app:lrb_outAnimDuration="500"
+                app:lrb_outterPadding="8dp"
+                app:lrb_strokeRadius="15dp"
+                app:lrb_strokeWidth="1dp"
+                app:lrb_unCheckedColor="@color/lightyellow" />
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/roundbutton"
+        android:elevation="10dp"
+        android:onClick="btnSignUp"
+        android:stateListAnimator="@null"
+        android:text="Sign Up"
+        android:textColor="@color/white"
+        android:textSize="15dp" />
+
+
+</RelativeLayout>

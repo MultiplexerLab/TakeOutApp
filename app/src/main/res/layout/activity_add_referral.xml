@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_back"
-    tools:context=".Item.AddReferralActivity">
+    tools:context=".ItemActivity.AddReferralActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="20dp"
         android:elevation="10dp"
-        android:onClick="BtnAddRef"
+        android:onClick="btnAddRef"
         android:stateListAnimator="@null"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"

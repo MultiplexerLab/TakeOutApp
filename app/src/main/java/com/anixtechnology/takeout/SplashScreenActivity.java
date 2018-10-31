@@ -1,15 +1,12 @@
 package com.anixtechnology.takeout;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -26,14 +23,13 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
         final Intent intent = new Intent(SplashScreenActivity.this, LogInActivity.class);
-        Thread timer = new Thread(){
-            public void run(){
+        Thread timer = new Thread() {
+            public void run() {
                 try {
                     sleep(4000);
-                }catch (InterruptedException e){
+                } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
 
                     startActivity(intent);
 
@@ -45,10 +41,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
-    public void Animation(){
+    public void Animation() {
         LogoPic = findViewById(R.id.IV_splash_logo);
 
-        Animation myanime = AnimationUtils.loadAnimation(this,R.anim.transition);
+        Animation myanime = AnimationUtils.loadAnimation(this, R.anim.transition);
         LogoPic.startAnimation(myanime);
 
     }

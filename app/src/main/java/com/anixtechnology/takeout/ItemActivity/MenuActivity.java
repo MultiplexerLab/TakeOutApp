@@ -1,4 +1,4 @@
-package com.anixtechnology.takeout.Item;
+package com.anixtechnology.takeout.ItemActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,8 +7,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.anixtechnology.takeout.Adapter.CustomAdapter;
 import com.anixtechnology.takeout.Model.Menu;
@@ -30,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recycler_view);
         cAdapter = new CustomAdapter(MenuActivity.this,menuList);

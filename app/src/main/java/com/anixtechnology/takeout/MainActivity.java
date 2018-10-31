@@ -1,9 +1,8 @@
 package com.anixtechnology.takeout;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -15,17 +14,16 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
-import com.anixtechnology.takeout.Item.AboutUsActivity;
-import com.anixtechnology.takeout.Item.AddReferralActivity;
-import com.anixtechnology.takeout.Item.MenuActivity;
-import com.anixtechnology.takeout.Item.ProfileActivity;
-import com.anixtechnology.takeout.Item.ScanQRActivity;
-import com.anixtechnology.takeout.Item.StoreLocatorActivity;
+import com.anixtechnology.takeout.ItemActivity.AboutUsActivity;
+import com.anixtechnology.takeout.ItemActivity.AddReferralActivity;
+import com.anixtechnology.takeout.ItemActivity.MenuActivity;
+import com.anixtechnology.takeout.ItemActivity.ProfileActivity;
+import com.anixtechnology.takeout.ItemActivity.ScanQRActivity;
+import com.anixtechnology.takeout.ItemActivity.StoreLocatorActivity;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
-import com.nightonke.boommenu.BoomButtons.TextOutsideCircleButton;
+import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
+
 import com.nightonke.boommenu.BoomMenuButton;
 
 import java.util.ArrayList;
@@ -54,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         titleList = new ArrayList<>();
 
         bmb = findViewById(R.id.bmb);
-        SetInitBoom();
-        BoomCustomize();
+        setInitBoom();
+        boomCustomize();
 
         imageList = new ArrayList<>();
-        burgerslide =findViewById(R.id.IV_burger_pic_slide);
-        InitSetPic();
-        BurgerSlider();
+        burgerslide = findViewById(R.id.IV_burger_pic_slide);
+        initSetPic();
+        burgerSlider();
 
 
         drawerLayout = findViewById(R.id.drawerlayout);
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         header = mNavigationView.getHeaderView(0);
     }
 
-    private void BurgerSlider() {
+    private void burgerSlider() {
 
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
@@ -92,13 +90,13 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 2000);
     }
 
-    private void InitSetPic() {
+    private void initSetPic() {
         imageList.add(R.drawable.pic1);
         imageList.add(R.drawable.pic2);
         imageList.add(R.drawable.pic3);
     }
 
-    private void SetInitBoom() {
+    private void setInitBoom() {
         iconList.add(R.drawable.profileicon);
         iconList.add(R.drawable.aboutuslogo);
         iconList.add(R.drawable.qr_icon);
@@ -125,18 +123,21 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void BoomCustomize(){
+    public void boomCustomize() {
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
-            TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
+            TextInsideCircleButton.Builder builder = new TextInsideCircleButton.Builder()
                     .normalImageRes(iconList.get(i))
                     .normalText(titleList.get(i))
                     .rippleEffect(true)
-                    .normalColorRes(R.color.lightestyellow)
+                    .normalColorRes(R.color.deepred)
                     .highlightedColorRes(R.color.deepred)
                     .pieceColorRes(R.color.deepred)
                     .textGravity(Gravity.CENTER)
                     .typeface(Typeface.DEFAULT_BOLD)
-                    .textSize(16)
+                    .normalTextColorRes(R.color.lightyellow)
+                    .textSize(10)
+                    .imagePadding(new Rect(20, 20, 20, 20))
+                    .textPadding(new Rect(10, 20, 10, 0))
                     .shadowEffect(true)
                     .rotateImage(true)
                     .rotateText(true)
@@ -144,22 +145,29 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onBoomButtonClick(int i) {
                             Intent intent = null;
-                            switch (i){
-                                case 0: intent = new Intent(MainActivity.this, ProfileActivity.class);
-                                break;
-                                case 1: intent = new Intent(MainActivity.this, AboutUsActivity.class);
+                            switch (i) {
+                                case 0:
+                                    intent = new Intent(MainActivity.this, ProfileActivity.class);
                                     break;
-                                case 2: intent = new Intent(MainActivity.this, ScanQRActivity.class);
+                                case 1:
+                                    intent = new Intent(MainActivity.this, AboutUsActivity.class);
                                     break;
-                                case 3: intent = new Intent(MainActivity.this, StoreLocatorActivity.class);
+                                case 2:
+                                    intent = new Intent(MainActivity.this, ScanQRActivity.class);
                                     break;
-                                case 4: String url = "https://www.foodpanda.com.bd/";
+                                case 3:
+                                    intent = new Intent(MainActivity.this, StoreLocatorActivity.class);
+                                    break;
+                                case 4:
+                                    String url = "https://www.foodpanda.com.bd/";
                                     intent = new Intent(Intent.ACTION_VIEW);
                                     intent.setData(Uri.parse(url));
                                     break;
-                                case 5: intent = new Intent(MainActivity.this, AddReferralActivity.class);
+                                case 5:
+                                    intent = new Intent(MainActivity.this, AddReferralActivity.class);
                                     break;
-                                case 6: intent = new Intent(MainActivity.this, LogInActivity.class);
+                                case 6:
+                                    intent = new Intent(MainActivity.this, LogInActivity.class);
                                     break;
                             }
                             startActivity(intent);
@@ -169,44 +177,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void BtnScanQR(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this,ScanQRActivity.class);
+    public void btnScanQR(MenuItem item) {
+        Intent intent = new Intent(MainActivity.this, ScanQRActivity.class);
         startActivity(intent);
     }
 
-    public void BtnProfile(MenuItem item) {
+    public void btnProfile(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
 
-    public void BtnAboutUs(MenuItem item) {
+    public void btnAboutUs(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
         startActivity(intent);
     }
 
-    public void BtnStoreLocator(MenuItem item) {
+    public void btnStoreLocator(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, StoreLocatorActivity.class);
         startActivity(intent);
     }
 
-    public void BtnHomeDelivery(MenuItem item) {
+    public void btnHomeDelivery(MenuItem item) {
         String url = "https://www.foodpanda.com.bd/";
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
     }
 
-    public void BtnAddReferral(MenuItem item) {
+    public void btnAddReferral(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
         startActivity(intent);
     }
 
-    public void BtnLogOut(MenuItem item) {
+    public void btnLogOut(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, LogInActivity.class);
         startActivity(intent);
     }
 
-    public void BtnMenu(View view) {
+    public void btnMenu(View view) {
         Intent intent = new Intent(MainActivity.this, MenuActivity.class);
         startActivity(intent);
     }

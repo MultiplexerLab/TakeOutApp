@@ -22,13 +22,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     List<Menu> mList;
     Context context;
 
-    public CustomAdapter( Context context, List<Menu> List) {
+    public CustomAdapter(Context context, List<Menu> List) {
         this.mList = List;
-        this.context =context;
+        this.context = context;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView IVPic,IVLargepic;
+        public ImageView IVPic, IVLargepic;
         RelativeLayout rlayout;
 
         public MyViewHolder(View view) {
