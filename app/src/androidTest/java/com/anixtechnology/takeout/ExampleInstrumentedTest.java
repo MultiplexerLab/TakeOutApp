@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.anixtechnology.takeout", appContext.getPackageName());
+        assertEquals("com.lab.takeout", appContext.getPackageName());
     }
 }

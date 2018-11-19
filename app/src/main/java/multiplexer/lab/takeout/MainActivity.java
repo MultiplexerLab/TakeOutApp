@@ -1,4 +1,4 @@
-package com.anixtechnology.takeout;
+package multiplexer.lab.takeout;
 
 import android.content.Intent;
 import android.graphics.Rect;
@@ -15,12 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.anixtechnology.takeout.ItemActivity.AboutUsActivity;
-import com.anixtechnology.takeout.ItemActivity.AddReferralActivity;
-import com.anixtechnology.takeout.ItemActivity.MenuActivity;
-import com.anixtechnology.takeout.ItemActivity.ProfileActivity;
-import com.anixtechnology.takeout.ItemActivity.ScanQRActivity;
-import com.anixtechnology.takeout.ItemActivity.StoreLocatorActivity;
+import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
+import multiplexer.lab.takeout.ItemActivity.AddReferralActivity;
+import multiplexer.lab.takeout.ItemActivity.MenuActivity;
+import multiplexer.lab.takeout.ItemActivity.ProfileActivity;
+import multiplexer.lab.takeout.ItemActivity.ScanQRActivity;
+import multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity;
+
+import com.anixtechnology.takeout.R;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 

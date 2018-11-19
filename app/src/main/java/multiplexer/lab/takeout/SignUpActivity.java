@@ -1,4 +1,4 @@
-package com.anixtechnology.takeout;
+package multiplexer.lab.takeout;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.anixtechnology.takeout.R;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 

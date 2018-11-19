@@ -1,4 +1,4 @@
-package com.anixtechnology.takeout.Adapter;
+package multiplexer.lab.takeout.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.RelativeLayout;
 
-import com.anixtechnology.takeout.Model.Menu;
+import multiplexer.lab.takeout.Model.Menu;
 import com.anixtechnology.takeout.R;
 
 import java.util.List;

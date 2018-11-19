@@ -1,4 +1,4 @@
-package com.anixtechnology.takeout;
+package multiplexer.lab.takeout;
 
 
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.anixtechnology.takeout.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

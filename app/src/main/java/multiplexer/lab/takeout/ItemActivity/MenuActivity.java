@@ -1,4 +1,4 @@
-package com.anixtechnology.takeout.ItemActivity;
+package multiplexer.lab.takeout.ItemActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.anixtechnology.takeout.Adapter.CustomAdapter;
-import com.anixtechnology.takeout.Model.Menu;
+import multiplexer.lab.takeout.Adapter.CustomAdapter;
+import multiplexer.lab.takeout.Model.Menu;
 import com.anixtechnology.takeout.R;
 
 import java.util.ArrayList;

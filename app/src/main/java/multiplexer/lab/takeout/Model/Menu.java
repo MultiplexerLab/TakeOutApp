@@ -1,4 +1,4 @@
-package com.anixtechnology.takeout.Model;
+package multiplexer.lab.takeout.Model;
 
 public class Menu {
 

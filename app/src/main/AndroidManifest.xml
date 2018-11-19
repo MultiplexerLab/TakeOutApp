@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.anixtechnology.takeout">
+    package="multiplexer.lab.takeout">
 
     <supports-screens
         android:anyDensity="true"
@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="multiplexer.lab.takeout.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,74 +27,74 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LogInActivity"
+            android:name="multiplexer.lab.takeout.LogInActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".SignUpActivity"
+            android:name="multiplexer.lab.takeout.SignUpActivity"
             android:label="SignUp"
-            android:parentActivityName=".LogInActivity">
+            android:parentActivityName="multiplexer.lab.takeout.LogInActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.LogInActivity"/>
+                android:value=".LogInActivity"/>
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="multiplexer.lab.takeout.MainActivity"
             android:label="Home" />
         <activity
-            android:name=".ItemActivity.ScanQRActivity"
+            android:name="multiplexer.lab.takeout.ItemActivity.ScanQRActivity"
             android:label="Scan Your QR Code"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
 
         <activity
-            android:name=".ItemActivity.ProfileActivity"
+            android:name="multiplexer.lab.takeout.ItemActivity.ProfileActivity"
             android:label="Profile"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
 
         <activity
-            android:name=".ItemActivity.AboutUsActivity"
+            android:name="multiplexer.lab.takeout.ItemActivity.AboutUsActivity"
             android:label="About Us"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.MainActivity"/>
+                android:value=".MainActivity"/>
 
         </activity>
 
         <activity
-            android:name=".ItemActivity.StoreLocatorActivity"
+            android:name="multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity"
             android:label="Store Locator"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
 
         <activity
-            android:name=".ItemActivity.AddReferralActivity"
+            android:name="multiplexer.lab.takeout.ItemActivity.AddReferralActivity"
             android:label="Add Referral"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
 
-        <activity android:name=".ItemActivity.MenuActivity"
+        <activity android:name="multiplexer.lab.takeout.ItemActivity.MenuActivity"
             android:label="Our Menu"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.MainActivity"/>
+                android:value=".MainActivity"/>
 
         </activity>
     </application>

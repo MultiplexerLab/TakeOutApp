@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".ItemActivity.AboutUsActivity">
+    tools:context="multiplexer.lab.takeout.ItemActivity.AboutUsActivity">
 
     <ImageView
         android:layout_width="180dp"
