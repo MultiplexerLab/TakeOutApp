@@ -8,90 +8,202 @@
     tools:context="multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity">
 
     <LinearLayout
+        android:id="@+id/firstLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@drawable/search_back"
         android:elevation="10dp"
-        android:padding="5dp"
-        android:layout_margin="10dp"
-        android:id="@+id/firstLL"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:background="@drawable/search_icon"/>
+            android:layout_marginTop="5dp"
+            android:background="@drawable/search_icon" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search for places"/>
-
+            android:hint="Search for places" />
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/store1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/firstLL"
-        android:background="@drawable/squareshape"
-        android:padding="10dp"
         android:layout_margin="10dp"
-        android:elevation="10dp"
         android:layout_marginTop="10dp"
-        >
+        android:background="@drawable/squareshape"
+        android:elevation="10dp"
+        android:padding="10dp">
 
         <ImageView
+            android:id="@+id/IV_burger_pic_art"
             android:layout_width="60dp"
             android:layout_height="50dp"
-            android:id="@+id/IV_burger_pic_art"
             android:layout_centerVertical="true"
-            android:background="@drawable/burgericon"/>
+            android:background="@drawable/burgericon" />
+
         <TextView
+            android:id="@+id/TV_place_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TakeOut Banani"
-            android:id="@+id/TV_place_name"
+            android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/IV_burger_pic_art"
+            android:text="TakeOut Banani"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginLeft="20dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TV_store_address"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Abedin Tower, 35 Kemal Ataturk Avenue, Banani"
             android:layout_below="@+id/TV_place_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/IV_burger_pic_art"
-            android:textColor="@color/black"
-            android:layout_marginLeft="20dp"/>
+            android:text="Abedin Tower, 35 Kemal Ataturk Avenue, Banani"
+            android:textColor="@color/black" />
 
         <ImageView
             android:id="@+id/IV_call"
-            android:layout_width="40dp"
-            android:layout_toRightOf="@+id/IV_direction"
-            android:layout_height="40dp"
-            android:background="@drawable/call_icon"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            />
+            android:layout_toRightOf="@+id/IV_direction"
+            android:onClick="callStore"
+            android:background="@drawable/call" />
 
         <ImageView
             android:id="@+id/IV_direction"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/TV_store_address"
             android:background="@drawable/direction_icon"
-
-            android:layout_centerVertical="true"
-            />
-
-
+            android:onClick="mapJump" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/store2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/store1"
+        android:layout_margin="10dp"
+        android:background="@drawable/squareshape"
+        android:elevation="10dp"
+        android:padding="10dp">
 
+        <ImageView
+            android:id="@+id/IV_burger_pic_art1"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/burgericon" />
+
+        <TextView
+            android:id="@+id/TV_place_name1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/IV_burger_pic_art1"
+            android:text="TakeOut Dhanmondi"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TV_store_address1"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_place_name1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+
+            android:layout_toRightOf="@+id/IV_burger_pic_art1"
+            android:text="736 Rangs KB Square, Road - 9/a, Satmosjid Road, Dhanmondi"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/IV_call1"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="callStore"
+            android:layout_toRightOf="@+id/IV_direction1"
+            android:background="@drawable/call" />
+
+        <ImageView
+            android:id="@+id/IV_direction1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/TV_store_address1"
+            android:background="@drawable/direction_icon"
+            android:onClick="mapJump" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/store3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/store2"
+        android:layout_margin="10dp"
+        android:background="@drawable/squareshape"
+        android:elevation="10dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/IV_burger_pic_art2"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/burgericon" />
+
+        <TextView
+            android:id="@+id/TV_place_name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/IV_burger_pic_art2"
+            android:text="TakeOut Dhanmondi"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TV_store_address2"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_place_name2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/IV_burger_pic_art2"
+            android:text="17 Sonargao Janapath, Sector - 13, Uttara Model Town"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/IV_call2"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/IV_direction2"
+            android:onClick="callStore"
+            android:background="@drawable/call" />
+
+        <ImageView
+            android:id="@+id/IV_direction2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/TV_store_address2"
+            android:background="@drawable/direction_icon"
+            android:onClick="mapJump" />
+    </RelativeLayout>
 
 </RelativeLayout>

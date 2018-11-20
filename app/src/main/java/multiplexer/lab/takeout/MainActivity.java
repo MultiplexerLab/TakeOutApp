@@ -35,9 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     NavigationView mNavigationView;
     View header;
-
     ImageView burgerslide;
-
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
     ArrayList<Integer> imageList;

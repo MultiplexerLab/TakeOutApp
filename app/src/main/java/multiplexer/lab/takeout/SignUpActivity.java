@@ -1,20 +1,55 @@
 package multiplexer.lab.takeout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import multiplexer.lab.takeout.Model.RegisterBindingModel;
 import multiplexer.lab.takeout.R;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
     EditText etFullname, etEmail, etPassword, etConPassword, etPhone;
     RadioButton rMale, rFemale;
+    Snackbar snackbar;
+    RelativeLayout rootLayout;
+    ArrayAdapter<String> adapter;
+    String arr[] = {"Bangladesh", "Sri Lanka"};
+    Spinner spinnerCountry;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +63,80 @@ public class SignUpActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.et_signup_phoneno);
         rMale = findViewById(R.id.Radiobtnmale);
         rFemale = findViewById(R.id.Radiobtnfemale);
+        rootLayout = findViewById(R.id.rootLayout);
+        spinnerCountry = findViewById(R.id.spinnerCountry);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
+        spinnerCountry.setAdapter(adapter);
+        queue = Volley.newRequestQueue(this);
     }
 
     public void btnSignUp(View view) {
-        if (validation()) {
-            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }else {
-            YoYo.with(Techniques.Shake)
-                    .duration(1000)
-                    .repeat(1)
-                    .playOn(findViewById(R.id.ll_signup));
+        if (internetConnected()) {
+            if (validation()) {
+                sendDataToServer();
+            } else {
+                YoYo.with(Techniques.Shake)
+                        .duration(1000)
+                        .repeat(0)
+                        .playOn(findViewById(R.id.ll_signup));
+            }
+        } else {
+            showSnackBar();
         }
+    }
+
+    private void sendDataToServer() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://api.bdtakeout.com/api/account/register",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(SignUpActivity.this, "Thanks for being registered!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        Log.i("Response", response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse response = error.networkResponse;
+                if(response!=null) {
+                    Log.e("networkResponse", response.toString());
+                    if (error instanceof ServerError && response != null) {
+                        try {
+                            String res = new String(response.data,
+                                    HttpHeaderParser.parseCharset(response.headers, "application/json"));
+                            Log.i("resString", res);
+                            if(res.contains("Phone")){
+                                Toast.makeText(SignUpActivity.this, "This phone number is already taken!", Toast.LENGTH_SHORT).show();
+                            }else if(res.contains("Email")){
+                                Toast.makeText(SignUpActivity.this, "This email Id is already registered!", Toast.LENGTH_SHORT).show();
+                            }
+                            JSONObject obj = new JSONObject(res);
+
+                        } catch (UnsupportedEncodingException e1) {
+                            e1.printStackTrace();
+                        } catch (JSONException e2) {
+                            e2.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                RegisterBindingModel obj = new RegisterBindingModel("ASDFA", "testUser1@gmail.com",
+                        "01994654654", "Bangladesh", "asddsaa123", "asddsaa123");
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("fullName", etFullname.getText().toString());
+                params.put("email", etEmail.getText().toString());
+                params.put("phoneNumber", etPhone.getText().toString());
+                params.put("countryName", spinnerCountry.getSelectedItem().toString());
+                params.put("password", etPassword.getText().toString());
+                params.put("confirmPassword", etConPassword.getText().toString());
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 
     private boolean validation() {
@@ -91,7 +187,41 @@ public class SignUpActivity extends AppCompatActivity {
             error = false;
         }
         return error;
+    }
 
+    private boolean internetConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void showSnackBar() {
+        snackbar = Snackbar
+                .make(rootLayout, "Internet is not connected!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Connect", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent settingsIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                        startActivityForResult(settingsIntent, 9003);
+                    }
+                });
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9003) {
+            if (internetConnected()) {
+
+            } else {
+                showSnackBar();
+            }
+        }
     }
 
 }

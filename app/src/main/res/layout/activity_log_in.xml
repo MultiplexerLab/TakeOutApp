@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -34,9 +35,9 @@
         android:id="@+id/iv_b10"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginRight="10dp"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="380dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/left" />
 
     <ImageView
@@ -91,8 +92,8 @@
         android:id="@+id/iv_b3"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="60dp"
         android:background="@drawable/left" />
 
@@ -135,6 +136,7 @@
         android:background="@drawable/squareshape"
         android:elevation="10dp"
         android:orientation="vertical"
+        android:alpha="0.8"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
@@ -150,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightyellow"
-                android:hint="USERNAME"
+                android:hint="Username"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
@@ -161,8 +163,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="40dp"
             android:textColorHint="@color/lightyellow">
 
             <EditText
@@ -170,7 +172,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightyellow"
-                android:hint="PASSWORD"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
@@ -184,7 +186,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="180dp"
         android:background="@drawable/buttonlogin"
         android:elevation="10dp"
         android:onClick="btnLogIn"
@@ -198,10 +200,10 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_below="@+id/LL_input"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:onClick="btnSignUp"
         android:orientation="horizontal">
 
@@ -217,7 +219,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/lightyellow"
             android:textStyle="bold" />
     </LinearLayout>

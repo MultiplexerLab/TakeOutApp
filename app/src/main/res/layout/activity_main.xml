@@ -158,11 +158,11 @@
         android:layout_gravity="start"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="0dp"
-        android:background="@drawable/nav_color"
+        android:background="#ece8e8"
         app:elevation="10dp"
         app:headerLayout="@layout/header"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/yellow"
+        app:itemTextColor="@color/yellow"
         app:menu="@menu/drawermenu">
 
     </android.support.design.widget.NavigationView>

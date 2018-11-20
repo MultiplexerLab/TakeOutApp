@@ -53,8 +53,5 @@ public class MenuActivity extends AppCompatActivity {
         menuList.add(new Menu(R.drawable.pic3, R.drawable.pic1b) );
         menuList.add(new Menu(R.drawable.pic2m, R.drawable.pic2b) );
         menuList.add(new Menu(R.drawable.pic3m, R.drawable.pic3b) );
-        menuList.add(new Menu(R.drawable.pic3, R.drawable.pic1b) );
-        menuList.add(new Menu(R.drawable.pic2m, R.drawable.pic2b) );
-        menuList.add(new Menu(R.drawable.pic3m, R.drawable.pic3b) );
     }
 }

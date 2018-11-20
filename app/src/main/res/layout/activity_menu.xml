@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="multiplexer.lab.takeout.ItemActivity.MenuActivity"
-    android:background="@drawable/login_back">
+    tools:context="multiplexer.lab.takeout.ItemActivity.MenuActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_back"
+        android:alpha="0.7"></RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"

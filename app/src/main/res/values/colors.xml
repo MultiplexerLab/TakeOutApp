@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FEC834</color>
-    <color name="colorPrimaryDark">#340101</color>
+    <color name="colorPrimaryDark">#490202</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="ash">#F3F1F2</color>
     <color name="red">#EC3521</color>
-    <color name="deepred">#450101</color>
-    <color name="deepestred">#340101</color>
+    <color name="deepred">#540202</color>
+    <color name="deepestred">#410101</color>
     <color name="lightyellow">#FEDC3D</color>
     <color name="lightestyellow">#378393</color>
     <color name="yellow">#FAB117</color>
