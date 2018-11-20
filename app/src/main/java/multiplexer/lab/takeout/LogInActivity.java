@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
-import com.anixtechnology.takeout.R;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
@@ -22,6 +20,21 @@ public class LogInActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_login_email);
         etPassword = findViewById(R.id.et_login_password);
         loginLayout = findViewById(R.id.LL_input);
+        animation();
+    }
+
+    private void animation(){
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b1));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b2));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b3));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b4));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b5));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b6));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b7));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b8));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b9));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b10));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b11));
     }
 
 

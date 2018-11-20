@@ -22,7 +22,6 @@ import multiplexer.lab.takeout.ItemActivity.ProfileActivity;
 import multiplexer.lab.takeout.ItemActivity.ScanQRActivity;
 import multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity;
 
-import com.anixtechnology.takeout.R;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 
@@ -131,12 +130,13 @@ public class MainActivity extends AppCompatActivity {
                     .normalImageRes(iconList.get(i))
                     .normalText(titleList.get(i))
                     .rippleEffect(true)
-                    .normalColorRes(R.color.deepred)
+                    .normalColorRes(R.color.lightyellow)
+
                     .highlightedColorRes(R.color.deepred)
                     .pieceColorRes(R.color.deepred)
                     .textGravity(Gravity.CENTER)
                     .typeface(Typeface.DEFAULT_BOLD)
-                    .normalTextColorRes(R.color.lightyellow)
+                    .normalTextColorRes(R.color.black)
                     .textSize(10)
                     .imagePadding(new Rect(20, 20, 20, 20))
                     .textPadding(new Rect(10, 20, 10, 0))

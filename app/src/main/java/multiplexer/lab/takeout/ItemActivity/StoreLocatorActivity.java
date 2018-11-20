@@ -3,7 +3,8 @@ package multiplexer.lab.takeout.ItemActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.anixtechnology.takeout.R;
+import multiplexer.lab.takeout.R;
+
 
 public class StoreLocatorActivity extends AppCompatActivity {
 

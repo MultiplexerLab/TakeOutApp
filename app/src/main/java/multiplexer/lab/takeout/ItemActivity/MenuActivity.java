@@ -10,7 +10,8 @@ import android.support.v7.widget.RecyclerView;
 
 import multiplexer.lab.takeout.Adapter.CustomAdapter;
 import multiplexer.lab.takeout.Model.Menu;
-import com.anixtechnology.takeout.R;
+import multiplexer.lab.takeout.R;
+
 
 import java.util.ArrayList;
 import java.util.List;

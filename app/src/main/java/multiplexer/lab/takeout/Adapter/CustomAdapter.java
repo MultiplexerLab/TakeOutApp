@@ -11,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import multiplexer.lab.takeout.Model.Menu;
-import com.anixtechnology.takeout.R;
+import multiplexer.lab.takeout.R;
+
 
 import java.util.List;
 

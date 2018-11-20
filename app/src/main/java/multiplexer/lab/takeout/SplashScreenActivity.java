@@ -8,8 +8,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.anixtechnology.takeout.R;
-
 public class SplashScreenActivity extends AppCompatActivity {
 
     ImageView LogoPic;

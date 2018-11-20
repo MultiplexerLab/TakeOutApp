@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import multiplexer.lab.takeout.MainActivity;
-import com.anixtechnology.takeout.R;
+import multiplexer.lab.takeout.R;
+
 
 public class AddReferralActivity extends AppCompatActivity {
 
