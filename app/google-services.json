@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "930215277308",
+    "firebase_url": "https://takeoutbd-fa6a1.firebaseio.com",
+    "project_id": "takeoutbd-fa6a1",
+    "storage_bucket": "takeoutbd-fa6a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930215277308:android:bdcc6e95f2b8dcf0",
+        "android_client_info": {
+          "package_name": "multiplexer.lab.takeout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930215277308-hbiuithmv73gft2f416hmdchoi3rf57p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "multiplexer.lab.takeout",
+            "certificate_hash": "b7aa2410ccbe5dc5561d1cc17cc14ce0b93788f3"
+          }
+        },
+        {
+          "client_id": "930215277308-sgsen7ueao081kfh3uhcol10s040rqpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiww-9w5X60j4i29tsbUCzSttl0Xee9u0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930215277308-sgsen7ueao081kfh3uhcol10s040rqpm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
