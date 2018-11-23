@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,7 +13,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -41,7 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
-
+    final Context context = this;
     EditText etFullname, etEmail, etPassword, etConPassword, etPhone;
     RadioButton rMale, rFemale;
     Snackbar snackbar;
@@ -50,6 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
     String arr[] = {"Bangladesh", "Sri Lanka"};
     Spinner spinnerCountry;
     RequestQueue queue;
+    int value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +75,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void btnSignUp(View view) {
+
         if (internetConnected()) {
             if (validation()) {
+                selectAvater();
                 sendDataToServer();
             } else {
                 YoYo.with(Techniques.Shake)
@@ -85,6 +91,30 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+    public void selectAvater(){
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.custom_avatar);
+        ImageView dialogmale = dialog.findViewById(R.id.IV_male);
+        ImageView dialogfemale = dialog.findViewById(R.id.IV_female);
+        // if button is clicked, close the custom dialog
+        dialogmale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                value=1;
+                dialog.dismiss();
+            }
+        });
+        dialogfemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                value=0;
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
     private void sendDataToServer() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://api.bdtakeout.com/api/account/register",
                 new Response.Listener<String>() {
@@ -92,6 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(SignUpActivity.this, "Thanks for being registered!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        intent.putExtra("Avater",value);
                         startActivity(intent);
                         finish();
                         Log.i("Response", response.toString());

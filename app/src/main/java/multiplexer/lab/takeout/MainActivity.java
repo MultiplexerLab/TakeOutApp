@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
 import multiplexer.lab.takeout.ItemActivity.AddReferralActivity;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
     ArrayList<Integer> imageList;
+    int value;
+    TextView notactivate;
 
     BoomMenuButton bmb;
 
@@ -46,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        notactivate=findViewById(R.id.TV_not_activated);
+        Intent intent = getIntent();
+        value =intent.getIntExtra("val",0);
+        if(value==1){
+            notactivate.setVisibility(View.INVISIBLE);
+        }
+
+        value =intent.getIntExtra("Avater",0);
+        ImageView pic =findViewById(R.id.IV_avatar_main);
+        if(value==1){
+
+            pic.setImageResource(R.drawable.male);
+        }else {
+            pic.setImageResource(R.drawable.female);
+        }
 
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();
@@ -217,5 +236,17 @@ public class MainActivity extends AppCompatActivity {
     public void btnMenu(View view) {
         Intent intent = new Intent(MainActivity.this, MenuActivity.class);
         startActivity(intent);
+    }
+
+    public void btnQR(View view) {
+        Intent intent = new Intent(MainActivity.this, ScanQRActivity.class);
+        startActivity(intent);
+    }
+
+    public void btnActivate(View view) {
+        Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
+        intent.putExtra("val",1);
+        startActivity(intent);
+
     }
 }

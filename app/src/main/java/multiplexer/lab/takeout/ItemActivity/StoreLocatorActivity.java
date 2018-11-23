@@ -5,18 +5,26 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import multiplexer.lab.takeout.R;
 
 
 public class StoreLocatorActivity extends AppCompatActivity {
-
+    ArrayAdapter<String> adapter;
+    String arr[] = {"Bangladesh", "Sri Lanka"};
+    Spinner spinnerCountry2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_locator);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        spinnerCountry2 = findViewById(R.id.spinnerCountry2);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
+        spinnerCountry2.setAdapter(adapter);
     }
 
     public void mapJump(View view) {

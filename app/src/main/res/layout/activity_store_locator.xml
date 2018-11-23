@@ -25,9 +25,17 @@
             android:background="@drawable/search_icon" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:hint="Search for places" />
+
+        <Spinner
+            android:id="@+id/spinnerCountry2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"/>
+
     </LinearLayout>
 
     <RelativeLayout

@@ -60,8 +60,9 @@
         android:id="@+id/iv_b7"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/right" />
+        android:layout_below="@+id/LL_input"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/left" />
 
     <ImageView
         android:id="@+id/iv_b8"
@@ -75,8 +76,9 @@
         android:id="@+id/iv_b9"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="190dp"
-        android:layout_marginTop="520dp"
+        android:layout_below="@+id/LL_reg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/right" />
 
     <ImageView
@@ -92,7 +94,8 @@
         android:id="@+id/iv_b3"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/iv_b5"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="60dp"
         android:background="@drawable/left" />
@@ -144,7 +147,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:textColorHint="@color/lightyellow">
 
             <EditText
@@ -164,7 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="60dp"
             android:textColorHint="@color/lightyellow">
 
             <EditText
@@ -182,11 +185,12 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_login"
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="210dp"
         android:background="@drawable/buttonlogin"
         android:elevation="10dp"
         android:onClick="btnLogIn"
@@ -198,12 +202,12 @@
 
 
     <LinearLayout
+        android:id="@+id/LL_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LL_input"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/btn_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:onClick="btnSignUp"
         android:orientation="horizontal">
 
@@ -220,7 +224,7 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/lightyellow"
+            android:textColor="@color/black"
             android:textStyle="bold" />
     </LinearLayout>
 

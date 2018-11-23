@@ -11,6 +11,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="multiplexer.lab.takeout.SplashScreenActivity"
+            android:name=".SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,76 +31,66 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="multiplexer.lab.takeout.LogInActivity"
+            android:name=".LogInActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="multiplexer.lab.takeout.SignUpActivity"
+            android:name=".SignUpActivity"
             android:label="SignUp"
-            android:parentActivityName="multiplexer.lab.takeout.LogInActivity">
+            android:parentActivityName=".LogInActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LogInActivity" />
         </activity>
-
         <activity
-            android:name="multiplexer.lab.takeout.MainActivity"
+            android:name=".MainActivity"
             android:label="Home" />
         <activity
-            android:name="multiplexer.lab.takeout.ItemActivity.ScanQRActivity"
+            android:name=".ItemActivity.ScanQRActivity"
             android:label="Scan Your QR Code"
-            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
-
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name="multiplexer.lab.takeout.ItemActivity.ProfileActivity"
+            android:name=".ItemActivity.ProfileActivity"
             android:label="Profile"
-            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name="multiplexer.lab.takeout.ItemActivity.AboutUsActivity"
+            android:name=".ItemActivity.AboutUsActivity"
             android:label="About Us"
-            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-
         </activity>
-
         <activity
-            android:name="multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity"
+            android:name=".ItemActivity.StoreLocatorActivity"
             android:label="Store Locator"
-            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name="multiplexer.lab.takeout.ItemActivity.AddReferralActivity"
+            android:name=".ItemActivity.AddReferralActivity"
             android:label="Add Referral"
-            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name="multiplexer.lab.takeout.ItemActivity.MenuActivity"
+            android:name=".ItemActivity.MenuActivity"
             android:label="Our Menu"
-            android:parentActivityName="multiplexer.lab.takeout.MainActivity">
-
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-
         </activity>
 
         <service android:name=".Services.MyFirebaseInstanceIDService">
@@ -107,7 +98,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".Services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -117,10 +107,45 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logo" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
+
+        <activity android:name=".ItemActivity.ChefSpecialActivity"
+            android:label="Chef's Special"
+            android:parentActivityName=".ItemActivity.MenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemActivity.MenuActivity" />
+        </activity>
+
+        <activity android:name=".ItemActivity.BurgerActivity"
+            android:label="Burger's"
+            android:parentActivityName=".ItemActivity.MenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemActivity.MenuActivity" />
+        </activity>
+
+        <activity android:name=".ItemActivity.SidesActivity"
+            android:label="Side's"
+            android:parentActivityName=".ItemActivity.MenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemActivity.MenuActivity" />
+        </activity>
+
+        <activity android:name=".ItemActivity.DrinkActivity"
+            android:label="Drink's"
+            android:parentActivityName=".ItemActivity.MenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemActivity.MenuActivity" />
+        </activity>
     </application>
+
 </manifest>

@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout.ItemActivity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -7,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import multiplexer.lab.takeout.Adapter.CustomAdapter;
 import multiplexer.lab.takeout.Model.Menu;
@@ -18,40 +20,33 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
-
-    private List<Menu> menuList = new ArrayList<>();
-
-    private RecyclerView recyclerView;
-    private CustomAdapter cAdapter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        recyclerView = findViewById(R.id.recycler_view);
-        cAdapter = new CustomAdapter(MenuActivity.this,menuList);
-        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(MenuActivity.this, LinearLayoutManager.VERTICAL, false);
-
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(cAdapter);
-        input();
     }
 
 
-    public void input() {
-        menuList.add(new Menu(R.drawable.pic3, R.drawable.pic1b) );
-        menuList.add(new Menu(R.drawable.pic2m, R.drawable.pic2b) );
-        menuList.add(new Menu(R.drawable.pic3m, R.drawable.pic3b) );
-        menuList.add(new Menu(R.drawable.pic3, R.drawable.pic1b) );
-        menuList.add(new Menu(R.drawable.pic2m, R.drawable.pic2b) );
-        menuList.add(new Menu(R.drawable.pic3m, R.drawable.pic3b) );
-        menuList.add(new Menu(R.drawable.pic3, R.drawable.pic1b) );
-        menuList.add(new Menu(R.drawable.pic2m, R.drawable.pic2b) );
-        menuList.add(new Menu(R.drawable.pic3m, R.drawable.pic3b) );
+
+
+    public void btnChefSpecial(View view) {
+        Intent intent = new Intent(MenuActivity.this, ChefSpecialActivity.class);
+        startActivity(intent);
+    }
+
+    public void btnBurger(View view) {
+        Intent intent = new Intent(MenuActivity.this, BurgerActivity.class);
+        startActivity(intent);
+    }
+
+    public void btnSides(View view) {
+        Intent intent = new Intent(MenuActivity.this, SidesActivity.class);
+        startActivity(intent);
+    }
+
+    public void btnDrinks(View view) {
+        Intent intent = new Intent(MenuActivity.this, DrinkActivity.class);
+        startActivity(intent);
     }
 }

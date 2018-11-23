@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_back"
     tools:context="multiplexer.lab.takeout.ItemActivity.AddReferralActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_back"
+        android:alpha="0.7"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,12 +23,13 @@
         android:layout_centerHorizontal="true">
 
         <TextView
+            android:id="@+id/TV_referral"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
-            android:text="Use Reference No. to Activate your account."
+            android:text="Use Code to Earn Points."
             android:textSize="16dp"/>
 
         <EditText
@@ -34,14 +39,14 @@
             android:gravity="center"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="30dp"
-            android:hint="Enter the No. Here"/>
+            android:hint="Enter the Code Here"/>
 
     </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="use Referral"
+        android:text="Add code"
         android:layout_centerHorizontal="true"
         android:textSize="20dp"
         android:elevation="10dp"

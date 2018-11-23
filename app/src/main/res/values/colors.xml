@@ -10,6 +10,6 @@
     <color name="deepred">#540202</color>
     <color name="deepestred">#410101</color>
     <color name="lightyellow">#FEDC3D</color>
-    <color name="lightestyellow">#378393</color>
+    <!--<color name="lightestyellow">#378393</color>-->
     <color name="yellow">#FAB117</color>
 </resources>

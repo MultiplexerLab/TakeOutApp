@@ -87,6 +87,24 @@
             android:editable="false"
             android:text="01688710173"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACTIVATION CODE (CLICK TO SHARE)"
+            android:textSize="13dp"
+            android:textColor="#212121"
+            android:layout_marginTop="20dp"
+            />
+
+        <EditText
+            android:id="@+id/ET_activationcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#33c70d"
+            android:onClick="btnShareCode"
+            android:editable="false"
+            android:text="jhdj4y78478"/>
+
     </LinearLayout>
     </RelativeLayout>
 

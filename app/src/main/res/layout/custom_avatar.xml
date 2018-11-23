@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/TV_avater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:text="SELECT YOUR AVATER."/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TV_avater"
+        android:layout_centerHorizontal="true">
+
+
+        <ImageView
+            android:id="@+id/IV_male"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="20dp"
+            android:elevation="10dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/male"
+            android:stateListAnimator="@null" />
+
+        <ImageView
+            android:id="@+id/IV_female"
+            android:layout_toRightOf="@+id/IV_male"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="20dp"
+            android:elevation="10dp"
+            android:src="@drawable/female"
+            android:stateListAnimator="@null" />
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>
