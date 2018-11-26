@@ -40,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.Model.RegisterBindingModel;
 
 public class LogInActivity extends AppCompatActivity {
@@ -116,7 +117,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void sendDataToServer() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://api.bdtakeout.com/token",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.SIGNIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -124,11 +125,14 @@ public class LogInActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             Log.i("ResponseObj", obj.toString());
                             String accessToken = obj.getString("access_token");
-                            Log.i("accessToken", accessToken);
+                            Log.i("accessTokenLogin", accessToken);
                             SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("accessToken", accessToken);
                             editor.apply();
+                            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

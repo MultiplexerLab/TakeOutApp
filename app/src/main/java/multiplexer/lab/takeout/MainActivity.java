@@ -1,6 +1,7 @@
 package multiplexer.lab.takeout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -10,12 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
 import multiplexer.lab.takeout.ItemActivity.AddReferralActivity;
 import multiplexer.lab.takeout.ItemActivity.MenuActivity;
@@ -23,12 +26,21 @@ import multiplexer.lab.takeout.ItemActivity.ProfileActivity;
 import multiplexer.lab.takeout.ItemActivity.ScanQRActivity;
 import multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 
 import com.nightonke.boommenu.BoomMenuButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
     ArrayList<Integer> imageList;
+    TextView points;
     int value;
     TextView notactivate;
-
+    RequestQueue queue;
     BoomMenuButton bmb;
 
     @Override
@@ -50,19 +63,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        notactivate=findViewById(R.id.TV_not_activated);
+        notactivate = findViewById(R.id.TV_not_activated);
         Intent intent = getIntent();
-        value =intent.getIntExtra("val",0);
-        if(value==1){
+        value = intent.getIntExtra("val", 0);
+        if (value == 1) {
             notactivate.setVisibility(View.INVISIBLE);
         }
 
-        value =intent.getIntExtra("Avater",0);
-        ImageView pic =findViewById(R.id.IV_avatar_main);
-        if(value==1){
+        value = intent.getIntExtra("Avater", 0);
+        ImageView pic = findViewById(R.id.IV_avatar_main);
+        if (value == 1) {
 
             pic.setImageResource(R.drawable.male);
-        }else {
+        } else {
             pic.setImageResource(R.drawable.female);
         }
 
@@ -88,6 +101,40 @@ public class MainActivity extends AppCompatActivity {
 
         mNavigationView = findViewById(R.id.navView);
         header = mNavigationView.getHeaderView(0);
+
+        queue = Volley.newRequestQueue(this);
+        points = findViewById(R.id.points);
+        getPoints();
+    }
+
+    private void getPoints() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, EndPoints.GET_POINT_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("points", response.toString());
+                points.setText("Total Points: "+ response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+
     }
 
     private void burgerSlider() {
@@ -186,7 +233,12 @@ public class MainActivity extends AppCompatActivity {
                                     intent = new Intent(MainActivity.this, AddReferralActivity.class);
                                     break;
                                 case 6:
+                                    SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    editor.putString("accessToken", "");
+                                    editor.apply();
                                     intent = new Intent(MainActivity.this, LogInActivity.class);
+                                    finish();
                                     break;
                             }
                             startActivity(intent);
@@ -245,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnActivate(View view) {
         Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
-        intent.putExtra("val",1);
+        intent.putExtra("val", 1);
         startActivity(intent);
 
     }

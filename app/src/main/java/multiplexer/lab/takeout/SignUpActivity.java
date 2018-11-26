@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.Model.RegisterBindingModel;
 import multiplexer.lab.takeout.R;
 
@@ -116,7 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void sendDataToServer() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://api.bdtakeout.com/api/account/register",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.SIGNUP_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
