@@ -64,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         notactivate = findViewById(R.id.TV_not_activated);
+        ImageView pic = findViewById(R.id.IV_avatar_main);
+        bmb = findViewById(R.id.bmb);
+        burgerslide = findViewById(R.id.IV_burger_pic_slide);
+        drawerLayout = findViewById(R.id.drawerlayout);
+        points = findViewById(R.id.points);
+
         Intent intent = getIntent();
         value = intent.getIntExtra("val", 0);
         if (value == 1) {
@@ -71,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         value = intent.getIntExtra("Avater", 0);
-        ImageView pic = findViewById(R.id.IV_avatar_main);
+
         if (value == 1) {
 
             pic.setImageResource(R.drawable.male);
@@ -82,17 +88,15 @@ public class MainActivity extends AppCompatActivity {
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();
 
-        bmb = findViewById(R.id.bmb);
+
         setInitBoom();
         boomCustomize();
 
         imageList = new ArrayList<>();
-        burgerslide = findViewById(R.id.IV_burger_pic_slide);
+
         initSetPic();
         burgerSlider();
 
-
-        drawerLayout = findViewById(R.id.drawerlayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -103,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         header = mNavigationView.getHeaderView(0);
 
         queue = Volley.newRequestQueue(this);
-        points = findViewById(R.id.points);
+
         getPoints();
     }
 
@@ -112,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.i("points", response.toString());
-                points.setText("Total Points: "+ response);
+                points.setText("Total Points: " + response);
             }
         }, new Response.ErrorListener() {
             @Override
