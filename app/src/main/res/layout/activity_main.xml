@@ -123,30 +123,27 @@
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
-
                     </RelativeLayout>
-
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_below="@+id/LL_welcome"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="60dp"
-                    android:background="@drawable/squareshape"
-                    android:elevation="10dp"
-                    android:padding="10dp">
+                    android:background="#FAFAFA">
 
-                    <ImageView
-                        android:id="@+id/IV_burger_pic_slide"
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewpager_default"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/pic1"
-                        android:scaleType="fitXY" />
+                        android:layout_margin="5dp" />
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator_default"
+                        android:layout_width="fill_parent"
+                        android:layout_height="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="8dp" />
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>

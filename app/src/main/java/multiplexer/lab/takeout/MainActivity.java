@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import me.relex.circleindicator.CircleIndicator;
+import multiplexer.lab.takeout.Adapter.AdAdapter;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
 import multiplexer.lab.takeout.ItemActivity.AddReferralActivity;
@@ -39,6 +42,8 @@ import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 
 import com.nightonke.boommenu.BoomMenuButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -51,10 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     NavigationView mNavigationView;
     View header;
-    ImageView burgerslide;
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
-    ArrayList<Integer> imageList;
     TextView points;
     int value;
     TextView notactivate;
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         notactivate = findViewById(R.id.TV_not_activated);
         ImageView pic = findViewById(R.id.IV_avatar_main);
         bmb = findViewById(R.id.bmb);
-        burgerslide = findViewById(R.id.IV_burger_pic_slide);
         drawerLayout = findViewById(R.id.drawerlayout);
         points = findViewById(R.id.points);
 
@@ -95,10 +97,6 @@ public class MainActivity extends AppCompatActivity {
         setInitBoom();
         boomCustomize();
 
-        imageList = new ArrayList<>();
-
-        initSetPic();
-
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
@@ -110,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
         header = mNavigationView.getHeaderView(0);
 
         queue = Volley.newRequestQueue(this);
-        getAds();
         getPoints();
-        burgerSlider();
+        //burgerSlider();
+        getAds();
     }
 
     private void getPoints() {
@@ -150,7 +148,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i("Ads", response.toString());
-
+                ArrayList<String> pics = new ArrayList<>();
+                try {
+                    /*JSONObject jsonObject = response.getJSONObject("fOffer");
+                    String message = jsonObject.getString("");*/
+                    JSONArray jsonArray = response.getJSONArray("fpaAdds");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        pics.add("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
+                    }
+                    initSetPic(pics);
+                } catch (JSONException e) {
+                    Log.e("ParseError", e.toString());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -170,12 +179,10 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(adsRequest);
-
     }
 
-    private void burgerSlider() {
+/*    private void burgerSlider() {
 
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
@@ -191,12 +198,16 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable, 2000);
-    }
+    }*/
 
-    private void initSetPic() {
-        imageList.add(R.drawable.pic1);
-        imageList.add(R.drawable.pic2);
-        imageList.add(R.drawable.pic3);
+    private void initSetPic(ArrayList<String> pics) {
+        Log.i("data", pics.toString());
+        ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager_default);
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator_default);
+        AdAdapter mPageAdapter = new AdAdapter(this, pics);
+        viewpager.setAdapter(mPageAdapter);
+        viewpager.setOffscreenPageLimit(pics.size());
+        indicator.setViewPager(viewpager);
     }
 
     private void setInitBoom() {
