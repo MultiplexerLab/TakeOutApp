@@ -31,12 +31,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 
 import com.nightonke.boommenu.BoomMenuButton;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         imageList = new ArrayList<>();
 
         initSetPic();
-        burgerSlider();
+
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
@@ -107,8 +110,9 @@ public class MainActivity extends AppCompatActivity {
         header = mNavigationView.getHeaderView(0);
 
         queue = Volley.newRequestQueue(this);
-
+        getAds();
         getPoints();
+        burgerSlider();
     }
 
     private void getPoints() {
@@ -138,6 +142,36 @@ public class MainActivity extends AppCompatActivity {
         };
 
         queue.add(stringRequest);
+
+    }
+
+    private void getAds() {
+        JsonObjectRequest adsRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_ADS_DATA, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("Ads", response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
+
+        queue.add(adsRequest);
 
     }
 

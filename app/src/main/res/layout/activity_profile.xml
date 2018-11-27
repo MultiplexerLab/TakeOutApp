@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/login_back"
     tools:context="multiplexer.lab.takeout.ItemActivity.ProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="30dp"
@@ -28,7 +33,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="140dp"
         android:background="@color/white">
 
         <LinearLayout
@@ -43,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NAME"
+                android:text="FULL NAME"
                 android:textColor="#212121"
                 android:textSize="13dp" />
 
@@ -80,10 +85,27 @@
                 android:textSize="13dp" />
 
             <EditText
+                android:id="@+id/phoneNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:text="01688710173"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="ADDRESS"
+                android:textColor="#212121"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:editable="false"
+                android:text=""
                 android:textColor="@color/black" />
 
             <TextView
@@ -105,5 +127,6 @@
 
         </LinearLayout>
     </RelativeLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

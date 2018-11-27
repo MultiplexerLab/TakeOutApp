@@ -29,7 +29,7 @@ import multiplexer.lab.takeout.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    EditText activationcode, fullName, email;
+    EditText activationcode, fullName, email, phoneno, address;
     RequestQueue queue;
 
     @Override
@@ -43,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
         activationcode = findViewById(R.id.ET_activationcode);
         fullName = findViewById(R.id.fullName);
         email = findViewById(R.id.profileEmail);
+        phoneno = findViewById(R.id.phoneNo);
+        address = findViewById(R.id.address);
 
         getProfileData();
     }
@@ -59,9 +61,13 @@ public class ProfileActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_PROFILE_DATA, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                Log.i("responseprofile",response.toString());
                 try {
                     fullName.setText(response.getString("Fullname"));
                     email.setText(response.getString("Email"));
+                    phoneno.setText(response.getString("Phone"));
+                    phoneno.setText(response.getString("Address"));
+
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
