@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RL_custom_store"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/firstLL"
+    android:layout_margin="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/squareshape"
+    android:elevation="10dp"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/IV_burger_pic_art"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/burgericon" />
+
+    <TextView
+        android:id="@+id/TV_place_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/IV_burger_pic_art"
+        android:text="TakeOut Banani"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TV_store_address"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TV_place_name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/IV_burger_pic_art"
+        android:text="Abedin Tower, 35 Kemal Ataturk Avenue, Banani"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/IV_call"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/IV_direction"
+        android:background="@drawable/call"
+         />
+
+    <ImageView
+        android:id="@+id/IV_direction"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/TV_store_address"
+        android:background="@drawable/direction_icon"
+         />
+
+</RelativeLayout>

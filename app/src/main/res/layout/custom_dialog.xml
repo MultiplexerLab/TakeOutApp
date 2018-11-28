@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@drawable/squareshape"
+    android:padding="30dp"
+    >
 
     <TextView
         android:id="@+id/TV_global"
@@ -15,13 +18,12 @@
         android:layout_marginBottom="10dp"
         android:text="Global Rating"/>
 
-    <RatingBar
-        android:layout_width="wrap_content"
+    <com.hsalf.smilerating.SmileRating
+        android:id="@+id/smile_rating_global"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="4"
-        android:progressTint="@color/lightyellow"
-        android:isIndicator="true"
+        app:isIndicator="true"
+        app:normalColor="@color/lightyellow"
         />
 
     <TextView
@@ -35,24 +37,28 @@
         android:layout_marginBottom="10dp"
         android:text="Your Rating"/>
 
-    <RatingBar
-        android:layout_width="wrap_content"
+    <com.hsalf.smilerating.SmileRating
+        android:id="@+id/smile_rating"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:progressTint="@color/lightyellow"
-        android:id="@+id/RB_user_rating"
-        android:numStars="5"/>
+        app:isIndicator="false"
+        app:normalColor="@color/lightyellow"
+        />
+
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:background="@drawable/tv_menu_home"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:textSize="15dp"
+        android:background="@drawable/loginbutton"
         android:paddingLeft="50dp"
-        android:paddingRight="50dp"/>
+        android:paddingRight="50dp"
+        android:text="Submit"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
 
 </LinearLayout>
+

@@ -16,13 +16,13 @@ import multiplexer.lab.takeout.R;
 
 import java.util.List;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
 
 
     List<Menu> mList;
     Context context;
 
-    public CustomAdapter(Context context, List<Menu> List) {
+    public MenuAdapter(Context context, List<Menu> List) {
         this.mList = List;
         this.context = context;
     }
@@ -41,7 +41,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
     @Override
-    public CustomAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MenuAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_layout_menu, parent, false);
 
@@ -49,7 +49,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(final CustomAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MenuAdapter.MyViewHolder holder, int position) {
         final Menu menu = mList.get(position);
         holder.IVPic.setBackgroundResource(menu.getShortPicId());
 

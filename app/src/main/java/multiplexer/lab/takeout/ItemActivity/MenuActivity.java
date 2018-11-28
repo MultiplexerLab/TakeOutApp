@@ -3,20 +3,9 @@ package multiplexer.lab.takeout.ItemActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import multiplexer.lab.takeout.Adapter.CustomAdapter;
-import multiplexer.lab.takeout.Model.Menu;
 import multiplexer.lab.takeout.R;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 

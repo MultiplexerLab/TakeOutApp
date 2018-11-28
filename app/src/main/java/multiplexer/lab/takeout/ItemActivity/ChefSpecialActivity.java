@@ -11,12 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import multiplexer.lab.takeout.Adapter.CustomAdapter;
+import multiplexer.lab.takeout.Adapter.MenuAdapter;
 import multiplexer.lab.takeout.Model.Menu;
 import multiplexer.lab.takeout.R;
 
@@ -25,7 +24,7 @@ public class ChefSpecialActivity extends AppCompatActivity {
     private List<Menu> menuList = new ArrayList<>();
 
     private RecyclerView recyclerView;
-    private CustomAdapter cAdapter;
+    private MenuAdapter cAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class ChefSpecialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chef_special);
 
         recyclerView = findViewById(R.id.recycler_view);
-        cAdapter = new CustomAdapter(ChefSpecialActivity.this,menuList);
+        cAdapter = new MenuAdapter(ChefSpecialActivity.this,menuList);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(ChefSpecialActivity.this, LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));

@@ -24,6 +24,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.nightonke:boommenu:2.1.1'
+    implementation 'com.github.sujithkanna:smileyrating:1.6.8'
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
