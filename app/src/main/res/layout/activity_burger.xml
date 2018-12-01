@@ -4,41 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemActivity.BurgerActivity">
+    tools:context=".ItemActivity.ProductActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_back"
-        android:alpha="0.7"/>
+        android:alpha="0.7"
+        android:background="@drawable/login_back" />
 
     <RelativeLayout
+        android:id="@+id/RL_menu_detail"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/RL_menu_detail"
-        android:background="@drawable/squareshape"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:onClick="btnRating"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/squareshape"
         android:elevation="10dp">
 
         <ImageView
-            android:id="@+id/IV_menu_detail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/bigpic"
+            android:layout_width="220dp"
+            android:layout_height="300dp"
             android:adjustViewBounds="true"
-            android:onClick="btnRating"
-            android:scaleType="fitXY"
-            android:background="@drawable/pic1b"/>
+            android:background="@drawable/pic1"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/prod_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/bigpic"
+            android:gravity="center"
+            android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/prod_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prod_name"
+            android:layout_toRightOf="@+id/bigpic"
+            android:gravity="center"
+            android:padding="5dp" />
+
+        <TextView
+            android:id="@+id/prod_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prod_desc"
+            android:layout_toRightOf="@+id/bigpic"
+            android:gravity="center"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prod_price"
+            android:layout_toRightOf="@+id/bigpic"
+            android:padding="5dp"
+            android:gravity="center"
+            android:text="CLICK FOR RATING"
+            android:textColor="@color/black"/>
+
 
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/RL_menu_detail"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/RL_menu_detail"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:scrollbars="vertical" />
 

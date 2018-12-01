@@ -56,8 +56,9 @@ public class SignUpActivity extends AppCompatActivity {
     Snackbar snackbar;
     RelativeLayout rootLayout;
     ArrayAdapter<String> adapter;
-    ArrayList<String> arr = new ArrayList<String>();
-    ArrayList<Integer> arrint = new ArrayList<Integer>();
+    /*ArrayList<String> arr = new ArrayList<String>();
+    ArrayList<Integer> arrint = new ArrayList<Integer>();*/
+    String arr[] = {"Bangladesh", "Sri Lanka"};
     Spinner spinnerCountry;
     RequestQueue queue;
     //int value;
@@ -72,18 +73,16 @@ public class SignUpActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_signup_password);
         etConPassword = findViewById(R.id.et_signup_conpassword);
         etPhone = findViewById(R.id.et_signup_phoneno);
-       /* rMale = findViewById(R.id.Radiobtnmale);
-        rFemale = findViewById(R.id.Radiobtnfemale);*/
         rootLayout = findViewById(R.id.rootLayout);
         spinnerCountry = findViewById(R.id.spinnerCountry);
         queue = Volley.newRequestQueue(this);
-        addCountry();
+        //addCountry();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
         spinnerCountry.setAdapter(adapter);
 
     }
 
-    private void addCountry() {
+    /*private void addCountry() {
         JsonArrayRequest countryRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_COUNTRY_DATA, new Response.Listener<JSONArray>() {
 
 
@@ -109,20 +108,10 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-                String accessToken = pref.getString("accessToken", "");
-                Log.i("accessToken", accessToken);
 
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer " + accessToken);
-                return params;
-            }
         };
         queue.add(countryRequest);
-    }
+    }*/
 
     public void btnSignUp(View view) {
 

@@ -200,12 +200,24 @@
         android:textColor="@color/black"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/forgotpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password? "
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#757575"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_login"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold" />
+
 
     <LinearLayout
         android:id="@+id/LL_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_login"
+        android:layout_below="@+id/forgotpass"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:onClick="btnSignUp"

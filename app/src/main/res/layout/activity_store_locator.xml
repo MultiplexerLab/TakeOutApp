@@ -12,8 +12,27 @@
         android:alpha="0.7"
         android:background="@drawable/login_back" />
 
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/search_icon"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/black"
+        android:id="@+id/search"
+        />
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/spinnerCountry2"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:layout_toLeftOf="@+id/search"
+        />
+
+
+    <!--<LinearLayout
         android:id="@+id/firstLL"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -35,18 +54,13 @@
             android:layout_height="wrap_content"
             android:hint="Search for places" />
 
-        <Spinner
-            android:id="@+id/spinnerCountry2"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp" />
 
-    </LinearLayout>
+
+    </LinearLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/firstLL"
+        android:layout_below="@+id/spinnerCountry2"
         android:id="@+id/recycler_view_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

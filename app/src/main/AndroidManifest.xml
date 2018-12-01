@@ -115,8 +115,8 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".ItemActivity.BurgerActivity"
-            android:label="Burger's"
+        <activity android:name=".ItemActivity.ProductActivity"
+            android:label="Our Menu"
             android:parentActivityName=".ItemActivity.MenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

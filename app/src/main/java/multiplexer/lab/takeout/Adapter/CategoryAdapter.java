@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
-import multiplexer.lab.takeout.ItemActivity.BurgerActivity;
+import multiplexer.lab.takeout.ItemActivity.ProductActivity;
 import multiplexer.lab.takeout.Model.Category;
 import multiplexer.lab.takeout.R;
 
@@ -29,13 +29,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView cat_Logo;
         TextView cat_name;
-        RelativeLayout relativeLayout;
+        LinearLayout linearLayout;
 
         public MyViewHolder(View view) {
             super(view);
             cat_name = view.findViewById(R.id.cat_name);
             cat_Logo = view.findViewById(R.id.prod_logo);
-            relativeLayout = view.findViewById(R.id.rlayout_category);
+            linearLayout = view.findViewById(R.id.Llayout_category);
 
         }
     }
@@ -54,10 +54,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         Picasso.with(context).load(category.getImage()).into(holder.cat_Logo);
         holder.cat_name.setText(category.getName());
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, BurgerActivity.class);
+                Intent intent = new Intent(context, ProductActivity.class);
                 intent.putExtra("CatId",category.getCatid());
                 context.startActivity(intent);
             }

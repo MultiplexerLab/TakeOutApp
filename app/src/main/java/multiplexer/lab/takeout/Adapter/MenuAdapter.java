@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import multiplexer.lab.takeout.Model.Menu;
+import com.squareup.picasso.Picasso;
+
+import multiplexer.lab.takeout.Model.Product;
 import multiplexer.lab.takeout.R;
 
 
@@ -19,23 +22,28 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
 
 
-    List<Menu> mList;
+    List<Product> mList;
     Context context;
 
-    public MenuAdapter(Context context, List<Menu> List) {
+    public MenuAdapter(Context context, List<Product> List) {
         this.mList = List;
         this.context = context;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView IVPic, IVLargepic;
-        RelativeLayout rlayout;
+        ImageView smallpic, bigpic;
+        TextView name, description, price;
+        RelativeLayout rlayout,bigrlayout;
 
         public MyViewHolder(View view) {
             super(view);
-            IVPic = view.findViewById(R.id.IV_burger_menu_pic);
+            smallpic = view.findViewById(R.id.IV_burger_menu_pic);
+            bigpic = ((Activity) context).findViewById(R.id.bigpic);
+            name = view.findViewById(R.id.prod_name);
             rlayout = view.findViewById(R.id.RL_menu_item);
-            IVLargepic = ((Activity) context).findViewById(R.id.IV_menu_detail);
+            description = ((Activity) context).findViewById(R.id.prod_desc);
+            bigrlayout = ((Activity) context).findViewById(R.id.RL_menu_detail);
+            price = ((Activity) context).findViewById(R.id.prod_price);
         }
     }
 
@@ -49,14 +57,18 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(final MenuAdapter.MyViewHolder holder, int position) {
-        final Menu menu = mList.get(position);
-        holder.IVPic.setBackgroundResource(menu.getShortPicId());
+    public void onBindViewHolder(final MenuAdapter.MyViewHolder holder, final int position) {
+        final Product product = mList.get(position);
+        Picasso.with(context).load(product.getImage()).into(holder.smallpic);
 
         holder.rlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.IVLargepic.setImageResource(menu.getLongPicId());
+                Picasso.with(context).load(product.getImage()).into(holder.bigpic);
+                holder.name.setText("Name: "+product.getName());
+                holder.description.setText("Description: "+product.getDescription());
+                holder.price.setText("Price: "+product.getPrice());
+
             }
         });
 
