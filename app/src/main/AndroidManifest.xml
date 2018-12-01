@@ -115,14 +115,6 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".ItemActivity.ChefSpecialActivity"
-            android:label="Chef's Special"
-            android:parentActivityName=".ItemActivity.MenuActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ItemActivity.MenuActivity" />
-        </activity>
-
         <activity android:name=".ItemActivity.BurgerActivity"
             android:label="Burger's"
             android:parentActivityName=".ItemActivity.MenuActivity">
@@ -131,21 +123,6 @@
                 android:value=".ItemActivity.MenuActivity" />
         </activity>
 
-        <activity android:name=".ItemActivity.SidesActivity"
-            android:label="Side's"
-            android:parentActivityName=".ItemActivity.MenuActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ItemActivity.MenuActivity" />
-        </activity>
-
-        <activity android:name=".ItemActivity.DrinkActivity"
-            android:label="Drink's"
-            android:parentActivityName=".ItemActivity.MenuActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ItemActivity.MenuActivity" />
-        </activity>
     </application>
 
 </manifest>

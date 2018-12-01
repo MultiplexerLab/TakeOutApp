@@ -3,6 +3,7 @@ package multiplexer.lab.takeout;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -25,6 +26,7 @@ import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.Model.RegisterBindingModel;
 import multiplexer.lab.takeout.R;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,15 +34,18 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,10 +56,11 @@ public class SignUpActivity extends AppCompatActivity {
     Snackbar snackbar;
     RelativeLayout rootLayout;
     ArrayAdapter<String> adapter;
-    String arr[] = {"Bangladesh", "Sri Lanka"};
+    ArrayList<String> arr = new ArrayList<String>();
+    ArrayList<Integer> arrint = new ArrayList<Integer>();
     Spinner spinnerCountry;
     RequestQueue queue;
-    int value;
+    //int value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +72,56 @@ public class SignUpActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_signup_password);
         etConPassword = findViewById(R.id.et_signup_conpassword);
         etPhone = findViewById(R.id.et_signup_phoneno);
-        rMale = findViewById(R.id.Radiobtnmale);
-        rFemale = findViewById(R.id.Radiobtnfemale);
+       /* rMale = findViewById(R.id.Radiobtnmale);
+        rFemale = findViewById(R.id.Radiobtnfemale);*/
         rootLayout = findViewById(R.id.rootLayout);
         spinnerCountry = findViewById(R.id.spinnerCountry);
+        queue = Volley.newRequestQueue(this);
+        addCountry();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
         spinnerCountry.setAdapter(adapter);
-        queue = Volley.newRequestQueue(this);
+
+    }
+
+    private void addCountry() {
+        JsonArrayRequest countryRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_COUNTRY_DATA, new Response.Listener<JSONArray>() {
+
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                Log.i("countrydata", response.toString());
+                try {
+                    for(int i=0;i<response.length();i++){
+                        arr.add(response.getJSONObject(i).getString("Name"));
+                        arrint.add(response.getJSONObject(i).getInt("Id"));
+                        adapter.notifyDataSetChanged();
+                    }
+
+
+                } catch (JSONException e) {
+                    Log.e("ParseError", e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
+        queue.add(countryRequest);
     }
 
     public void btnSignUp(View view) {
@@ -80,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity {
         if (internetConnected()) {
             if (validation()) {
                 selectAvater();
-                sendDataToServer();
+
             } else {
                 YoYo.with(Techniques.Shake)
                         .duration(1000)
@@ -98,22 +147,30 @@ public class SignUpActivity extends AppCompatActivity {
         ImageView dialogmale = dialog.findViewById(R.id.IV_male);
         ImageView dialogfemale = dialog.findViewById(R.id.IV_female);
         // if button is clicked, close the custom dialog
+        final SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         dialogmale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                value=1;
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Avatar", "male");
+                editor.apply();
                 dialog.dismiss();
+                sendDataToServer();
             }
         });
         dialogfemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                value=0;
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Avatar", "female");
+                editor.apply();
                 dialog.dismiss();
+                sendDataToServer();
             }
         });
 
         dialog.show();
+
     }
 
     private void sendDataToServer() {
@@ -123,7 +180,6 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(SignUpActivity.this, "Thanks for being registered!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                        intent.putExtra("Avater",value);
                         startActivity(intent);
                         finish();
                         Log.i("Response", response.toString());

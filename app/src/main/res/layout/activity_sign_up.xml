@@ -35,6 +35,23 @@
             android:textColorHint="@color/lightyellow">
 
             <EditText
+                android:id="@+id/et_signup_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/deepred"
+                android:hint="UserName"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/lightyellow">
+
+            <EditText
                 android:id="@+id/et_signup_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,10 +125,11 @@
                 android:hint="Phone No (01XXX)"
                 android:inputType="number"
                 android:paddingLeft="10dp"
+                android:layout_marginBottom="40dp"
                 android:textColor="@color/black" />
         </android.support.design.widget.TextInputLayout>
 
-        <RadioGroup
+        <!--<RadioGroup
             android:id="@+id/RadioGroupgender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -154,7 +172,7 @@
                 app:lrb_strokeWidth="1dp"
                 app:lrb_unCheckedColor="@color/lightyellow" />
 
-        </RadioGroup>
+        </RadioGroup>-->
 
 
     </LinearLayout>
@@ -164,10 +182,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundbutton"
-        android:layout_below="@+id/ll_signup"
         android:elevation="10dp"
         android:onClick="btnSignUp"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:stateListAnimator="@null"
         android:text="Sign Up"
         android:textColor="@color/white"

@@ -75,15 +75,18 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerlayout);
         points = findViewById(R.id.points);
 
+        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        String avatar = pref.getString("Avatar", "");
+
         Intent intent = getIntent();
         value = intent.getIntExtra("val", 0);
         if (value == 1) {
             notactivate.setVisibility(View.INVISIBLE);
         }
 
-        value = intent.getIntExtra("Avater", 0);
+       /* value = intent.getIntExtra("Avater", 0);*/
 
-        if (value == 1) {
+        if (avatar.equalsIgnoreCase("male")) {
 
             pic.setImageResource(R.drawable.male);
         } else {

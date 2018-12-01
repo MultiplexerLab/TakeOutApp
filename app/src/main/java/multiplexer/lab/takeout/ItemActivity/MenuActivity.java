@@ -1,41 +1,97 @@
 package multiplexer.lab.takeout.ItemActivity;
-
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
+import org.json.JSONException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import multiplexer.lab.takeout.Adapter.CategoryAdapter;
+import multiplexer.lab.takeout.Helper.EndPoints;
+import multiplexer.lab.takeout.Model.Category;
 import multiplexer.lab.takeout.R;
 
 public class MenuActivity extends AppCompatActivity {
+
+    private List<Category> catList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private CategoryAdapter cAdapter;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        queue = Volley.newRequestQueue(this);
+
+        recyclerView = findViewById(R.id.category_rv);
+        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(cLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        cAdapter = new CategoryAdapter(MenuActivity.this,catList);
+        recyclerView.setAdapter(cAdapter);
+        addCategory();
+
     }
 
+    private void addCategory() {
 
+        JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_CATEGORY_DATA, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.i("CATEGORY", response.toString());
+                String name,image,id;
+                int catid;
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        name = response.getJSONObject(i).getString("Name");
+                        image ="http://store.bdtakeout.com/images/categoryimage/"+response.getJSONObject(i).getString("Image");
+                        catid = response.getJSONObject(i).getInt("CatId");
+                        id = response.getJSONObject(i).getString("Id");
+                        Category category = new Category(name,image,id,catid);
+                        catList.add(category);
+                        cAdapter.notifyDataSetChanged();
+                    }
 
+                } catch (JSONException e) {
+                    Log.e("ParseError", e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-    public void btnChefSpecial(View view) {
-        Intent intent = new Intent(MenuActivity.this, ChefSpecialActivity.class);
-        startActivity(intent);
-    }
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
 
-    public void btnBurger(View view) {
-        Intent intent = new Intent(MenuActivity.this, BurgerActivity.class);
-        startActivity(intent);
-    }
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
 
-    public void btnSides(View view) {
-        Intent intent = new Intent(MenuActivity.this, SidesActivity.class);
-        startActivity(intent);
-    }
-
-    public void btnDrinks(View view) {
-        Intent intent = new Intent(MenuActivity.this, DrinkActivity.class);
-        startActivity(intent);
+                return params;
+            }
+        };
+        queue.add(catRequest);
     }
 }

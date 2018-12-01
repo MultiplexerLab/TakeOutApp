@@ -11,4 +11,5 @@ public class EndPoints {
     public static final String GET_ADS_DATA = BASE_URL+"api/add";
     public static final String GET_STORE_DATA = BASE_URL+"api/storelocator/getall/";
     public static final String GET_COUNTRY_DATA = BASE_URL+"api/country/getAll";
+    public static final String GET_CATEGORY_DATA = BASE_URL+"api/menu/Catagory";
 }

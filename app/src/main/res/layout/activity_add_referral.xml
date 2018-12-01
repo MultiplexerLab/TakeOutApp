@@ -29,7 +29,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
-            android:text="Use Code to Earn Points."
+            android:text="Use Code to Earn Points :)"
             android:textSize="16dp"/>
 
         <EditText
@@ -52,9 +52,10 @@
         android:elevation="10dp"
         android:onClick="btnAddRef"
         android:stateListAnimator="@null"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
-        android:background="#0B6623"
+        android:paddingRight="50dp"
+        android:paddingLeft="50dp"
+        android:background="@drawable/loginbutton"
+        android:backgroundTint="#0B6623"
         android:textColor="@color/white"
         android:layout_marginTop="190dp"
         />
