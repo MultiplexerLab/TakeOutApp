@@ -9,6 +9,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -22,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,8 +42,8 @@ public class StoreLocatorActivity extends AppCompatActivity {
     private List<Store> storeList = new ArrayList<>();
     RequestQueue queue;
     ArrayAdapter<String> adapter;
-    ArrayList<String> arr = new ArrayList<String>();
-    ArrayList<Integer> arrint = new ArrayList<Integer>();
+    ArrayList<String> countryArrList = new ArrayList<String>();
+    ArrayList<Integer> countryIdList = new ArrayList<Integer>();
     String country;
     int cCode;
     Spinner spinnerCountry2;
@@ -63,33 +66,38 @@ public class StoreLocatorActivity extends AppCompatActivity {
         storeAdapter = new StoreAdapter(StoreLocatorActivity.this, storeList);
         recyclerView.setAdapter(storeAdapter);
 
-
-        addCountry();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, countryArrList);
         spinnerCountry2.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        spinnerCountry2.setSelection(0);
-        addStore();
+        getAllCountries();
+        getStoresByCountry(1);
 
+        spinnerCountry2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int countryId = countryIdList.get(position);
+                Log.i("countryId", countryId + "");
+                getStoresByCountry(countryId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    public void addCountry() {
-
+    public void getAllCountries() {
         JsonArrayRequest countryRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_COUNTRY_DATA, new Response.Listener<JSONArray>() {
-
-
             @Override
             public void onResponse(JSONArray response) {
 
                 Log.i("countrydata", response.toString());
                 try {
-                    for(int i=0;i<response.length();i++){
-                        arr.add(response.getJSONObject(i).getString("Name"));
-                        arrint.add(response.getJSONObject(i).getInt("Id"));
-                        adapter.notifyDataSetChanged();
+                    for (int i = 0; i < response.length(); i++) {
+                        countryArrList.add(response.getJSONObject(i).getString("Name"));
+                        countryIdList.add(response.getJSONObject(i).getInt("Id"));
                     }
-
-
+                    adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
                 }
@@ -97,7 +105,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("ParseError", error.toString());
             }
         }) {
             @Override
@@ -117,35 +125,39 @@ public class StoreLocatorActivity extends AppCompatActivity {
     }
 
 
-    public void addStore (){
-        JsonArrayRequest storeRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_STORE_DATA, new Response.Listener<JSONArray>() {
+    public void getStoresByCountry(int countryId) {
+        JsonArrayRequest storeRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_STORE_DATA + countryId, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray response) {
-                    String name, address, phone, latitude, longitude;
-                    Log.i("storedata", response.toString());
+                String name, address, phone, latitude, longitude;
+                Log.i("storedata", response.toString());
+                storeList.clear();
+                if (response.length()==0){
+                    adapter.notifyDataSetChanged();
+                }
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject mainObject = response.getJSONObject(i);
+                        name = mainObject.getString("Name");
+                        address = mainObject.getString("Address");
+                        phone = mainObject.getString("Phone");
 
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            name = response.getJSONObject(i).getString("Name");
-                            address = response.getJSONObject(i).getString("Address");
-                            phone = response.getJSONObject(i).getString("Phone");
-                            latitude = response.getJSONObject(i).getString("Latitude");
-                            longitude = response.getJSONObject(i).getString("Longitude");
-                            Store store = new Store(name,address,phone,country,latitude,longitude);
-                            storeList.add(store);
-                            storeAdapter.notifyDataSetChanged();
-                        }
-
-                    } catch (JSONException e) {
-                        Log.e("ParseError", e.toString());
+                        JSONObject geoLocation = mainObject.getJSONObject("GeoLocation");
+                        latitude = geoLocation.getString("Latitude");
+                        longitude = geoLocation.getString("Longitude");
+                        Store store = new Store(name, address, phone, country, latitude, longitude);
+                        storeList.add(store);
+                        storeAdapter.notifyDataSetChanged();
                     }
-
+                } catch (JSONException e) {
+                    Log.e("ParseError", e.toString());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("ParseError", error.toString());
             }
         }) {
 
@@ -154,7 +166,6 @@ public class StoreLocatorActivity extends AppCompatActivity {
                 SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                 String accessToken = pref.getString("accessToken", "");
                 Log.i("accessToken", accessToken);
-                Log.i("cCode", String.valueOf(cCode));
 
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
@@ -163,8 +174,6 @@ public class StoreLocatorActivity extends AppCompatActivity {
 
                 return params;
             }
-
-
         };
         queue.add(storeRequest);
     }
