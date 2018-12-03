@@ -52,13 +52,13 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
-    NavigationView mNavigationView;
+    //private DrawerLayout drawerLayout;
+    //private ActionBarDrawerToggle toggle;
+    //NavigationView mNavigationView;
     View header;
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
-    TextView points;
+    TextView points, welcomeMessage;
     int value;
     TextView notactivate;
     RequestQueue queue;
@@ -71,8 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         notactivate = findViewById(R.id.TV_not_activated);
         ImageView pic = findViewById(R.id.IV_avatar_main);
+        welcomeMessage = findViewById(R.id.welcomeMessage);
         bmb = findViewById(R.id.bmb);
-        drawerLayout = findViewById(R.id.drawerlayout);
+        //drawerLayout = findViewById(R.id.drawerlayout);
         points = findViewById(R.id.points);
 
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
@@ -84,10 +85,7 @@ public class MainActivity extends AppCompatActivity {
             notactivate.setVisibility(View.INVISIBLE);
         }
 
-       /* value = intent.getIntExtra("Avater", 0);*/
-
         if (avatar.equalsIgnoreCase("male")) {
-
             pic.setImageResource(R.drawable.male);
         } else {
             pic.setImageResource(R.drawable.female);
@@ -96,24 +94,54 @@ public class MainActivity extends AppCompatActivity {
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();
 
-
         setInitBoom();
         boomCustomize();
 
-
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+       /* toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
         mNavigationView = findViewById(R.id.navView);
-        header = mNavigationView.getHeaderView(0);
+        header = mNavigationView.getHeaderView(0);*/
 
         queue = Volley.newRequestQueue(this);
         getPoints();
-        //burgerSlider();
+        getProfileData();
         getAds();
+    }
+
+    private void getProfileData() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_PROFILE_DATA, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("responseprofile",response.toString());
+                try {
+                    welcomeMessage.setText("Welcome, "+response.getString("Fullname"));
+                } catch (JSONException e) {
+                    Log.e("JsonException", e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
+
+        queue.add(jsonObjectRequest);
+
     }
 
     private void getPoints() {
@@ -141,9 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(stringRequest);
-
     }
 
     private void getAds() {
@@ -153,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Ads", response.toString());
                 ArrayList<String> pics = new ArrayList<>();
                 try {
-                    /*JSONObject jsonObject = response.getJSONObject("fOffer");
-                    String message = jsonObject.getString("");*/
                     JSONArray jsonArray = response.getJSONArray("fpaAdds");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         pics.add("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
@@ -184,24 +208,6 @@ public class MainActivity extends AppCompatActivity {
         };
         queue.add(adsRequest);
     }
-
-/*    private void burgerSlider() {
-
-        final Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
-            int i = 0;
-
-            public void run() {
-                burgerslide.setImageResource(imageList.get(i));
-                i++;
-                if (i > imageList.size() - 1) {
-                    i = 0;
-                }
-                handler.postDelayed(this, 2000);
-            }
-        };
-        handler.postDelayed(runnable, 2000);
-    }*/
 
     private void initSetPic(ArrayList<String> pics) {
         Log.i("data", pics.toString());
@@ -234,9 +240,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
+       /* if (toggle.onOptionsItemSelected(item)) {
             return true;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 

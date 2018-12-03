@@ -21,7 +21,6 @@ import java.util.List;
 
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
 
-
     List<Product> mList;
     Context context;
 
@@ -68,10 +67,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
                 holder.name.setText("Name: "+product.getName());
                 holder.description.setText("Description: "+product.getDescription());
                 holder.price.setText("Price: "+product.getPrice());
-
             }
         });
-
     }
 
     @Override

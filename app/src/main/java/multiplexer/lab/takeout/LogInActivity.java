@@ -134,7 +134,7 @@ public class LogInActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.e("LoginError", e.toString());
                         }
 
                         Toast.makeText(LogInActivity.this, "Welcome to TakeOut!", Toast.LENGTH_SHORT).show();
