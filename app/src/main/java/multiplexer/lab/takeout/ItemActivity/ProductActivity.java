@@ -1,7 +1,7 @@
 package multiplexer.lab.takeout.ItemActivity;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +11,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,25 +29,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import multiplexer.lab.takeout.Adapter.MenuAdapter;
+import multiplexer.lab.takeout.Adapter.ProductAdapter;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.Model.Product;
 import multiplexer.lab.takeout.R;
 
 public class ProductActivity extends AppCompatActivity {
-    final Context context = this;
-    private List<Product> productList = new ArrayList<>();
 
+    private List<Product> productList = new ArrayList<>();
+    int countrycode=1, catid;
     private RecyclerView recyclerView;
-    private MenuAdapter cAdapter;
+    private ProductAdapter cAdapter;
     RequestQueue queue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_burger);
+        setContentView(R.layout.activity_product);
+
+        Intent intent = getIntent();
+        catid= intent.getIntExtra("CatId",0);
+        Log.i("Anikkk",String.valueOf(catid));
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view);
-        cAdapter = new MenuAdapter(ProductActivity.this,productList);
+        cAdapter = new ProductAdapter(ProductActivity.this,productList);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -59,7 +61,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void input() {
-        JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_PRODUCT_DATA, new Response.Listener<JSONArray>() {
+        JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_PRODUCT_DATA+catid+'/'+countrycode, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.i("Product", response.toString());
@@ -69,12 +71,21 @@ public class ProductActivity extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         name = response.getJSONObject(i).getString("Name");
                         id = response.getJSONObject(i).getInt("FinId");
-                        // need change the url
+                        // need to change the url
                         image ="http://store.bdtakeout.com/images/categoryimage/"+response.getJSONObject(i).getString("Image");
 
                         description = response.getJSONObject(i).getString("Desc");
-                        rating = response.getJSONObject(i).getInt("Rating");
-                        customer_rating = response.getJSONObject(i).getInt("CustomerRating");
+                        if(response.getJSONObject(i).isNull("Rating")){
+                            rating = 0;
+                        }else{
+                            rating = response.getJSONObject(i).getInt("Rating");
+                        }
+
+                        if(response.getJSONObject(i).isNull("CustomerRating")){
+                            customer_rating = 3;
+                        }else{
+                            customer_rating = response.getJSONObject(i).getInt("CustomerRating");
+                        }
 
                         JSONObject finobj = response.getJSONObject(i).getJSONObject("FinishedMaterial");
                         price = finobj.getInt("price");
@@ -104,26 +115,10 @@ public class ProductActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + accessToken);
-                params.put("CategoryID", "1");
 
                 return params;
             }
         };
         queue.add(catRequest);
-    }
-
-    public void btnRating(View view) {
-
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.custom_dialog);
-        Button dialogButton = dialog.findViewById(R.id.btn_submit);
-        // if button is clicked, close the custom dialog
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
     }
 }

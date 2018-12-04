@@ -29,24 +29,25 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
-            android:text="Use Code to Earn Points :)"
+            android:text="Use Coupon to Earn Points :)"
             android:textSize="16dp"/>
 
         <EditText
+            android:id="@+id/ET_coupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:gravity="center"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="30dp"
-            android:hint="Enter the Code Here"/>
+            android:hint="Enter your coupon Here"/>
 
     </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add code"
+        android:text="Add Coupon"
         android:layout_centerHorizontal="true"
         android:textSize="20dp"
         android:elevation="10dp"

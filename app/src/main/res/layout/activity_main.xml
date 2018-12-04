@@ -163,7 +163,7 @@
             app:bmb_buttonPlaceEnum="buttonPlace_sc_7_1"
             app:bmb_frames="100"
             app:bmb_hideDuration="500"
-            app:bmb_normalColor="@color/lightyellow"
+            app:bmb_normalColor="@color/black"
             app:bmb_piecePlaceEnum="piecePlace_dot_7_1"
             app:bmb_rotateDegree="1080"
             app:bmb_showDuration="900" />

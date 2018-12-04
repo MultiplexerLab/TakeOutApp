@@ -56,8 +56,6 @@ public class SignUpActivity extends AppCompatActivity {
     Snackbar snackbar;
     RelativeLayout rootLayout;
     ArrayAdapter<String> adapter;
-    /*ArrayList<String> arr = new ArrayList<String>();
-    ArrayList<Integer> arrint = new ArrayList<Integer>();*/
     String arr[] = {"Bangladesh", "Sri Lanka"};
     Spinner spinnerCountry;
     RequestQueue queue;
@@ -76,42 +74,12 @@ public class SignUpActivity extends AppCompatActivity {
         rootLayout = findViewById(R.id.rootLayout);
         spinnerCountry = findViewById(R.id.spinnerCountry);
         queue = Volley.newRequestQueue(this);
-        //addCountry();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
         spinnerCountry.setAdapter(adapter);
 
     }
 
-    /*private void addCountry() {
-        JsonArrayRequest countryRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_COUNTRY_DATA, new Response.Listener<JSONArray>() {
 
-
-            @Override
-            public void onResponse(JSONArray response) {
-
-                Log.i("countrydata", response.toString());
-                try {
-                    for(int i=0;i<response.length();i++){
-                        arr.add(response.getJSONObject(i).getString("Name"));
-                        arrint.add(response.getJSONObject(i).getInt("Id"));
-                        adapter.notifyDataSetChanged();
-                    }
-
-
-                } catch (JSONException e) {
-                    Log.e("ParseError", e.toString());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-
-        };
-        queue.add(countryRequest);
-    }*/
 
     public void btnSignUp(View view) {
 

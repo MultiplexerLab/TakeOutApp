@@ -45,7 +45,6 @@ public class StoreLocatorActivity extends AppCompatActivity {
     ArrayList<String> countryArrList = new ArrayList<String>();
     ArrayList<Integer> countryIdList = new ArrayList<Integer>();
     String country;
-    int cCode;
     Spinner spinnerCountry2;
     private RecyclerView recyclerView;
     private StoreAdapter storeAdapter;
@@ -170,7 +169,6 @@ public class StoreLocatorActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + accessToken);
-                params.put("countryCode", String.valueOf(1));
 
                 return params;
             }

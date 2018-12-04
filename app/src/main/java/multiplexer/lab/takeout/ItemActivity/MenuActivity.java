@@ -3,9 +3,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import com.android.volley.AuthFailureError;
@@ -21,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import multiplexer.lab.takeout.Adapter.CategoryAdapter;
+import multiplexer.lab.takeout.Adapter.MenuAdapter;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.Model.Category;
 import multiplexer.lab.takeout.R;
@@ -30,7 +28,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private List<Category> catList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private CategoryAdapter cAdapter;
+    private MenuAdapter cAdapter;
     RequestQueue queue;
 
     @Override
@@ -44,13 +42,13 @@ public class MenuActivity extends AppCompatActivity {
         RecyclerView.LayoutManager cLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        cAdapter = new CategoryAdapter(MenuActivity.this,catList);
+        cAdapter = new MenuAdapter(MenuActivity.this,catList);
         recyclerView.setAdapter(cAdapter);
-        addCategory();
+        addMenu();
 
     }
 
-    private void addCategory() {
+    private void addMenu() {
 
         JsonArrayRequest productRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_CATEGORY_DATA, new Response.Listener<JSONArray>() {
             @Override

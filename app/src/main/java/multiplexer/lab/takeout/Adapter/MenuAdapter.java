@@ -1,79 +1,71 @@
 package multiplexer.lab.takeout.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
-import multiplexer.lab.takeout.Model.Product;
-import multiplexer.lab.takeout.R;
-
-
 import java.util.List;
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
+import multiplexer.lab.takeout.ItemActivity.ProductActivity;
+import multiplexer.lab.takeout.Model.Category;
+import multiplexer.lab.takeout.R;
 
-    List<Product> mList;
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
+    List<Category> catList;
     Context context;
 
-    public MenuAdapter(Context context, List<Product> List) {
-        this.mList = List;
+    public MenuAdapter(Context context, List<Category> List) {
+
+        this.catList = List;
         this.context = context;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView smallpic, bigpic;
-        TextView name, description, price;
-        RelativeLayout rlayout,bigrlayout;
+        ImageView cat_Logo;
+        TextView cat_name;
+        LinearLayout linearLayout;
 
         public MyViewHolder(View view) {
             super(view);
-            smallpic = view.findViewById(R.id.IV_burger_menu_pic);
-            bigpic = ((Activity) context).findViewById(R.id.bigpic);
-            name = view.findViewById(R.id.prod_name);
-            rlayout = view.findViewById(R.id.RL_menu_item);
-            description = ((Activity) context).findViewById(R.id.prod_desc);
-            bigrlayout = ((Activity) context).findViewById(R.id.RL_menu_detail);
-            price = ((Activity) context).findViewById(R.id.prod_price);
+            cat_name = view.findViewById(R.id.cat_name);
+            cat_Logo = view.findViewById(R.id.prod_logo);
+            linearLayout = view.findViewById(R.id.Llayout_category);
+
         }
     }
 
 
     @Override
-    public MenuAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.custom_layout_menu, parent, false);
-
         return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final MenuAdapter.MyViewHolder holder, final int position) {
-        final Product product = mList.get(position);
-        Picasso.with(context).load(product.getImage()).into(holder.smallpic);
+    public void onBindViewHolder(final MenuAdapter.MyViewHolder holder, int position) {
+        final Category category = catList.get(position);
 
-        holder.rlayout.setOnClickListener(new View.OnClickListener() {
+        Picasso.with(context).load(category.getImage()).into(holder.cat_Logo);
+        holder.cat_name.setText(category.getName());
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Picasso.with(context).load(product.getImage()).into(holder.bigpic);
-                holder.name.setText("Name: "+product.getName());
-                holder.description.setText("Description: "+product.getDescription());
-                holder.price.setText("Price: "+product.getPrice());
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra("CatId",category.getCatid());
+                context.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return catList.size();
     }
-
 }
