@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout;
 
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -15,7 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -44,7 +47,7 @@ import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.Model.RegisterBindingModel;
 
 public class LogInActivity extends AppCompatActivity {
-
+    final Context context = this;
     EditText etEmail, etPassword;
     LinearLayout loginLayout;
     Snackbar snackbar;
@@ -254,5 +257,19 @@ public class LogInActivity extends AppCompatActivity {
         }
         return error;
 
+    }
+
+    public void btnForgotPassword(View view) {
+
+        final Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.custom_forgot_password);
+        EditText email = dialog.findViewById(R.id.ET_forgot_email);
+        Button submit = dialog.findViewById(R.id.btn_forgot_submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }

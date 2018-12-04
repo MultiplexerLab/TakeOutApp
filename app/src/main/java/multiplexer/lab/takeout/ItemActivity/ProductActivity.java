@@ -1,6 +1,5 @@
 package multiplexer.lab.takeout.ItemActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -48,7 +47,6 @@ public class ProductActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         catid= intent.getIntExtra("CatId",0);
-        Log.i("Anikkk",String.valueOf(catid));
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view);
         cAdapter = new ProductAdapter(ProductActivity.this,productList);
@@ -72,7 +70,7 @@ public class ProductActivity extends AppCompatActivity {
                         name = response.getJSONObject(i).getString("Name");
                         id = response.getJSONObject(i).getInt("FinId");
                         // need to change the url
-                        image ="http://store.bdtakeout.com/images/categoryimage/"+response.getJSONObject(i).getString("Image");
+                        image ="http://store.bdtakeout.com/images/productimage/"+response.getJSONObject(i).getString("Image");
 
                         description = response.getJSONObject(i).getString("Desc");
                         if(response.getJSONObject(i).isNull("Rating")){
