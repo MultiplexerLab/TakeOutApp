@@ -135,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/squareshape"
         android:elevation="10dp"
         android:orientation="vertical"
@@ -190,7 +190,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/buttonlogin"
         android:elevation="10dp"
         android:onClick="btnLogIn"
@@ -205,7 +205,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forgot Password? "
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#757575"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_login"
@@ -240,5 +240,10 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="50dp"
+        android:id="@+id/rootView"/>
 
 </RelativeLayout>

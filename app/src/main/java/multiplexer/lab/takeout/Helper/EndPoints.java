@@ -16,4 +16,5 @@ public class EndPoints {
     public static final String POST_PRODUCT_RATING = BASE_URL+ "api/menu/rate/";
     public static final String GET_USE_COUPON= BASE_URL+ "api/invoice/useinvoice/";
     public static final String GET_USE_REFERRAL= BASE_URL+ "api/referral/userReferral/";
+    public static final String FORGOT_PASSWORD= BASE_URL+ "api/account/ForgetPassword";
 }

@@ -8,5 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="App_EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@color/yellow</item>
+        <item name="android:textColor">#d2d0d0</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
 
 </resources>

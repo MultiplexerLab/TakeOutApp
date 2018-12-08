@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -32,6 +33,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
+import com.yarolegovich.lovelydialog.ViewConfigurator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +53,8 @@ public class LogInActivity extends AppCompatActivity {
     Snackbar snackbar;
     RelativeLayout rootLayout;
     RequestQueue queue;
+    TextView forgotpass;
+    View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +64,74 @@ public class LogInActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_login_password);
         loginLayout = findViewById(R.id.LL_input);
         rootLayout = findViewById(R.id.rootLayout);
+        forgotpass = findViewById(R.id.forgotpass);
+        rootView = findViewById(R.id.rootView);
         queue = Volley.newRequestQueue(this);
         //createNotificationChannel();
         animation();
+
+        forgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LovelyTextInputDialog(LogInActivity.this, R.style.App_EditTextStyle)
+                        .setTopColorRes(R.color.colorPrimary)
+                        .setTitle("Email")
+                        .setMessage("Insert your Email please")
+                        //.configureView((ViewConfigurator<View>) rootView)
+                        .setInputFilter("Email is not correct", new LovelyTextInputDialog.TextFilter() {
+                            @Override
+                            public boolean check(String text) {
+                                return text.matches(".com");
+                            }
+                        })
+                        .setConfirmButton(android.R.string.ok, new LovelyTextInputDialog.OnTextInputConfirmListener() {
+                            @Override
+                            public void onTextInputConfirmed(String text) {
+                                Toast.makeText(LogInActivity.this, text, Toast.LENGTH_SHORT).show();
+                                sendEmail(text);
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
+
+    private void sendEmail(final String email) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.FORGOT_PASSWORD,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("EmailResponse", response.toString());
+                    }
+                }, new Response.ErrorListener() {
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse response = error.networkResponse;
+                if (response != null) {
+                    Log.e("networkResponse", response.toString());
+                    if (error instanceof ServerError && response != null) {
+                        try {
+                            String res = new String(response.data,
+                                    HttpHeaderParser.parseCharset(response.headers, "application/json"));
+                            Log.i("resString", res);
+                            if (res.contains("unsupported_grant_type")) {
+                                Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (UnsupportedEncodingException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }) {
+            @Override
+            public Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Email", email);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 
     private void createNotificationChannel() {
@@ -174,10 +244,9 @@ public class LogInActivity extends AppCompatActivity {
                 params.put("grant_type", "password");
                 return params;
                 }
-            }*/
-            {
-                @Override
-                public Map<String, String> getParams () {
+            }*/ {
+            @Override
+            public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("username", etEmail.getText().toString());
                 params.put("password", etPassword.getText().toString());
