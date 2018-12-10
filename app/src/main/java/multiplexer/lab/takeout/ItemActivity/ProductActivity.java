@@ -48,7 +48,7 @@ public class ProductActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         catid= intent.getIntExtra("CatId",0);
-        Log.i("Anikkk",String.valueOf(catid));
+        Log.i("catId",String.valueOf(catid));
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view);
         cAdapter = new ProductAdapter(ProductActivity.this,productList);

@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout;
 
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -14,14 +15,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,9 +35,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
-import com.yarolegovich.lovelydialog.ViewConfigurator;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +43,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import multiplexer.lab.takeout.Helper.EndPoints;
-import multiplexer.lab.takeout.Model.RegisterBindingModel;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -54,7 +52,6 @@ public class LogInActivity extends AppCompatActivity {
     RelativeLayout rootLayout;
     RequestQueue queue;
     TextView forgotpass;
-    View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,33 +62,34 @@ public class LogInActivity extends AppCompatActivity {
         loginLayout = findViewById(R.id.LL_input);
         rootLayout = findViewById(R.id.rootLayout);
         forgotpass = findViewById(R.id.forgotpass);
-        rootView = findViewById(R.id.rootView);
         queue = Volley.newRequestQueue(this);
-        //createNotificationChannel();
         animation();
 
         forgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new LovelyTextInputDialog(LogInActivity.this, R.style.App_EditTextStyle)
-                        .setTopColorRes(R.color.colorPrimary)
-                        .setTitle("Email")
-                        .setMessage("Insert your Email please")
-                        //.configureView((ViewConfigurator<View>) rootView)
-                        .setInputFilter("Email is not correct", new LovelyTextInputDialog.TextFilter() {
-                            @Override
-                            public boolean check(String text) {
-                                return text.matches(".com");
-                            }
-                        })
-                        .setConfirmButton(android.R.string.ok, new LovelyTextInputDialog.OnTextInputConfirmListener() {
-                            @Override
-                            public void onTextInputConfirmed(String text) {
-                                Toast.makeText(LogInActivity.this, text, Toast.LENGTH_SHORT).show();
-                                sendEmail(text);
-                            }
-                        })
-                        .show();
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(LogInActivity.this);
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = inflater.inflate(R.layout.custom_dialog_forgot, null);
+                dialog.setView(customView);
+
+                Button btn = customView.findViewById(R.id.btn_forgot_password);
+                final EditText editText = customView.findViewById(R.id.emailFotgotPassword);
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(editText.getText().toString().isEmpty()){
+                            Toast.makeText(LogInActivity.this, "Please insert your email!", Toast.LENGTH_SHORT).show();
+                        }else if(!editText.getText().toString().contains(".com")){
+                            Toast.makeText(LogInActivity.this, "Email is not valid!", Toast.LENGTH_SHORT).show();
+                        }else{
+                            sendEmail(editText.getText().toString());
+                        }
+                    }
+                });
+                dialog.show();
+
             }
         });
     }
@@ -116,7 +114,6 @@ public class LogInActivity extends AppCompatActivity {
                             if (res.contains("unsupported_grant_type")) {
                                 Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
                             }
-
                         } catch (UnsupportedEncodingException e1) {
                             e1.printStackTrace();
                         }
@@ -224,6 +221,8 @@ public class LogInActivity extends AppCompatActivity {
                             Log.i("resString", res);
                             if (res.contains("unsupported_grant_type")) {
                                 Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                            } else if (res.contains("password")) {
+                                Toast.makeText(LogInActivity.this, "Username or Password is incorrect!", Toast.LENGTH_SHORT).show();
                             }
                             JSONObject obj = new JSONObject(res);
 

@@ -9,17 +9,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_back"
         android:alpha="0.7"
-        />
+        android:background="@drawable/login_back" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/category_rv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:elevation="5dp"
-            android:scrollbars="vertical"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="5dp"
+        android:scrollbars="vertical" />
 
 
 </RelativeLayout>

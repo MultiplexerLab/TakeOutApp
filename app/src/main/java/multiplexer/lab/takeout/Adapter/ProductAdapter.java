@@ -34,13 +34,13 @@ import java.util.Map;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
 
-    List<Product> mList;
+    List<Product> productList;
     Context context;
     RequestQueue queue;
     String personId;
 
-    public ProductAdapter(Context context, List<Product> List) {
-        this.mList = List;
+    public ProductAdapter(Context context, List<Product> productList) {
+        this.productList = productList;
         this.context = context;
     }
 
@@ -73,8 +73,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final ProductAdapter.MyViewHolder holder, final int position) {
-        final Product product = mList.get(position);
+        final Product product = productList.get(position);
         Picasso.with(context).load(product.getImage()).into(holder.smallpic);
+
+        if(position==0){
+            holder.bigrlayout.setVisibility(View.VISIBLE);
+            Picasso.with(context).load(product.getImage()).into(holder.bigpic);
+            holder.name.setText("Name: "+product.getName());
+            holder.description.setText("Description: "+product.getDescription());
+            holder.price.setText("Price: "+product.getPrice());
+        }
 
         holder.rlayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +109,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     public void onClick(View v) {
                         int rating = smileRating.getRating();
                         product.setRating(rating);
-
                         postRating(product.getId(),rating);
-
                         dialog.dismiss();
                     }
                 });
@@ -114,7 +120,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return productList.size();
     }
 
     public void postRating(final int productid, final int rating){
