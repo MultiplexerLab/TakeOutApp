@@ -12,21 +12,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
-        android:text="Forgot Password?"
+        android:text="Get some bonus points!"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/emailFotgotPassword"
+        android:id="@+id/invoiceNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="Insert your email please"
+        android:hint="Insert your invoice number"
         android:textColorHint="@color/black" />
 
     <Button
-        android:id="@+id/btn_forgot_password"
+        android:id="@+id/btn_bonus_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

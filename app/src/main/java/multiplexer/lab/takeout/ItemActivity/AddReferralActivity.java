@@ -53,11 +53,7 @@ public class AddReferralActivity extends AppCompatActivity {
         value = intent.getIntExtra("val",0);
         if(value == 1){
             text.setText("Use Code to Activate your Account.");
-        }else{
-            text.setText("Use Code to Earn Points.");
         }
-
-
     }
 
     public void btnAddRef(View view) {

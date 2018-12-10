@@ -5,61 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="multiplexer.lab.takeout.ItemActivity.AddReferralActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_back"
-        android:alpha="0.7"/>
+        android:alpha="0.7"
+        android:background="@drawable/login_back" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/squareshape"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="10dp"
-        android:elevation="10dp"
         android:layout_marginTop="70dp"
-        android:layout_centerHorizontal="true">
+        android:layout_marginRight="10dp"
+        android:background="@drawable/squareshape"
+        android:elevation="10dp"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/TV_referral"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/black"
             android:layout_marginTop="10dp"
-            android:text="Use Coupon to Earn Points :)"
-            android:textSize="16dp"/>
+            android:gravity="center"
+            android:text="Use Code to Activate your Account."
+            android:textColor="@color/black"
+            android:textSize="16dp" />
 
         <EditText
             android:id="@+id/ET_coupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="30dp"
-            android:hint="Enter your coupon Here"/>
+            android:gravity="center"
+            android:hint="Enter your referral code Here"
+            android:padding="10dp" />
 
     </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Coupon"
         android:layout_centerHorizontal="true"
-        android:textSize="20dp"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/loginbutton"
+        android:backgroundTint="@color/colorPrimary"
         android:elevation="10dp"
         android:onClick="btnAddRef"
-        android:stateListAnimator="@null"
-        android:paddingRight="50dp"
         android:paddingLeft="50dp"
-        android:background="@drawable/loginbutton"
-        android:backgroundTint="#0B6623"
-        android:textColor="@color/white"
-        android:layout_marginTop="190dp"
-        />
+        android:paddingRight="50dp"
+        android:stateListAnimator="@null"
+        android:text="Add Coupon"
+        android:textColor="@color/black" />
 
 
 </RelativeLayout>

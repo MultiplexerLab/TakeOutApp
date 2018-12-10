@@ -81,50 +81,58 @@
                         android:textSize="15dp"
                         android:textStyle="bold" />
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="30dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="130dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginBottom="30dp"
+                            android:layout_weight="1"
+
                             android:background="@drawable/tv_menu_home"
                             android:elevation="5dp"
                             android:gravity="center"
                             android:onClick="btnQR"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp"
-                            android:paddingBottom="10dp"
+                            android:padding="10dp"
                             android:text="SCAN QR"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/black"
-                            android:textSize="15dp"
                             android:textStyle="bold" />
 
 
                         <TextView
-                            android:layout_width="130dp"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="30dp"
-                            android:layout_marginBottom="30dp"
+                            android:layout_weight="1"
                             android:background="@drawable/tv_menu_home"
                             android:elevation="5dp"
                             android:gravity="center"
                             android:onClick="btnMenu"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingRight="10dp"
-                            android:paddingBottom="10dp"
+                            android:padding="10dp"
                             android:text="MENU"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/black"
-                            android:textSize="15dp"
                             android:textStyle="bold" />
-                    </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/tv_menu_home"
+                            android:elevation="5dp"
+                            android:gravity="center"
+                            android:onClick="getPoints"
+                            android:padding="10dp"
+                            android:text="GET POINTS"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <RelativeLayout
@@ -179,8 +187,8 @@
         android:layout_marginStart="0dp"
         android:layout_marginBottom="0dp"
         android:background="#ece8e8"
-        app:elevation="10dp"
         android:visibility="invisible"
+        app:elevation="10dp"
         app:headerLayout="@layout/header"
         app:itemIconTint="@color/yellow"
         app:itemTextColor="@color/yellow"

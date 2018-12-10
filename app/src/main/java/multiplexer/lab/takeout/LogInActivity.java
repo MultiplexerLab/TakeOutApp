@@ -52,6 +52,7 @@ public class LogInActivity extends AppCompatActivity {
     RelativeLayout rootLayout;
     RequestQueue queue;
     TextView forgotpass;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +69,11 @@ public class LogInActivity extends AppCompatActivity {
         forgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(LogInActivity.this);
+                dialog = new AlertDialog.Builder(LogInActivity.this).create();
                 LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View customView = inflater.inflate(R.layout.custom_dialog_forgot, null);
                 dialog.setView(customView);
+                dialog.setCancelable(true);
 
                 Button btn = customView.findViewById(R.id.btn_forgot_password);
                 final EditText editText = customView.findViewById(R.id.emailFotgotPassword);
@@ -100,6 +102,10 @@ public class LogInActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("EmailResponse", response.toString());
+                        if(response.equals("")){
+                            Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
