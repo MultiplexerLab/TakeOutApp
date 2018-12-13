@@ -11,7 +11,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -115,14 +115,15 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".ItemActivity.ProductActivity"
+        <activity
+            android:name=".ItemActivity.ProductActivity"
             android:label="Our Menu"
             android:parentActivityName=".ItemActivity.MenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemActivity.MenuActivity" />
         </activity>
-
+        <activity android:name=".ItemActivity.ProfileEditActivity"></activity>
     </application>
 
 </manifest>

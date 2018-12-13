@@ -94,4 +94,10 @@ public class ProfileActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
     }
+
+    public void btnEdit(View view) {
+        Intent intent = new Intent(getApplicationContext(),ProfileEditActivity.class);
+        startActivity(intent);
+
+    }
 }
