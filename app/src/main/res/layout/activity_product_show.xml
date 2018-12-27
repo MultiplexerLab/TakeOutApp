@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightyellow"
+    tools:context=".ItemActivity.ProductShowActivity">
+
+    <ImageView
+        android:id="@+id/foodpic_show"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:background="@drawable/adpic_delete"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:elevation="10dp"
+        android:padding="20dp"
+        android:background="@drawable/squareshape"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/foodname_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beef Burger"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:textSize="20dp"
+            android:textColor="@color/lightblack"/>
+        <TextView
+            android:id="@+id/foodprice_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: 240 BDT"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/foodname_show"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/lightblack"/>
+        <TextView
+            android:id="@+id/foodratebtn_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rate it"
+            android:layout_marginTop="5dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:onClick="btnRate"
+            android:background="@drawable/loginbutton"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/foodprice_show"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/white"/>
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/lightblack"
+            android:layout_below="@+id/foodratebtn_show"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+            android:id="@+id/foodrate_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/lightyellow"/>
+
+        <TextView
+            android:id="@+id/foodratenumber_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.0"
+            android:layout_below="@+id/foodrate_show"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textColor="@color/lightyellow"/>
+        <TextView
+            android:id="@+id/foodratetitle_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VERY GOOD"
+            android:layout_below="@+id/foodratenumber_show"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:textSize="10dp"
+            android:textColor="@color/lightyellow"/>
+
+        <TextView
+            android:id="@+id/fooddescription_show"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="A hamburger, beefburger or burger is a sandwich consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun. The patty may be pan fried, grilled, or flame broiled. ... A hamburger topped with cheese is called a cheeseburger."
+            android:layout_below="@+id/separator"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/lightblack"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

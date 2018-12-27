@@ -10,12 +10,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     TextView notactivate;
     RequestQueue queue;
     BoomMenuButton bmb;
+    BoomMenuButton bmb1;
     AlertDialog dialog;
 
     @Override
@@ -79,12 +79,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        notactivate = findViewById(R.id.TV_not_activated);
+        /*notactivate = findViewById(R.id.TV_not_activated);*/
         ImageView pic = findViewById(R.id.IV_avatar_main);
         welcomeMessage = findViewById(R.id.welcomeMessage);
-        bmb = findViewById(R.id.bmb);
-        //drawerLayout = findViewById(R.id.drawerlayout);
         points = findViewById(R.id.points);
+
+        ActionBar mActionBar = getSupportActionBar();
+        assert mActionBar != null;
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View actionBar = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView mTitleTextView = actionBar.findViewById(R.id.title_text);
+        mTitleTextView.setText("Home");
+        mActionBar.setCustomView(actionBar);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0,0);
+        bmb1 = actionBar.findViewById(R.id.bmb1);
 
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         String avatar = pref.getString("Avatar", "");
@@ -98,14 +110,15 @@ public class MainActivity extends AppCompatActivity {
         if (avatar.equalsIgnoreCase("male")) {
             pic.setImageResource(R.drawable.male);
         } else {
-            pic.setImageResource(R.drawable.female);
+            pic.setImageResource(R.drawable.male);
         }
 
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();
 
         setInitBoom();
-        boomCustomize();
+        //boomCustomize();
+        boomCustomizebmb1();
 
        /* toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
@@ -134,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.i("responseprofile",response.toString());
                 try {
-                    welcomeMessage.setText("Welcome, "+response.getString("Fullname"));
+                    welcomeMessage.setText("Welcome , "+response.getString("Fullname"));
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
@@ -264,15 +277,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void boomCustomize() {
+   /* public void boomCustomize() {
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
             TextInsideCircleButton.Builder builder = new TextInsideCircleButton.Builder()
                     .normalImageRes(iconList.get(i))
                     .normalText(titleList.get(i))
                     .rippleEffect(true)
-                    .normalColorRes(R.color.black)
+                    .normalColorRes(R.color.deepred)
 
-                    .highlightedColorRes(R.color.deepred)
+                    .highlightedColorRes(R.color.deepestred)
                     .pieceColorRes(R.color.white)
                     .textGravity(Gravity.CENTER)
                     .typeface(Typeface.DEFAULT_BOLD)
@@ -322,7 +335,68 @@ public class MainActivity extends AppCompatActivity {
                     });
             bmb.addBuilder(builder);
         }
+    }*/
+
+    public void boomCustomizebmb1() {
+        for (int i = 0; i < bmb1.getPiecePlaceEnum().pieceNumber(); i++) {
+            TextInsideCircleButton.Builder builder = new TextInsideCircleButton.Builder()
+                    .normalImageRes(iconList.get(i))
+                    .normalText(titleList.get(i))
+                    .rippleEffect(true)
+                    .normalColorRes(R.color.lightyellow)
+
+                    .highlightedColorRes(R.color.lightyellow)
+                    .pieceColorRes(R.color.white)
+                    .textGravity(Gravity.CENTER)
+                    .typeface(Typeface.DEFAULT_BOLD)
+                    .normalTextColorRes(R.color.lightblack)
+                    .textSize(10)
+                    .imagePadding(new Rect(20, 20, 20, 20))
+                    .textPadding(new Rect(10, 20, 10, 0))
+                    .shadowEffect(true)
+                    .rotateImage(true)
+                    .rotateText(true)
+                    .listener(new OnBMClickListener() {
+                        @Override
+                        public void onBoomButtonClick(int i) {
+                            Intent intent = null;
+                            switch (i) {
+                                case 0:
+                                    intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                    break;
+                                case 1:
+                                    intent = new Intent(MainActivity.this, AboutUsActivity.class);
+                                    break;
+                                case 2:
+                                    intent = new Intent(MainActivity.this, ScanQRActivity.class);
+                                    break;
+                                case 3:
+                                    intent = new Intent(MainActivity.this, StoreLocatorActivity.class);
+                                    break;
+                                case 4:
+                                    String url = "https://www.foodpanda.com.bd/";
+                                    intent = new Intent(Intent.ACTION_VIEW);
+                                    intent.setData(Uri.parse(url));
+                                    break;
+                                case 5:
+                                    intent = new Intent(MainActivity.this, AddReferralActivity.class);
+                                    break;
+                                case 6:
+                                    SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    editor.putString("accessToken", "");
+                                    editor.apply();
+                                    intent = new Intent(MainActivity.this, LogInActivity.class);
+                                    finish();
+                                    break;
+                            }
+                            startActivity(intent);
+                        }
+                    });
+            bmb1.addBuilder(builder);
+        }
     }
+
 
     public void btnScanQR(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, ScanQRActivity.class);

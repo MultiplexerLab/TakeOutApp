@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FEC834</color>
+    <color name="colorPrimary">#CE9F2B</color>
     <color name="colorPrimaryDark">#490202</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+    <color name="black">#000</color>
     <color name="ash">#F3F1F2</color>
-    <color name="red">#EC3521</color>
-    <color name="deepred">#540202</color>
-    <color name="deepestred">#410101</color>
-    <color name="lightyellow">#FEDC3D</color>
+    <color name="ash2">#93938B</color>
+    <color name="green">#1e8302</color>
+
+    <color name="red">#DF252F</color>
+    <color name="lightblack">#24221D</color>
+  <!-- <color name="deepred">#592913</color>-->
+    <color name="deepestred">#52433E</color>
+    <!--<color name="deepestred">#410101</color>-->
+    <color name="lightyellow">#FFC837</color>
     <!--<color name="lightestyellow">#378393</color>-->
     <color name="yellow">#FAB117</color>
 </resources>

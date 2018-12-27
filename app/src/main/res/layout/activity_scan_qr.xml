@@ -7,6 +7,13 @@
     tools:context="multiplexer.lab.takeout.ItemActivity.ScanQRActivity"
     android:background="@color/ash">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:background="@drawable/login_back" />
+
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"

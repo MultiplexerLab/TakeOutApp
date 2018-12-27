@@ -86,7 +86,7 @@
         </activity>
         <activity
             android:name=".ItemActivity.MenuActivity"
-            android:label="Our Menu"
+            android:label="Food Menu"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -123,7 +123,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemActivity.MenuActivity" />
         </activity>
-        <activity android:name=".ItemActivity.ProfileEditActivity"></activity>
+        <activity android:name=".ItemActivity.ProfileEditActivity" />
+        <activity android:name=".ItemActivity.ProductShowActivity"
+            android:parentActivityName=".ItemActivity.ProductActivity">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".ItemActivity.ProductActivity" />
+        </activity>
     </application>
 
 </manifest>

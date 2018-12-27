@@ -5,23 +5,25 @@
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ash"
     tools:context="multiplexer.lab.takeout.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/ash">
 
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/login_back">
+            android:background="@color/ash">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/TV_not_activated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -32,51 +34,89 @@
                     android:padding="10dp"
                     android:text="CLICK TO ACTIVATE YOUR ACCOUNT"
                     android:textColor="@color/white"
-                    android:textSize="15dp" />
+                    android:textSize="15dp" />-->
 
-                <LinearLayout
+
+                <RelativeLayout
                     android:id="@+id/LL_welcome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_margin="10dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/squareshape"
-                    android:elevation="10dp"
-                    android:orientation="vertical">
+                    android:elevation="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="260dp"
+                        android:alpha="0.7"
+                        android:background="@drawable/login_back" />
 
                     <ImageView
                         android:id="@+id/IV_avatar_main"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
-                        android:elevation="10dp"
-                        android:src="@drawable/male"
-                        android:stateListAnimator="@null" />
+                        android:src="@drawable/male" />
 
                     <TextView
                         android:id="@+id/welcomeMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/IV_avatar_main"
+                        android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="Welcome, Monjura Moula Anik"
+                        android:text="Welcome "
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/welcomeMessage"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:id="@+id/status1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+
+                            android:text="Status:"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/activate_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/status1"
+                            android:layout_marginBottom="10dp"
+                            android:text=" NOT ACTIVATED"
+                            android:textColor="@color/red"
+                            android:textSize="17dp"
+                            android:textStyle="bold|italic" />
+
+                    </RelativeLayout>
+
 
                     <TextView
                         android:id="@+id/points"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@color/deepred"
-                        android:elevation="5dp"
+                        android:layout_below="@+id/status"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/lightblack"
+                        android:elevation="10dp"
                         android:gravity="center"
+                        android:paddingBottom="5dp"
                         android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="POINTS: 86"
+                        android:text="POINTS: 00"
                         android:textColor="@color/white"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -84,15 +124,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="30dp"
+                        android:layout_below="@+id/points"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:elevation="7dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/squareshape"
-                        android:backgroundTint="@color/lightyellow"
-                        android:padding="5dp"
-                        android:orientation="horizontal">
+                        android:backgroundTint="@color/lightblack"
+                        android:elevation="10dp"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
                         <TextView
                             android:layout_width="0dp"
@@ -107,7 +148,7 @@
                             android:padding="10dp"
                             android:text="SCAN QR"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textStyle="bold" />
 
 
@@ -122,7 +163,7 @@
                             android:padding="10dp"
                             android:text="MENU"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textStyle="bold" />
 
                         <TextView
@@ -136,16 +177,25 @@
                             android:padding="10dp"
                             android:text="GET POINTS"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textStyle="bold" />
                     </LinearLayout>
-                </LinearLayout>
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_below="@+id/LL_welcome"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/adpic_delete"
+                    android:elevation="10dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_below="@+id/LL_welcome"
-                    android:background="#FAFAFA">
+                    android:layout_margin="10dp"
+                    android:background="@color/ash">
 
                     <android.support.v4.view.ViewPager
                         android:id="@+id/viewpager_default"
@@ -163,43 +213,43 @@
             </RelativeLayout>
         </ScrollView>
 
-        <com.nightonke.boommenu.BoomMenuButton
-            android:id="@+id/bmb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            app:bmb_boomEnum="boomParabola_1"
-            app:bmb_boomInWholeScreen="true"
-            app:bmb_buttonEnum="textInsideCircle"
-            app:bmb_buttonPlaceEnum="buttonPlace_sc_7_1"
-            app:bmb_frames="100"
-            app:bmb_hideDuration="500"
-            app:bmb_normalColor="@color/black"
-            app:bmb_piecePlaceEnum="piecePlace_dot_7_1"
-            app:bmb_rotateDegree="1080"
-            app:bmb_showDuration="900" />
+        <!-- <com.nightonke.boommenu.BoomMenuButton
+             android:id="@+id/bmb"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentBottom="true"
+             android:layout_marginRight="10dp"
+             android:layout_marginBottom="10dp"
+             app:bmb_boomEnum="boomParabola_1"
+             app:bmb_boomInWholeScreen="true"
+             app:bmb_buttonEnum="textInsideCircle"
+             app:bmb_buttonPlaceEnum="buttonPlace_sc_7_1"
+             app:bmb_frames="100"
+             app:bmb_hideDuration="500"
+             app:bmb_normalColor="@color/black"
+             app:bmb_piecePlaceEnum="piecePlace_dot_7_1"
+             app:bmb_rotateDegree="1080"
+             app:bmb_showDuration="900" />-->
     </RelativeLayout>
+    <!--
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="start"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="#ece8e8"
+            android:visibility="invisible"
+            app:elevation="10dp"
+            app:headerLayout="@layout/header"
+            app:itemIconTint="@color/yellow"
+            app:itemTextColor="@color/yellow"
+            app:menu="@menu/drawermenu">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="start"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="0dp"
-        android:background="#ece8e8"
-        android:visibility="invisible"
-        app:elevation="10dp"
-        app:headerLayout="@layout/header"
-        app:itemIconTint="@color/yellow"
-        app:itemTextColor="@color/yellow"
-        app:menu="@menu/drawermenu">
-
-    </android.support.design.widget.NavigationView>
+        </android.support.design.widget.NavigationView>-->
 
 </android.support.v4.widget.DrawerLayout>

@@ -3,7 +3,9 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import com.android.volley.AuthFailureError;
@@ -39,9 +41,10 @@ public class MenuActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
 
         recyclerView = findViewById(R.id.category_rv);
-        RecyclerView.LayoutManager cLayoutManager = new GridLayoutManager(this, 2);
+        RecyclerView.LayoutManager cLayoutManager =  new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         cAdapter = new MenuAdapter(MenuActivity.this,catList);
         recyclerView.setAdapter(cAdapter);
         addMenu();

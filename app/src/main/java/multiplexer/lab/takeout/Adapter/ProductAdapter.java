@@ -3,6 +3,7 @@ package multiplexer.lab.takeout.Adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.hsalf.smilerating.SmileRating;
 import com.squareup.picasso.Picasso;
 import multiplexer.lab.takeout.Helper.EndPoints;
+import multiplexer.lab.takeout.ItemActivity.ProductShowActivity;
 import multiplexer.lab.takeout.Model.Product;
 import multiplexer.lab.takeout.R;
 import java.io.UnsupportedEncodingException;
@@ -45,19 +47,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView smallpic, bigpic;
-        TextView name, description, price;
-        RelativeLayout rlayout,bigrlayout;
+      //  ImageView smallpic, bigpic;
+        ImageView smallpic;
+        TextView foodname,rate,price;
+        RelativeLayout layout;
+       // TextView name, description, price;
+       // RelativeLayout rlayout,bigrlayout;
 
         public MyViewHolder(View view) {
             super(view);
             smallpic = view.findViewById(R.id.IV_burger_menu_pic);
-            bigpic = ((Activity) context).findViewById(R.id.bigpic);
-            name = ((Activity) context).findViewById(R.id.prod_name);
-            rlayout = view.findViewById(R.id.RL_menu_item);
-            description = ((Activity) context).findViewById(R.id.prod_desc);
-            bigrlayout = ((Activity) context).findViewById(R.id.RL_menu_detail);
-            price = ((Activity) context).findViewById(R.id.prod_price);
+            foodname = view.findViewById(R.id.foodname);
+            rate = view.findViewById(R.id.foodrate);
+            price = view.findViewById(R.id.foodprice);
+            layout = view.findViewById(R.id.RL_menu_item);
+           // bigpic = ((Activity) context).findViewById(R.id.bigpic);
+           // name = ((Activity) context).findViewById(R.id.prod_name);
+            //rlayout = view.findViewById(R.id.RL_menu_item);
+          //  description = ((Activity) context).findViewById(R.id.prod_desc);
+           // bigrlayout = ((Activity) context).findViewById(R.id.RL_menu_detail);
+           // price = ((Activity) context).findViewById(R.id.prod_price);
             queue = Volley.newRequestQueue(context);
         }
     }
@@ -76,15 +85,34 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         final Product product = productList.get(position);
         Picasso.with(context).load(product.getImage()).into(holder.smallpic);
 
-        if(position==0){
+        holder.foodname.setText(product.getName());
+        holder.rate.setText("Rating: "+product.getRating());
+        holder.price.setText("Price: "+product.getPrice()+" BDT");
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductShowActivity.class);
+                intent.putExtra("name",product.getName());
+                intent.putExtra("rating",product.getRating());
+                intent.putExtra("price",product.getPrice());
+                intent.putExtra("description",product.getDescription());
+                intent.putExtra("picaddress",product.getImage());
+                intent.putExtra("prodid",product.getId());
+                intent.putExtra("customerrate",product.getCustomer_rating());
+                context.startActivity(intent);
+            }
+        });
+
+        /*if(position==0){
             holder.bigrlayout.setVisibility(View.VISIBLE);
             Picasso.with(context).load(product.getImage()).into(holder.bigpic);
             holder.name.setText("Name: "+product.getName());
             holder.description.setText("Description: "+product.getDescription());
             holder.price.setText("Price: "+product.getPrice());
-        }
+        }*/
 
-        holder.rlayout.setOnClickListener(new View.OnClickListener() {
+        /*holder.rlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Picasso.with(context).load(product.getImage()).into(holder.bigpic);
@@ -115,7 +143,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 });
                 dialog.show();
             }
-        });
+        });*/
     }
 
     @Override
@@ -123,7 +151,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         return productList.size();
     }
 
-    public void postRating(final int productid, final int rating){
+    /*public void postRating(final int productid, final int rating){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.POST_PRODUCT_RATING+personId,
                 new Response.Listener<String>() {
@@ -165,6 +193,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             }
         };
         queue.add(stringRequest);
-    }
+    }*/
 
 }

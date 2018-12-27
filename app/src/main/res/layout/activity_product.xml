@@ -12,7 +12,7 @@
         android:alpha="0.7"
         android:background="@drawable/login_back" />
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:id="@+id/RL_menu_detail"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -69,14 +69,12 @@
             android:text="CLICK FOR RATING"
             android:textColor="@color/colorPrimaryDark"/>
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/RL_menu_detail"
-        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:scrollbars="vertical" />
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RL_menu_item"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_margin="10dp"
     android:background="@drawable/squareshape"
@@ -11,17 +11,58 @@
 
     <ImageView
         android:id="@+id/IV_burger_menu_pic"
-        android:layout_width="match_parent"
-        android:layout_height="110dp" />
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:background="@drawable/burgericon" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/foodname"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/IV_burger_menu_pic"
-        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@id/IV_burger_menu_pic"
+        android:text="XYZ Burger"
+        android:textColor="@color/lightblack"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/foodrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/IV_burger_menu_pic"
+        android:text="Rating: 5.0"
+        android:layout_below="@+id/foodname"
+        android:textColor="@color/lightyellow"
+        android:textSize="13dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/foodprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/IV_burger_menu_pic"
+        android:text="Price: 240 BDT"
+        android:layout_below="@+id/foodrate"
+        android:textColor="@color/lightblack"
+        android:textSize="13dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/foodprice"
+        android:layout_alignParentEnd="true"
         android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
         android:text="Click for Details"
-        android:textColor="@color/black"
-        android:textSize="10dp"
+        android:textColor="@color/red"
+        android:textSize="15dp"
         android:textStyle="bold" />
 </RelativeLayout>

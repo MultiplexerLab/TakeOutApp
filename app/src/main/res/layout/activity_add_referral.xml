@@ -51,14 +51,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="190dp"
         android:background="@drawable/loginbutton"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/lightblack"
         android:elevation="10dp"
         android:onClick="btnAddRef"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:stateListAnimator="@null"
         android:text="Add Coupon"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
 
 </RelativeLayout>

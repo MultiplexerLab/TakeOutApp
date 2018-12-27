@@ -1,6 +1,5 @@
 package multiplexer.lab.takeout.ItemActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -37,23 +36,26 @@ import multiplexer.lab.takeout.R;
 public class ProductActivity extends AppCompatActivity {
 
     private List<Product> productList = new ArrayList<>();
-    int countrycode=1, catid;
+    int countrycode = 1, catid;
     private RecyclerView recyclerView;
     private ProductAdapter cAdapter;
     RequestQueue queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
         Intent intent = getIntent();
-        catid= intent.getIntExtra("CatId",0);
-        Log.i("catId",String.valueOf(catid));
+        catid = intent.getIntExtra("CatId", 0);
+        Log.i("catId", String.valueOf(catid));
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view);
-        cAdapter = new ProductAdapter(ProductActivity.this,productList);
-        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        cAdapter = new ProductAdapter(ProductActivity.this, productList);
+        /*RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));*/
+        RecyclerView.LayoutManager cLayoutManager =  new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(cAdapter);
@@ -61,7 +63,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void input() {
-        JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_PRODUCT_DATA+catid+'/'+countrycode, new Response.Listener<JSONArray>() {
+        JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_PRODUCT_DATA + catid + '/' + countrycode, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.i("Product", response.toString());
@@ -72,18 +74,18 @@ public class ProductActivity extends AppCompatActivity {
                         name = response.getJSONObject(i).getString("Name");
                         id = response.getJSONObject(i).getInt("FinId");
                         // need to change the url
-                        image ="http://store.bdtakeout.com/images/categoryimage/"+response.getJSONObject(i).getString("Image");
+                        image = "http://store.bdtakeout.com/images/categoryimage/" + response.getJSONObject(i).getString("Image");
 
                         description = response.getJSONObject(i).getString("Desc");
-                        if(response.getJSONObject(i).isNull("Rating")){
+                        if (response.getJSONObject(i).isNull("Rating")) {
                             rating = 0;
-                        }else{
+                        } else {
                             rating = response.getJSONObject(i).getInt("Rating");
                         }
 
-                        if(response.getJSONObject(i).isNull("CustomerRating")){
+                        if (response.getJSONObject(i).isNull("CustomerRating")) {
                             customer_rating = 3;
-                        }else{
+                        } else {
                             customer_rating = response.getJSONObject(i).getInt("CustomerRating");
                         }
 
@@ -91,7 +93,7 @@ public class ProductActivity extends AppCompatActivity {
                         price = finobj.getInt("price");
                         countryid = finobj.getInt("country");
 
-                        Product product = new Product(id,rating,customer_rating,price,countryid,name,image,description);
+                        Product product = new Product(id, rating, customer_rating, price, countryid, name, image, description);
                         productList.add(product);
                         cAdapter.notifyDataSetChanged();
                     }

@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
                     fullName.setText(response.getString("Fullname"));
                     email.setText(response.getString("Email"));
                     phoneno.setText(response.getString("Phone"));
-                    phoneno.setText(response.getString("Address"));
+                    address.setText(response.getString("Address"));
 
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());

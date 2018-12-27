@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/dialog_layout"
-    android:backgroundTint="@color/colorPrimary"
+    android:layout_margin="30dp"
     android:padding="20dp">
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/loginbutton"
-        android:backgroundTint="@color/deepestred"
+        android:backgroundTint="@color/lightblack"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:text="Submit"
