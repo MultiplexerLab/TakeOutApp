@@ -14,7 +14,8 @@
   <!-- <color name="deepred">#592913</color>-->
     <color name="deepestred">#52433E</color>
     <!--<color name="deepestred">#410101</color>-->
-    <color name="lightyellow">#FFC837</color>
+    <color name="lightyellow">#FCD66F</color>
     <!--<color name="lightestyellow">#378393</color>-->
     <color name="yellow">#FAB117</color>
+    <!--<color name="backgroundcolor">#FCD66F</color>-->
 </resources>

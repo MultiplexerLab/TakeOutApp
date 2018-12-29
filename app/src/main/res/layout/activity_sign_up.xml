@@ -27,9 +27,10 @@
         <Spinner
             android:id="@+id/spinnerCountry"
             android:layout_width="200dp"
+            android:backgroundTint="@color/lightyellow"
             android:layout_height="wrap_content" />
 
-        <android.support.design.widget.TextInputLayout
+        <!--<android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/lightyellow">
@@ -44,7 +45,7 @@
                 android:paddingLeft="10dp"
                 android:textColor="@color/black" />
 
-        </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>-->
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -89,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightblack"
-                android:hint="Password"
+                android:hint="Password ( >8 )"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black" />

@@ -29,7 +29,7 @@ import multiplexer.lab.takeout.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    EditText activationcode, fullName, email, phoneno, address;
+    EditText activationcode, fullName, email, phoneno;
     RequestQueue queue;
 
     @Override
@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         fullName = findViewById(R.id.fullName);
         email = findViewById(R.id.profileEmail);
         phoneno = findViewById(R.id.phoneNo);
-        address = findViewById(R.id.address);
+
 
         getProfileData();
     }
@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
                     fullName.setText(response.getString("Fullname"));
                     email.setText(response.getString("Email"));
                     phoneno.setText(response.getString("Phone"));
-                    address.setText(response.getString("Address"));
+
 
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
@@ -95,9 +95,4 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void btnEdit(View view) {
-        Intent intent = new Intent(getApplicationContext(),ProfileEditActivity.class);
-        startActivity(intent);
-
-    }
 }

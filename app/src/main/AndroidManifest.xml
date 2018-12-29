@@ -123,13 +123,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemActivity.MenuActivity" />
         </activity>
-        <activity android:name=".ItemActivity.ProfileEditActivity" />
+
         <activity android:name=".ItemActivity.ProductShowActivity"
+            android:label="Food Description"
             android:parentActivityName=".ItemActivity.ProductActivity">
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".ItemActivity.ProductActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemActivity.ProductActivity" />
         </activity>
+
     </application>
 
 </manifest>

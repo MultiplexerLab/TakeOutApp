@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
@@ -21,7 +21,7 @@
         android:onClick="btnEdit"
         android:background="@drawable/edit_icon"
         android:backgroundTint="@color/black"
-        android:elevation="10dp" />
+        android:elevation="10dp" />-->
 
 
     <ImageView
@@ -34,7 +34,7 @@
         android:elevation="15dp" />
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/fullName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/IV_pro_pic"
@@ -42,7 +42,7 @@
             android:gravity="center"
             android:editable="false"
             android:elevation="15dp"
-            android:text="Anik Khan"
+            android:text="Full Name"
             android:textColor="@color/black" />
 
     <RelativeLayout
@@ -61,7 +61,7 @@
             android:stateListAnimator="@null">
 
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="FULL NAME"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:text="Monjura Moula Anik"
-                android:textColor="@color/black" />
+                android:textColor="@color/black" />-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,7 +89,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
-                android:text="monjuramanik@gmail.com"
                 android:textColor="@color/black" />
 
             <TextView
@@ -105,10 +104,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
-                android:text="01688710173"
                 android:textColor="@color/black" />
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -122,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:text=""
-                android:textColor="@color/black" />
+                android:textColor="@color/black" />-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -138,7 +136,6 @@
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:onClick="btnShareCode"
-                android:text="jhdj4y78478"
                 android:textColor="#33c70d" />
 
         </LinearLayout>

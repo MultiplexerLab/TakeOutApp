@@ -85,7 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (internetConnected()) {
             if (validation()) {
-                selectAvater();
+               // selectAvater();
+                sendDataToServer();
 
             } else {
                 YoYo.with(Techniques.Shake)
@@ -136,7 +137,17 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(SignUpActivity.this, "Thanks for being registered!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        final SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("fullname", etFullname.getText().toString());
+                        editor.apply();
+                        editor.putString("email", etEmail.getText().toString());
+                        editor.apply();
+                        editor.putString("phoneNumber", etPhone.getText().toString());
+                        editor.apply();
+                        editor.putString("countryName", spinnerCountry.getSelectedItem().toString());
+                        editor.apply();
+                        Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
                         startActivity(intent);
                         finish();
                         Log.i("Response", response.toString());
@@ -213,7 +224,7 @@ public class SignUpActivity extends AppCompatActivity {
             etPassword.setError("Neeed a Password");
             error = false;
         } else if (password.length() < 8) {
-            etPassword.setError("Password is too SHORT!!");
+            etPassword.setError("password length needs to be more than 8");
             error = false;
         }
         if (conpassword.isEmpty()) {

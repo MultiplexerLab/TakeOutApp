@@ -100,8 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         String avatar = pref.getString("Avatar", "");
-
-        Intent intent = getIntent();
+        /*welcomeMessage.setText("Welcome, "+pref.getString("fullname",""));*/
+        pic.setImageResource(R.drawable.male);
+        /*Intent intent = getIntent();
         value = intent.getIntExtra("val", 0);
         if (value == 1) {
             notactivate.setVisibility(View.INVISIBLE);
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             pic.setImageResource(R.drawable.male);
         } else {
             pic.setImageResource(R.drawable.male);
-        }
+        }*/
 
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();

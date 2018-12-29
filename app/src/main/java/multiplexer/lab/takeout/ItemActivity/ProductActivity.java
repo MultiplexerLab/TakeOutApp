@@ -45,12 +45,17 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         catid = intent.getIntExtra("CatId", 0);
         Log.i("catId", String.valueOf(catid));
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         cAdapter = new ProductAdapter(ProductActivity.this, productList);
         /*RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));*/
@@ -60,6 +65,19 @@ public class ProductActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(cAdapter);
         input();
+    }
+
+     public boolean onOptionsItemSelected(android.view.MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        return true;
     }
 
     public void input() {

@@ -43,12 +43,19 @@ public class ProductShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_show);
+
+
         foodPic = findViewById(R.id.foodpic_show);
         foodRate = findViewById(R.id.foodratenumber_show);
         foodPrice = findViewById(R.id.foodprice_show);
         foodDescription = findViewById(R.id.fooddescription_show);
         foodName = findViewById(R.id.foodname_show);
         personalRate = findViewById(R.id.foodratebtn_show);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         intent = getIntent();
         Picasso.with(getApplicationContext()).load(intent.getStringExtra("picaddress")).into(foodPic);
@@ -65,6 +72,21 @@ public class ProductShowActivity extends AppCompatActivity {
         }
         queue = Volley.newRequestQueue(getApplicationContext());
 
+
+
+    }
+
+     public boolean onOptionsItemSelected(android.view.MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        return true;
     }
 
     public void btnRate(View view) {
@@ -81,6 +103,7 @@ public class ProductShowActivity extends AppCompatActivity {
                 int rating = smileRating.getRating();
                 personalRate.setBackgroundResource(R.color.green);
                 personalRate.setText("Your Rate: " + rating);
+
                 postRating(intent.getIntExtra("prodid", 0), rating);
                 dialog.dismiss();
             }
@@ -89,6 +112,9 @@ public class ProductShowActivity extends AppCompatActivity {
     }
 
     public void postRating(final int productid, final int rating) {
+
+        android.content.SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        String personid = pref.getString("accessToken", "");
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.POST_PRODUCT_RATING + personid,
                 new Response.Listener<String>() {

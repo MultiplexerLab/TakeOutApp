@@ -64,6 +64,7 @@ public class LogInActivity extends AppCompatActivity {
         loginLayout = findViewById(R.id.LL_input);
         rootLayout = findViewById(R.id.rootLayout);
         forgotpass = findViewById(R.id.forgotpass);
+
         queue = Volley.newRequestQueue(this);
         animation();
 
