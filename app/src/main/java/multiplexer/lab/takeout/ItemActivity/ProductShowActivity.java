@@ -37,7 +37,7 @@ public class ProductShowActivity extends AppCompatActivity {
     TextView foodRate, foodPrice, foodDescription, foodName, personalRate;
     RequestQueue queue;
     Intent intent;
-    String personid;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +63,13 @@ public class ProductShowActivity extends AppCompatActivity {
         foodRate.setText(intent.getIntExtra("customerrate", 5) + ".0");
         foodPrice.setText("Price: " + intent.getIntExtra("price", 0) + " BDT");
         foodDescription.setText(intent.getStringExtra("description"));
-        String str = personalRate.getText().toString();
-        if (!str.equalsIgnoreCase("Rate it")) {
+        int rate = intent.getIntExtra("rating",0);
+
+        if(rate!=0){
             personalRate.setBackgroundResource(R.color.green);
             personalRate.setText("Your Rate: " + intent.getIntExtra("rating", 5) + ".0");
-        }else {
+        }
+        else {
             personalRate.setBackgroundResource(R.color.red);
         }
         queue = Volley.newRequestQueue(getApplicationContext());
@@ -90,7 +92,7 @@ public class ProductShowActivity extends AppCompatActivity {
     }
 
     public void btnRate(View view) {
-        final Dialog dialog = new Dialog(ProductShowActivity.this);
+        dialog = new Dialog(ProductShowActivity.this);
         dialog.setContentView(R.layout.custom_dialog);
         Button dialogButton = dialog.findViewById(R.id.btn_submit);
         final SmileRating smileRating = dialog.findViewById(R.id.smile_rating);
@@ -114,14 +116,14 @@ public class ProductShowActivity extends AppCompatActivity {
     public void postRating(final int productid, final int rating) {
 
         android.content.SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String personid = pref.getString("accessToken", "");
+        String personid = pref.getString("id", "");
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.POST_PRODUCT_RATING + personid,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(getApplicationContext(), "Thanks for your rating!", Toast.LENGTH_SHORT).show();
-
+                        dialog.dismiss();
                         Log.i("Rate Response", response.toString());
                     }
                 }, new Response.ErrorListener() {

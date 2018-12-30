@@ -52,7 +52,6 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
     final Context context = this;
     EditText etFullname, etEmail, etPassword, etConPassword, etPhone;
-    RadioButton rMale, rFemale;
     Snackbar snackbar;
     RelativeLayout rootLayout;
     ArrayAdapter<String> adapter;
@@ -85,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (internetConnected()) {
             if (validation()) {
-               // selectAvater();
+
                 sendDataToServer();
 
             } else {
@@ -99,37 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    public void selectAvater(){
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.custom_avatar);
-        ImageView dialogmale = dialog.findViewById(R.id.IV_male);
-        ImageView dialogfemale = dialog.findViewById(R.id.IV_female);
-        // if button is clicked, close the custom dialog
-        final SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        dialogmale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("Avatar", "male");
-                editor.apply();
-                dialog.dismiss();
-                sendDataToServer();
-            }
-        });
-        dialogfemale.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("Avatar", "female");
-                editor.apply();
-                dialog.dismiss();
-                sendDataToServer();
-            }
-        });
 
-        dialog.show();
-
-    }
 
     private void sendDataToServer() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.SIGNUP_URL,
@@ -137,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(SignUpActivity.this, "Thanks for being registered!", Toast.LENGTH_SHORT).show();
-                        final SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                        /*final SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("fullname", etFullname.getText().toString());
                         editor.apply();
@@ -146,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
                         editor.putString("phoneNumber", etPhone.getText().toString());
                         editor.apply();
                         editor.putString("countryName", spinnerCountry.getSelectedItem().toString());
-                        editor.apply();
+                        editor.apply();*/
                         Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
                         startActivity(intent);
                         finish();
@@ -189,6 +158,7 @@ public class SignUpActivity extends AppCompatActivity {
                 params.put("countryName", spinnerCountry.getSelectedItem().toString());
                 params.put("password", etPassword.getText().toString());
                 params.put("confirmPassword", etConPassword.getText().toString());
+
                 return params;
             }
         };
@@ -216,15 +186,16 @@ public class SignUpActivity extends AppCompatActivity {
         if (email.isEmpty()) {
             etEmail.setError("Email Address is missing");
             error = false;
-        } else if (!email.endsWith(".com")) {
-            etEmail.setError("Enter a valid Email Address");
+        }
+        if(!email.contains(".com")){
+            etEmail.setError("Enter an Email Address with .com");
             error = false;
         }
         if (password.isEmpty()) {
-            etPassword.setError("Neeed a Password");
+            etPassword.setError("Need a Password");
             error = false;
         } else if (password.length() < 8) {
-            etPassword.setError("password length needs to be more than 8");
+            etPassword.setError("At least 8 characters");
             error = false;
         }
         if (conpassword.isEmpty()) {

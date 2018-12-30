@@ -66,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
     View header;
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
-    TextView points, welcomeMessage;
+    TextView points, welcomeMessage,status;
     int value;
-    TextView notactivate;
+    ImageView pic;
     RequestQueue queue;
     BoomMenuButton bmb;
     BoomMenuButton bmb1;
@@ -79,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*notactivate = findViewById(R.id.TV_not_activated);*/
-        ImageView pic = findViewById(R.id.IV_avatar_main);
+
+        pic = findViewById(R.id.IV_avatar_main);
         welcomeMessage = findViewById(R.id.welcomeMessage);
         points = findViewById(R.id.points);
+        status = findViewById(R.id.activate_status);
 
         ActionBar mActionBar = getSupportActionBar();
         assert mActionBar != null;
@@ -98,44 +99,48 @@ public class MainActivity extends AppCompatActivity {
         ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0,0);
         bmb1 = actionBar.findViewById(R.id.bmb1);
 
-        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String avatar = pref.getString("Avatar", "");
-        /*welcomeMessage.setText("Welcome, "+pref.getString("fullname",""));*/
-        pic.setImageResource(R.drawable.male);
-        /*Intent intent = getIntent();
-        value = intent.getIntExtra("val", 0);
-        if (value == 1) {
-            notactivate.setVisibility(View.INVISIBLE);
-        }
-
-        if (avatar.equalsIgnoreCase("male")) {
-            pic.setImageResource(R.drawable.male);
-        } else {
-            pic.setImageResource(R.drawable.male);
-        }*/
-
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();
-
         setInitBoom();
-        //boomCustomize();
         boomCustomizebmb1();
-
-       /* toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mNavigationView = findViewById(R.id.navView);
-        header = mNavigationView.getHeaderView(0);*/
-
         queue = Volley.newRequestQueue(this);
+        setAvatar();
+        setStatus();
         getPoints();
         getProfileData();
         getAds();
     }
 
+    private void setStatus() {
+
+        //here will be the code to check if the user already activated the account by using referral code
+
+        //if activated
+        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("status", "");
+        //editor.putString("status", "activatedCode");
+        editor.commit();
+        //status.setText("Activated");
+        //status.setTextColor(this.getResources().getColor(R.color.green));
+    }
+
+    private void setAvatar() {
+
+        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        String avatar = pref.getString("Avatar", "male");
+        if(avatar.equalsIgnoreCase("male")){
+            pic.setImageResource(R.drawable.male);
+        }else{
+            pic.setImageResource(R.drawable.female);
+        }
+
+    }
+
     @Override
     protected void onResume(){
+        setAvatar();
+        setStatus();
         getPoints();
         getProfileData();
         getAds();
@@ -148,7 +153,17 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.i("responseprofile",response.toString());
                 try {
-                    welcomeMessage.setText("Welcome , "+response.getString("Fullname"));
+                    SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("id", response.getString("Id"));
+                    editor.commit();
+                    editor.putString("fullname", response.getString("Fullname"));
+                    editor.commit();
+                    editor.putString("email", response.getString("Email"));
+                    editor.commit();
+                    editor.putString("phone", response.getString("Phone"));
+                    editor.commit();
+                    welcomeMessage.setText("Welcome, "+response.getString("Fullname"));
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
@@ -278,65 +293,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-   /* public void boomCustomize() {
-        for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
-            TextInsideCircleButton.Builder builder = new TextInsideCircleButton.Builder()
-                    .normalImageRes(iconList.get(i))
-                    .normalText(titleList.get(i))
-                    .rippleEffect(true)
-                    .normalColorRes(R.color.deepred)
-
-                    .highlightedColorRes(R.color.deepestred)
-                    .pieceColorRes(R.color.white)
-                    .textGravity(Gravity.CENTER)
-                    .typeface(Typeface.DEFAULT_BOLD)
-                    .normalTextColorRes(R.color.white)
-                    .textSize(10)
-                    .imagePadding(new Rect(20, 20, 20, 20))
-                    .textPadding(new Rect(10, 20, 10, 0))
-                    .shadowEffect(true)
-                    .rotateImage(true)
-                    .rotateText(true)
-                    .listener(new OnBMClickListener() {
-                        @Override
-                        public void onBoomButtonClick(int i) {
-                            Intent intent = null;
-                            switch (i) {
-                                case 0:
-                                    intent = new Intent(MainActivity.this, ProfileActivity.class);
-                                    break;
-                                case 1:
-                                    intent = new Intent(MainActivity.this, AboutUsActivity.class);
-                                    break;
-                                case 2:
-                                    intent = new Intent(MainActivity.this, ScanQRActivity.class);
-                                    break;
-                                case 3:
-                                    intent = new Intent(MainActivity.this, StoreLocatorActivity.class);
-                                    break;
-                                case 4:
-                                    String url = "https://www.foodpanda.com.bd/";
-                                    intent = new Intent(Intent.ACTION_VIEW);
-                                    intent.setData(Uri.parse(url));
-                                    break;
-                                case 5:
-                                    intent = new Intent(MainActivity.this, AddReferralActivity.class);
-                                    break;
-                                case 6:
-                                    SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("accessToken", "");
-                                    editor.apply();
-                                    intent = new Intent(MainActivity.this, LogInActivity.class);
-                                    finish();
-                                    break;
-                            }
-                            startActivity(intent);
-                        }
-                    });
-            bmb.addBuilder(builder);
-        }
-    }*/
 
     public void boomCustomizebmb1() {
         for (int i = 0; i < bmb1.getPiecePlaceEnum().pieceNumber(); i++) {
@@ -454,27 +410,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getPoints(View view) {
-        dialog = new AlertDialog.Builder(MainActivity.this).create();
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View customView = inflater.inflate(R.layout.custom_dialog_points, null);
-        dialog.setView(customView);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCancelable(true);
+        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        String status = pref.getString("status", "");
 
-        Button btn = customView.findViewById(R.id.btn_bonus_points);
-        final EditText editText = customView.findViewById(R.id.invoiceNo);
+        if(!status.isEmpty()){
+            dialog = new AlertDialog.Builder(MainActivity.this).create();
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View customView = inflater.inflate(R.layout.custom_dialog_points, null);
+            dialog.setView(customView);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setCancelable(true);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(editText.getText().toString().isEmpty()){
-                    Toast.makeText(MainActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
-                }else{
-                    sendInvoiceNo(editText.getText().toString());
+            Button btn = customView.findViewById(R.id.btn_bonus_points);
+            final EditText editText = customView.findViewById(R.id.invoiceNo);
+
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(editText.getText().toString().isEmpty()){
+                        Toast.makeText(MainActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        sendInvoiceNo(editText.getText().toString());
+                    }
                 }
-            }
-        });
-        dialog.show();
+            });
+            dialog.show();
+        }
+        else {
+            Intent intent = new Intent(MainActivity.this,AddReferralActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
     private void sendInvoiceNo(final String invoiceNo) {

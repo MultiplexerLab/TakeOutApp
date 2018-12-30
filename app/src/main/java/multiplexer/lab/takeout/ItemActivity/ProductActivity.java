@@ -102,7 +102,7 @@ public class ProductActivity extends AppCompatActivity {
                         }
 
                         if (response.getJSONObject(i).isNull("CustomerRating")) {
-                            customer_rating = 3;
+                            customer_rating = 5;
                         } else {
                             customer_rating = response.getJSONObject(i).getInt("CustomerRating");
                         }

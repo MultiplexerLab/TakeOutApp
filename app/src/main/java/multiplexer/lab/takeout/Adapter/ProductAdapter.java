@@ -86,7 +86,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         Picasso.with(context).load(product.getImage()).into(holder.smallpic);
 
         holder.foodname.setText(product.getName());
-        holder.rate.setText("Rating: "+product.getRating());
+        holder.rate.setText("Rating: "+product.getCustomer_rating());
         holder.price.setText("Price: "+product.getPrice()+" BDT");
 
         holder.layout.setOnClickListener(new View.OnClickListener() {

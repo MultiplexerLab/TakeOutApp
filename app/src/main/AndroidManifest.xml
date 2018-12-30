@@ -78,7 +78,7 @@
         </activity>
         <activity
             android:name=".ItemActivity.AddReferralActivity"
-            android:label="Add Referral"
+            android:label="Activate Your Account"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -117,7 +117,7 @@
 
         <activity
             android:name=".ItemActivity.ProductActivity"
-            android:label="Our Menu"
+            android:label="Food Menu"
             android:parentActivityName=".ItemActivity.MenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

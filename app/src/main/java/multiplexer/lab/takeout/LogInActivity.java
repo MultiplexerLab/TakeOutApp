@@ -1,6 +1,7 @@
 package multiplexer.lab.takeout;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -20,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -89,6 +91,8 @@ public class LogInActivity extends AppCompatActivity {
                         }else if(!editText.getText().toString().contains(".com")){
                             Toast.makeText(LogInActivity.this, "Email is not valid!", Toast.LENGTH_SHORT).show();
                         }else{
+                            Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
                             sendEmail(editText.getText().toString());
                         }
                     }
@@ -99,6 +103,38 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
+    public void selectAvatar(){
+        final Dialog dialog = new Dialog(LogInActivity.this);
+        dialog.setContentView(R.layout.custom_avatar);
+        ImageView dialogmale = dialog.findViewById(R.id.IV_male);
+        ImageView dialogfemale = dialog.findViewById(R.id.IV_female);
+        // if button is clicked, close the custom dialog
+        final SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        dialogmale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Avatar", "male");
+                editor.apply();
+                dialog.dismiss();
+                sendDataToServer();
+            }
+        });
+        dialogfemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("Avatar", "female");
+                editor.apply();
+                dialog.dismiss();
+                sendDataToServer();
+            }
+        });
+
+        dialog.show();
+
+    }
+
     private void sendEmail(final String email) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.FORGOT_PASSWORD,
                 new Response.Listener<String>() {
@@ -106,7 +142,7 @@ public class LogInActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.i("EmailResponse", response.toString());
                         if(response.equals("")){
-                            Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                         }
                     }
@@ -178,9 +214,7 @@ public class LogInActivity extends AppCompatActivity {
                 }
             }
             if (validation()) {
-                /*Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-                startActivity(intent);*/
-                sendDataToServer();
+                selectAvatar();
             } else {
                 YoYo.with(Techniques.Shake)
                         .duration(1000)
@@ -314,19 +348,19 @@ public class LogInActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
-            etEmail.setError("Email is missing!");
+            etEmail.setError("Email is missing");
             error = false;
         }
         if (!email.contains(".com")) {
-            etEmail.setError("Please insert valid email!");
+            etEmail.setError("Please insert valid email");
             error = false;
         }
 
         if (password.isEmpty()) {
-            etPassword.setError("Neeed a Password");
+            etPassword.setError("Need a Password");
             error = false;
         } else if (password.length() < 8) {
-            etPassword.setError("Password is too SHORT!!");
+            etPassword.setError("Password must be at least 8 characters");
             error = false;
         }
         return error;

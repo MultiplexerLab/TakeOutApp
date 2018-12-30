@@ -36,7 +36,7 @@
         <EditText
             android:id="@+id/ET_coupon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="30dp"
             android:gravity="center"
@@ -46,6 +46,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -57,7 +58,7 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:stateListAnimator="@null"
-        android:text="Add Coupon"
+        android:text="Submit"
         android:textColor="@color/white" />
 
 

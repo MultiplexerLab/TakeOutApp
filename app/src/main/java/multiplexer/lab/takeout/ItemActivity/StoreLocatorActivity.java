@@ -53,7 +53,10 @@ public class StoreLocatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_locator);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view_store);
         spinnerCountry2 = findViewById(R.id.spinnerCountry2);
@@ -83,6 +86,19 @@ public class StoreLocatorActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public boolean onOptionsItemSelected(android.view.MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        return true;
     }
 
     public void getAllCountries() {

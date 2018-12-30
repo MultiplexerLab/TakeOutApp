@@ -4,8 +4,9 @@
     android:layout_height="250dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:backgroundTint="@color/ash"
-    android:background="@drawable/squareshape"
+    android:layout_margin="20dp"
+    android:backgroundTint="@color/lightblack"
+    android:background="@drawable/dialog_layout"
     >
 
     <TextView
@@ -13,9 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:textStyle="bold"
         android:gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:textColor="@color/lightblack"
+        android:textColor="@color/lightyellow"
         android:layout_marginBottom="10dp"
         android:text="Your Rating"/>
 
@@ -24,6 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:isIndicator="false"
+
+        app:textNonSelectionColor="@color/lightyellow"
+        app:textSelectionColor="@color/yellow"
         app:normalColor="@color/lightyellow"
         />
 
@@ -34,11 +39,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:background="@drawable/loginbutton"
-        android:backgroundTint="@color/red"
+        android:backgroundTint="@color/lightyellow"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:text="Submit"
-        android:textColor="@color/white"
+        android:textColor="@color/lightblack"
         android:textSize="15dp"
         android:textStyle="bold" />
 
