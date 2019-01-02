@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,22 +36,26 @@
         </activity>
         <activity
             android:name=".LogInActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
             android:label="SignUp"
-            android:parentActivityName=".LogInActivity">
+            android:parentActivityName=".LogInActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LogInActivity" />
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="Home" />
+            android:label="Home"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ItemActivity.ScanQRActivity"
             android:label="Scan Your QR Code"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -55,7 +63,8 @@
         <activity
             android:name=".ItemActivity.ProfileActivity"
             android:label="Profile"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -63,7 +72,8 @@
         <activity
             android:name=".ItemActivity.AboutUsActivity"
             android:label="About Us"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -71,7 +81,8 @@
         <activity
             android:name=".ItemActivity.StoreLocatorActivity"
             android:label="Store Locator"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -79,7 +90,8 @@
         <activity
             android:name=".ItemActivity.AddReferralActivity"
             android:label="Activate Your Account"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -87,7 +99,8 @@
         <activity
             android:name=".ItemActivity.MenuActivity"
             android:label="Food Menu"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -118,7 +131,8 @@
         <activity
             android:name=".ItemActivity.ProductActivity"
             android:label="Food Menu"
-            android:parentActivityName=".ItemActivity.MenuActivity">
+            android:parentActivityName=".ItemActivity.MenuActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemActivity.MenuActivity" />
@@ -126,7 +140,8 @@
 
         <activity android:name=".ItemActivity.ProductShowActivity"
             android:label="Food Description"
-            android:parentActivityName=".ItemActivity.ProductActivity">
+            android:parentActivityName=".ItemActivity.ProductActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ItemActivity.ProductActivity" />

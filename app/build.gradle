@@ -28,6 +28,8 @@ dependencies {
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.github.nipun-birla:BoxLoaderView:0.0.1'
+    implementation 'com.google.zxing:core:3.2.1'
 
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

@@ -1,12 +1,16 @@
 package multiplexer.lab.takeout.ItemActivity;
+
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,9 +18,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.R;
 
@@ -27,6 +34,7 @@ public class AddReferralActivity extends AppCompatActivity {
     EditText coupon;
     RequestQueue queue;
     Button submit;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +44,32 @@ public class AddReferralActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+        dialogprog = new Dialog(AddReferralActivity.this);
+        progressbarOpen();
         text = findViewById(R.id.TV_referral);
         queue = Volley.newRequestQueue(this);
         coupon = findViewById(R.id.ET_coupon);
         submit = findViewById(R.id.submit);
 
         activationCheck();
+        progressbarClose();
 
+    }
 
+    private void progressbarClose() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.setCanceledOnTouchOutside(true);
+        dialogprog.setCancelable(true);
+        dialogprog.dismiss();
+    }
+
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
     }
 
     private void activationCheck() {
@@ -73,10 +98,11 @@ public class AddReferralActivity extends AppCompatActivity {
     }
 
     public void btnAddRef(View view) {
-
+        progressbarOpen();
         if (submit.getText().toString().equalsIgnoreCase("Go Back")) {
             finish();
         } else {
+
             final String couponcode = coupon.getText().toString();
 
             JsonObjectRequest pointRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_USE_REFERRAL + couponcode, new Response.Listener<JSONObject>() {
@@ -95,6 +121,7 @@ public class AddReferralActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     Log.e("ParseError", error.toString());
                 }
+
             }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -112,6 +139,6 @@ public class AddReferralActivity extends AppCompatActivity {
 
         }
 
-
+        progressbarClose();
     }
 }

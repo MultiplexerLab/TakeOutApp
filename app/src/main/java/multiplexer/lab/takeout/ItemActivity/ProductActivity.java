@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout.ItemActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 import multiplexer.lab.takeout.Adapter.ProductAdapter;
 import multiplexer.lab.takeout.Helper.EndPoints;
+import multiplexer.lab.takeout.LogInActivity;
 import multiplexer.lab.takeout.Model.Product;
 import multiplexer.lab.takeout.R;
 
@@ -40,12 +43,14 @@ public class ProductActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter cAdapter;
     RequestQueue queue;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        dialogprog = new Dialog(ProductActivity.this);
+        progressbarOpen();
         Intent intent = getIntent();
         catid = intent.getIntExtra("CatId", 0);
         Log.i("catId", String.valueOf(catid));
@@ -57,9 +62,7 @@ public class ProductActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         cAdapter = new ProductAdapter(ProductActivity.this, productList);
-        /*RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));*/
-        RecyclerView.LayoutManager cLayoutManager =  new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -67,7 +70,24 @@ public class ProductActivity extends AppCompatActivity {
         input();
     }
 
-     public boolean onOptionsItemSelected(android.view.MenuItem item){
+    private void progressbarClose() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.setCanceledOnTouchOutside(true);
+        dialogprog.setCancelable(true);
+        dialogprog.dismiss();
+    }
+
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
+    }
+
+
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -115,6 +135,7 @@ public class ProductActivity extends AppCompatActivity {
                         productList.add(product);
                         cAdapter.notifyDataSetChanged();
                     }
+                    progressbarClose();
 
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());

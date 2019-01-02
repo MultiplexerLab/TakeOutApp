@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
-    final Context context = this;
     EditText etFullname, etEmail, etPassword, etConPassword, etPhone;
     Snackbar snackbar;
     RelativeLayout rootLayout;
@@ -58,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
     String arr[] = {"Bangladesh", "Sri Lanka"};
     Spinner spinnerCountry;
     RequestQueue queue;
-    //int value;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +72,27 @@ public class SignUpActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.et_signup_phoneno);
         rootLayout = findViewById(R.id.rootLayout);
         spinnerCountry = findViewById(R.id.spinnerCountry);
+        dialogprog = new Dialog(SignUpActivity.this);
         queue = Volley.newRequestQueue(this);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
         spinnerCountry.setAdapter(adapter);
 
+    }
+
+    private void progressbarClose() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.setCanceledOnTouchOutside(true);
+        dialogprog.setCancelable(true);
+        dialogprog.dismiss();
+    }
+
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
     }
 
 
@@ -101,22 +118,15 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private void sendDataToServer() {
+        progressbarOpen();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.SIGNUP_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(SignUpActivity.this, "Thanks for being registered!", Toast.LENGTH_SHORT).show();
-                        /*final SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putString("fullname", etFullname.getText().toString());
-                        editor.apply();
-                        editor.putString("email", etEmail.getText().toString());
-                        editor.apply();
-                        editor.putString("phoneNumber", etPhone.getText().toString());
-                        editor.apply();
-                        editor.putString("countryName", spinnerCountry.getSelectedItem().toString());
-                        editor.apply();*/
+
                         Intent intent = new Intent(SignUpActivity.this, LogInActivity.class);
+                        progressbarClose();
                         startActivity(intent);
                         finish();
                         Log.i("Response", response.toString());
@@ -145,6 +155,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                 }
+                progressbarClose();
             }
         }) {
             @Override

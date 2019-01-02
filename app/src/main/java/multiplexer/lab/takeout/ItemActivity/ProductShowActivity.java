@@ -63,22 +63,20 @@ public class ProductShowActivity extends AppCompatActivity {
         foodRate.setText(intent.getIntExtra("customerrate", 5) + ".0");
         foodPrice.setText("Price: " + intent.getIntExtra("price", 0) + " BDT");
         foodDescription.setText(intent.getStringExtra("description"));
-        int rate = intent.getIntExtra("rating",0);
+        int rate = intent.getIntExtra("rating", 0);
 
-        if(rate!=0){
+        if (rate != 0) {
             personalRate.setBackgroundResource(R.color.green);
             personalRate.setText("Your Rate: " + intent.getIntExtra("rating", 5) + ".0");
-        }
-        else {
+        } else {
             personalRate.setBackgroundResource(R.color.red);
         }
         queue = Volley.newRequestQueue(getApplicationContext());
 
 
-
     }
 
-     public boolean onOptionsItemSelected(android.view.MenuItem item){
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();

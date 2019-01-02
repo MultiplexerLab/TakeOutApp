@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public boolean onOptionsItemSelected(android.view.MenuItem item){
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -75,10 +75,10 @@ public class ProfileActivity extends AppCompatActivity {
         fullName.setText(Name);
         email.setText(Email);
         phoneno.setText(Phone);
-        if(Status.isEmpty()){
+        if (Status.isEmpty()) {
             activationcode.setText("Your Account is not Activated yet");
             activationcode.setTextColor(this.getResources().getColor(R.color.red));
-        }else{
+        } else {
             activationcode.setText(Status);
 
         }
@@ -87,19 +87,18 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void btnShareCode(View view) {
 
-        if(!activationcode.getText().toString().isEmpty()){
+        if (!activationcode.getText().toString().isEmpty()) {
             String code = activationcode.getText().toString();
             Uri uri = Uri.parse("smsto:");
-            Intent it = new Intent(Intent.ACTION_SENDTO,uri);
-            it.putExtra("sms_body", "To Activate your TakeOut account, Use this code: "+code);
+            Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+            it.putExtra("sms_body", "To Activate your TakeOut account, Use this code: " + code);
             startActivity(it);
-        }else {
-            Toast.makeText(getApplicationContext(),"Please Activate Your Account First",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please Activate Your Account First", Toast.LENGTH_LONG).show();
         }
 
 
     }
-
 
 
 }

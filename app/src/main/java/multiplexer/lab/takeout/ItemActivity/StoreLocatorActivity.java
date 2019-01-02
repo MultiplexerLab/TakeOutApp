@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout.ItemActivity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -48,6 +50,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
     Spinner spinnerCountry2;
     private RecyclerView recyclerView;
     private StoreAdapter storeAdapter;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        dialogprog = new Dialog(StoreLocatorActivity.this);
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view_store);
         spinnerCountry2 = findViewById(R.id.spinnerCountry2);
@@ -78,7 +82,9 @@ public class StoreLocatorActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int countryId = countryIdList.get(position);
                 Log.i("countryId", countryId + "");
+
                 getStoresByCountry(countryId);
+
             }
 
             @Override
@@ -88,7 +94,23 @@ public class StoreLocatorActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onOptionsItemSelected(android.view.MenuItem item){
+    private void progressbarClose() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.setCanceledOnTouchOutside(true);
+        dialogprog.setCancelable(true);
+        dialogprog.dismiss();
+    }
+
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
+    }
+
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -102,6 +124,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
     }
 
     public void getAllCountries() {
+        progressbarOpen();
         JsonArrayRequest countryRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_COUNTRY_DATA, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -113,6 +136,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
                         countryIdList.add(response.getJSONObject(i).getInt("Id"));
                     }
                     adapter.notifyDataSetChanged();
+                    progressbarClose();
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
                 }
@@ -141,6 +165,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
 
 
     public void getStoresByCountry(int countryId) {
+        progressbarOpen();
         JsonArrayRequest storeRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_STORE_DATA + countryId, new Response.Listener<JSONArray>() {
 
             @Override
@@ -148,7 +173,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
                 String name, address, phone, latitude, longitude;
                 Log.i("storedata", response.toString());
                 storeList.clear();
-                if (response.length()==0){
+                if (response.length() == 0) {
                     adapter.notifyDataSetChanged();
                 }
                 try {
@@ -165,6 +190,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
                         storeList.add(store);
                         storeAdapter.notifyDataSetChanged();
                     }
+                    progressbarClose();
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
                 }

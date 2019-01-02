@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,6 +39,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,7 +50,6 @@ import java.util.Map;
 import multiplexer.lab.takeout.Helper.EndPoints;
 
 public class LogInActivity extends AppCompatActivity {
-
     EditText etEmail, etPassword;
     LinearLayout loginLayout;
     Snackbar snackbar;
@@ -56,6 +57,7 @@ public class LogInActivity extends AppCompatActivity {
     RequestQueue queue;
     TextView forgotpass;
     AlertDialog dialog;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,9 @@ public class LogInActivity extends AppCompatActivity {
         loginLayout = findViewById(R.id.LL_input);
         rootLayout = findViewById(R.id.rootLayout);
         forgotpass = findViewById(R.id.forgotpass);
-
+        dialogprog = new Dialog(LogInActivity.this);
         queue = Volley.newRequestQueue(this);
+
         animation();
 
         forgotpass.setOnClickListener(new View.OnClickListener() {
@@ -86,11 +89,11 @@ public class LogInActivity extends AppCompatActivity {
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(editText.getText().toString().isEmpty()){
+                        if (editText.getText().toString().isEmpty()) {
                             Toast.makeText(LogInActivity.this, "Please insert your email!", Toast.LENGTH_SHORT).show();
-                        }else if(!editText.getText().toString().contains(".com")){
+                        } else if (!editText.getText().toString().contains(".com")) {
                             Toast.makeText(LogInActivity.this, "Email is not valid!", Toast.LENGTH_SHORT).show();
-                        }else{
+                        } else {
                             Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                             sendEmail(editText.getText().toString());
@@ -103,7 +106,24 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
-    public void selectAvatar(){
+    private void progressbarClose() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.setCanceledOnTouchOutside(true);
+        dialogprog.setCancelable(true);
+        dialogprog.dismiss();
+    }
+
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
+    }
+
+
+    public void selectAvatar() {
         final Dialog dialog = new Dialog(LogInActivity.this);
         dialog.setContentView(R.layout.custom_avatar);
         ImageView dialogmale = dialog.findViewById(R.id.IV_male);
@@ -141,7 +161,7 @@ public class LogInActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.i("EmailResponse", response.toString());
-                        if(response.equals("")){
+                        if (response.equals("")) {
                             Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                         }
@@ -227,6 +247,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void sendDataToServer() {
+        progressbarOpen();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.SIGNIN_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -241,6 +262,7 @@ public class LogInActivity extends AppCompatActivity {
                             editor.putString("accessToken", accessToken);
                             editor.apply();
                             Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+                            progressbarClose();
                             startActivity(intent);
                             finish();
                         } catch (JSONException e) {
@@ -265,6 +287,7 @@ public class LogInActivity extends AppCompatActivity {
                             if (res.contains("unsupported_grant_type")) {
                                 Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
                             } else if (res.contains("password")) {
+
                                 Toast.makeText(LogInActivity.this, "Username or Password is incorrect!", Toast.LENGTH_SHORT).show();
                             }
                             JSONObject obj = new JSONObject(res);
@@ -276,6 +299,7 @@ public class LogInActivity extends AppCompatActivity {
                         }
                     }
                 }
+                progressbarClose();
             }
         }) /*{
             @Override

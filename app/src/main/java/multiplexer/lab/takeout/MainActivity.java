@@ -1,6 +1,7 @@
 package multiplexer.lab.takeout;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -66,20 +68,20 @@ public class MainActivity extends AppCompatActivity {
     View header;
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
-    TextView points, welcomeMessage,status;
+    TextView points, welcomeMessage, status;
     int value;
     ImageView pic;
     RequestQueue queue;
     BoomMenuButton bmb;
     BoomMenuButton bmb1;
     AlertDialog dialog;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        dialogprog = new Dialog(MainActivity.this);
         pic = findViewById(R.id.IV_avatar_main);
         welcomeMessage = findViewById(R.id.welcomeMessage);
         points = findViewById(R.id.points);
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         mTitleTextView.setText("Home");
         mActionBar.setCustomView(actionBar);
         mActionBar.setDisplayShowCustomEnabled(true);
-        ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0,0);
+        ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0, 0);
         bmb1 = actionBar.findViewById(R.id.bmb1);
 
         iconList = new ArrayList<>();
@@ -104,11 +106,29 @@ public class MainActivity extends AppCompatActivity {
         setInitBoom();
         boomCustomizebmb1();
         queue = Volley.newRequestQueue(this);
+        progressbarOpen();
         setAvatar();
         setStatus();
         getPoints();
         getProfileData();
         getAds();
+
+    }
+
+    private void progressbarClose() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.setCanceledOnTouchOutside(true);
+        dialogprog.setCancelable(true);
+        dialogprog.dismiss();
+    }
+
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
     }
 
     private void setStatus() {
@@ -129,16 +149,16 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         String avatar = pref.getString("Avatar", "male");
-        if(avatar.equalsIgnoreCase("male")){
+        if (avatar.equalsIgnoreCase("male")) {
             pic.setImageResource(R.drawable.male);
-        }else{
+        } else {
             pic.setImageResource(R.drawable.female);
         }
 
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         setAvatar();
         setStatus();
         getPoints();
@@ -151,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_PROFILE_DATA, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("responseprofile",response.toString());
+                Log.i("responseprofile", response.toString());
                 try {
                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -163,7 +183,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.commit();
                     editor.putString("phone", response.getString("Phone"));
                     editor.commit();
-                    welcomeMessage.setText("Welcome, "+response.getString("Fullname"));
+
+                    welcomeMessage.setText("Welcome, " + response.getString("Fullname"));
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
@@ -192,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getPoints() {
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, EndPoints.GET_POINT_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -231,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
                         pics.add("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
                     }
                     initSetPic(pics);
+                    progressbarClose();
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
                 }
@@ -413,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         String status = pref.getString("status", "");
 
-        if(!status.isEmpty()){
+        if (!status.isEmpty()) {
             dialog = new AlertDialog.Builder(MainActivity.this).create();
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View customView = inflater.inflate(R.layout.custom_dialog_points, null);
@@ -427,17 +450,16 @@ public class MainActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(editText.getText().toString().isEmpty()){
+                    if (editText.getText().toString().isEmpty()) {
                         Toast.makeText(MainActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         sendInvoiceNo(editText.getText().toString());
                     }
                 }
             });
             dialog.show();
-        }
-        else {
-            Intent intent = new Intent(MainActivity.this,AddReferralActivity.class);
+        } else {
+            Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
             startActivity(intent);
         }
 
@@ -445,13 +467,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendInvoiceNo(final String invoiceNo) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, EndPoints.GET_USE_COUPON+invoiceNo,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, EndPoints.GET_USE_COUPON + invoiceNo,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.i("PointsResponse", response.toString());
-                        if(!response.equals("")){
-                            Toast.makeText(MainActivity.this, "Congrats! You have got "+invoiceNo+ " points!", Toast.LENGTH_SHORT).show();
+                        if (!response.equals("")) {
+                            Toast.makeText(MainActivity.this, "Congrats! You have got " + invoiceNo + " points!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
                     }

@@ -123,9 +123,9 @@
                             android:background="@color/lightblack"
                             android:elevation="10dp"
                             android:gravity="center"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="10dp"
-                            android:text="POINTS: 00"
+                            android:paddingBottom="7dp"
+                            android:paddingTop="7dp"
+                            android:text="Total Points: 0"
                             android:textColor="@color/white"
                             android:textSize="15dp"
                             android:textStyle="bold" />
