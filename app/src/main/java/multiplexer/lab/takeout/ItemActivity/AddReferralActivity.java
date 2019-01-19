@@ -1,6 +1,7 @@
 package multiplexer.lab.takeout.ItemActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import multiplexer.lab.takeout.Helper.EndPoints;
+import multiplexer.lab.takeout.MainActivity;
 import multiplexer.lab.takeout.R;
 
 
@@ -140,5 +142,18 @@ public class AddReferralActivity extends AppCompatActivity {
         }
 
         progressbarClose();
+    }
+
+    public void btnQR(View view) {
+        Intent intent = new Intent(AddReferralActivity.this, ScanQRActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    public void btnMenu(View view) {
+        Intent intent = new Intent(AddReferralActivity.this, MenuActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

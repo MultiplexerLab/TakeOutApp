@@ -331,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
                     .typeface(Typeface.DEFAULT_BOLD)
                     .normalTextColorRes(R.color.lightblack)
                     .textSize(10)
-                    .imagePadding(new Rect(20, 20, 20, 20))
+                    .imagePadding(new Rect(30, 30, 30, 50))
                     .textPadding(new Rect(10, 20, 10, 0))
                     .shadowEffect(true)
                     .rotateImage(true)

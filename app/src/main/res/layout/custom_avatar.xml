@@ -10,10 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:layout_margin="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:gravity="center_horizontal"
         android:textColor="@color/lightblack"
-        android:layout_marginBottom="10dp"
         android:textStyle="bold"
         android:text="SELECT YOUR AVATAR."/>
 
@@ -21,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TV_avatar"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true">
 
 
@@ -29,7 +31,7 @@
             android:id="@+id/IV_male"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:elevation="10dp"
             android:layout_marginRight="30dp"
             android:src="@drawable/male"
@@ -40,7 +42,7 @@
             android:layout_toRightOf="@+id/IV_male"
             android:layout_width="85dp"
             android:layout_height="85dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:elevation="10dp"
             android:src="@drawable/female"
             android:stateListAnimator="@null" />

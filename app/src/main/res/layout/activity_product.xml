@@ -12,64 +12,6 @@
         android:alpha="0.7"
         android:background="@drawable/login_back" />
 
-    <!--<RelativeLayout
-        android:id="@+id/RL_menu_detail"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
-        android:visibility="invisible"
-        android:background="@drawable/squareshape"
-        android:elevation="10dp">
-
-        <ImageView
-            android:id="@+id/bigpic"
-            android:layout_width="130dp"
-            android:layout_height="120dp"
-            android:adjustViewBounds="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:scaleType="fitXY" />
-
-        <TextView
-            android:id="@+id/prod_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/bigpic"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginBottom="5dp"
-            android:layout_alignTop="@+id/bigpic"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <TextView
-            android:id="@+id/prod_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/prod_name"
-            android:layout_toRightOf="@+id/bigpic"
-            android:textColor="@color/black"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-        <TextView
-            android:id="@+id/prod_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/prod_desc"
-            android:layout_toRightOf="@+id/bigpic"
-            android:textColor="@color/black"
-            android:layout_marginBottom="5dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/prod_price"
-            android:layout_toRightOf="@+id/bigpic"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:text="CLICK FOR RATING"
-            android:textColor="@color/colorPrimaryDark"/>
-
-    </RelativeLayout>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -77,5 +19,104 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightblack"
+        android:elevation="10dp"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnQR"
+            android:background="@drawable/tv_menu_home"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/qr_icon"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/unica_one"
+                android:gravity="center"
+                android:text="SCAN QR"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/tv_menu_home"
+            android:backgroundTint="@color/lightyellow"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/food_menu_icon"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:fontFamily="@font/unica_one"
+                android:gravity="center"
+                android:text="MENU"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btngetPoints"
+            android:background="@drawable/tv_menu_home"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/get_points_icon"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:fontFamily="@font/unica_one"
+                android:gravity="center"
+                android:text="GET POINTS"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

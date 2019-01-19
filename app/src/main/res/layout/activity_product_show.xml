@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
+        android:background="@drawable/food_menu_icon"
         android:adjustViewBounds="true"
         />
 
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="Name"
             android:textStyle="bold"
+            android:fontFamily="@font/amaranth"
             android:layout_marginBottom="5dp"
             android:textSize="20dp"
             android:textColor="@color/lightblack"/>
@@ -41,6 +43,7 @@
             android:layout_marginLeft="5dp"
             android:text="Price: "
             android:layout_below="@+id/foodname_show"
+            android:fontFamily="@font/amaranth"
             android:textStyle="bold"
             android:textSize="15dp"
             android:textColor="@color/lightblack"/>
@@ -48,14 +51,14 @@
             android:id="@+id/foodratebtn_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rate it"
+            android:text="Rate it !!"
             android:layout_marginTop="5dp"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             android:onClick="btnRate"
-            android:background="@drawable/loginbutton"
+            android:background="@drawable/rate_button"
             android:layout_marginLeft="5dp"
             android:layout_below="@+id/foodprice_show"
             android:textStyle="bold"
@@ -76,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rating"
+            android:fontFamily="@font/amaranth"
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
@@ -88,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/foodrate_show"
+            android:fontFamily="@font/amaranth"
             android:layout_marginRight="5dp"
             android:layout_alignParentEnd="true"
             android:textStyle="bold"
@@ -102,6 +107,7 @@
             android:layout_below="@+id/foodratenumber_show"
             android:layout_marginRight="5dp"
             android:layout_alignParentEnd="true"
+            android:fontFamily="@font/amaranth"
             android:textStyle="bold"
             android:textSize="10dp"
             android:textColor="@color/lightyellow"/>
@@ -124,6 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:fontFamily="@font/amaranth"
                     android:text="Description"
                     android:textColor="@color/lightblack"
                     android:textSize="15dp"
@@ -137,5 +144,104 @@
 
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightblack"
+        android:elevation="10dp"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btnQR"
+            android:background="@drawable/tv_menu_home"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/qr_icon"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/unica_one"
+                android:gravity="center"
+                android:text="SCAN QR"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/tv_menu_home"
+            android:backgroundTint="@color/lightyellow"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/food_menu_icon"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:fontFamily="@font/unica_one"
+                android:gravity="center"
+                android:text="MENU"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btngetPoints"
+            android:background="@drawable/tv_menu_home"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/get_points_icon"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:fontFamily="@font/unica_one"
+                android:gravity="center"
+                android:text="GET POINTS"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

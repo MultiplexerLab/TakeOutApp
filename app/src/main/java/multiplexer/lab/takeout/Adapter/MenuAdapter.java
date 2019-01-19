@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import java.util.List;
@@ -29,13 +30,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView cat_Logo;
         TextView cat_name;
-        LinearLayout linearLayout;
+        RelativeLayout relativeLayout;
 
         public MyViewHolder(View view) {
             super(view);
             cat_name = view.findViewById(R.id.cat_name);
             cat_Logo = view.findViewById(R.id.prod_logo);
-            linearLayout = view.findViewById(R.id.Llayout_category);
+            relativeLayout = view.findViewById(R.id.Rlayout_category);
 
         }
     }
@@ -54,7 +55,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
 
         Picasso.with(context).load(category.getImage()).into(holder.cat_Logo);
         holder.cat_name.setText(category.getName());
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProductActivity.class);

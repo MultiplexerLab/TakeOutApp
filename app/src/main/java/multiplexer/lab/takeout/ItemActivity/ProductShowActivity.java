@@ -1,16 +1,24 @@
 package multiplexer.lab.takeout.ItemActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,14 +38,13 @@ import java.util.Map;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.R;
 
-import static multiplexer.lab.takeout.R.color.green;
-
 public class ProductShowActivity extends AppCompatActivity {
     ImageView foodPic;
     TextView foodRate, foodPrice, foodDescription, foodName, personalRate;
     RequestQueue queue;
     Intent intent;
-    Dialog dialog;
+    AlertDialog dialog;
+    Dialog dlog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +97,10 @@ public class ProductShowActivity extends AppCompatActivity {
     }
 
     public void btnRate(View view) {
-        dialog = new Dialog(ProductShowActivity.this);
-        dialog.setContentView(R.layout.custom_dialog);
-        Button dialogButton = dialog.findViewById(R.id.btn_submit);
-        final SmileRating smileRating = dialog.findViewById(R.id.smile_rating);
+        dlog = new Dialog(ProductShowActivity.this);
+        dlog.setContentView(R.layout.custom_rating_dialog);
+        Button dialogButton = dlog.findViewById(R.id.btn_submit);
+        final SmileRating smileRating = dlog.findViewById(R.id.smile_rating);
         smileRating.setSelectedSmile(intent.getIntExtra("rating", 0));
 
         dialogButton.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +112,10 @@ public class ProductShowActivity extends AppCompatActivity {
                 personalRate.setText("Your Rate: " + rating);
 
                 postRating(intent.getIntExtra("prodid", 0), rating);
-                dialog.dismiss();
+                dlog.dismiss();
             }
         });
-        dialog.show();
+        dlog.show();
     }
 
     public void postRating(final int productid, final int rating) {
@@ -121,7 +128,7 @@ public class ProductShowActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(getApplicationContext(), "Thanks for your rating!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                        dlog.dismiss();
                         Log.i("Rate Response", response.toString());
                     }
                 }, new Response.ErrorListener() {
@@ -158,4 +165,89 @@ public class ProductShowActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
+    public void btnQR(View view) {
+        Intent intent = new Intent(ProductShowActivity.this, ScanQRActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void btngetPoints(View view) {
+        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        String status = pref.getString("status", "");
+
+        if (!status.isEmpty()) {
+
+            dialog = new AlertDialog.Builder(ProductShowActivity.this).create();
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View customView = inflater.inflate(R.layout.custom_dialog_points, null);
+            dialog.setView(customView);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setCancelable(true);
+
+            Button btn = customView.findViewById(R.id.btn_bonus_points);
+            final EditText editText = customView.findViewById(R.id.invoiceNo);
+
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (editText.getText().toString().isEmpty()) {
+                        Toast.makeText(ProductShowActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        sendInvoiceNo(editText.getText().toString());
+                    }
+                }
+            });
+            dialog.show();
+        } else {
+            Intent intent = new Intent(ProductShowActivity.this, AddReferralActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    private void sendInvoiceNo(final String invoiceNo) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, EndPoints.GET_USE_COUPON + invoiceNo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("PointsResponse", response.toString());
+                        if (!response.equals("")) {
+                            Toast.makeText(ProductShowActivity.this, "Congrats! You have got " + invoiceNo + " points!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse response = error.networkResponse;
+                if (response != null) {
+                    Log.e("networkResponse", response.toString());
+                    if (error instanceof ServerError && response != null) {
+                        try {
+                            String res = new String(response.data,
+                                    HttpHeaderParser.parseCharset(response.headers, "application/json"));
+                            Log.i("resString", res);
+                            if (res.contains("account")) {
+                                Toast.makeText(ProductShowActivity.this, "Your account is not activated!", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (UnsupportedEncodingException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
 }

@@ -5,100 +5,31 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/login_col"
     tools:context="multiplexer.lab.takeout.LogInActivity">
 
     <ImageView
         android:id="@+id/iv_b1"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/right" />
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/login_drink" />
 
     <ImageView
         android:id="@+id/iv_b2"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="170dp"
-        android:background="@drawable/left" />
-
-    <ImageView
-        android:id="@+id/iv_b11"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_width="150dp"
+        android:layout_height="130dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/left" />
-
-    <ImageView
-        android:id="@+id/iv_b10"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="380dp"
-        android:background="@drawable/left" />
-
-    <ImageView
-        android:id="@+id/iv_b5"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="270dp"
-        android:background="@drawable/right" />
-
-    <ImageView
-        android:id="@+id/iv_b6"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="320dp"
-        android:background="@drawable/right" />
-
-    <ImageView
-        android:id="@+id/iv_b7"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/LL_input"
-        android:layout_marginLeft="50dp"
-        android:background="@drawable/left" />
-
-    <ImageView
-        android:id="@+id/iv_b8"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="190dp"
-        android:background="@drawable/right" />
-
-    <ImageView
-        android:id="@+id/iv_b9"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/LL_reg"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/right" />
-
-    <ImageView
-        android:id="@+id/iv_b4"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/left" />
-
+        android:background="@drawable/login_burger" />
 
     <ImageView
         android:id="@+id/iv_b3"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/iv_b5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/left" />
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/login_potato" />
 
     <ImageView
         android:id="@+id/logo"
@@ -114,7 +45,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/burgericon" />
 
     <TextView
@@ -126,7 +57,7 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="@string/text"
-        android:textColor="#757575"
+        android:textColor="@color/lightblack"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -135,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:alpha="0.8"
         android:background="@drawable/squareshape"
         android:elevation="10dp"
@@ -190,7 +121,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/tag"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="190dp"
         android:background="@drawable/buttonlogin"
         android:elevation="10dp"
         android:onClick="btnLogIn"

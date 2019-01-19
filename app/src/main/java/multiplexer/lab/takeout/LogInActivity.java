@@ -216,14 +216,7 @@ public class LogInActivity extends AppCompatActivity {
         YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b1));
         YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b2));
         YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b3));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b4));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b5));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b6));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b7));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b8));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b9));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b10));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b11));
+
     }
 
     public void btnLogIn(View view) {

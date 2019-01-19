@@ -8,8 +8,9 @@
     <color name="ash">#F3F1F2</color>
     <color name="ash2">#93938B</color>
     <color name="green">#1e8302</color>
+    <color name="login_col">#FFC837</color>
 
-    <color name="red">#DF252F</color>
+    <color name="red">#D52A27</color>
     <color name="lightblack">#24221D</color>
   <!-- <color name="deepred">#592913</color>-->
     <color name="deepestred">#52433E</color>
