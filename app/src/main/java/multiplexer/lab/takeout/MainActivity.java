@@ -5,24 +5,22 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -36,6 +34,8 @@ import android.widget.Toast;
 
 import me.relex.circleindicator.CircleIndicator;
 import multiplexer.lab.takeout.Adapter.AdAdapter;
+import multiplexer.lab.takeout.Adapter.AdAdapterNew;
+import multiplexer.lab.takeout.Adapter.MenuAdapter;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
 import multiplexer.lab.takeout.ItemActivity.AddReferralActivity;
@@ -67,16 +67,19 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    View header;
     ArrayList<Integer> iconList;
     ArrayList<String> titleList;
-    TextView points, welcomeMessage, status;
+    TextView numpoints, name, status;
     int value;
     ImageView pic;
+    private RecyclerView recyclerView;
+    private List<String> adList = new ArrayList<>();
+    AdAdapterNew adAdapter;
     RequestQueue queue;
     BoomMenuButton bmb;
     BoomMenuButton bmb1;
@@ -89,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         dialogprog = new Dialog(MainActivity.this);
         pic = findViewById(R.id.IV_avatar_main);
-        welcomeMessage = findViewById(R.id.welcomeMessage);
-        points = findViewById(R.id.points);
+        name = findViewById(R.id.name);
+        numpoints = findViewById(R.id.numpoints);
         status = findViewById(R.id.activate_status);
 
         ActionBar mActionBar = getSupportActionBar();
@@ -107,12 +110,20 @@ public class MainActivity extends AppCompatActivity {
         ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0, 0);
         bmb1 = actionBar.findViewById(R.id.bmb1);
 
+
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();
         setInitBoom();
         boomCustomizebmb1();
         queue = Volley.newRequestQueue(this);
         progressbarOpen();
+        recyclerView = findViewById(R.id.recyclerview_ad);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        adAdapter = new AdAdapterNew(MainActivity.this, adList);
+        recyclerView.setAdapter(adAdapter);
+
         setAvatar();
         setStatus();
         getPoints();
@@ -120,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
         getAds();
 
     }
+
+
 
     private void progressbarClose() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -190,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("phone", response.getString("Phone"));
                     editor.commit();
 
-                    welcomeMessage.setText("Welcome, " + response.getString("Fullname"));
+                    name.setText(response.getString("Fullname"));
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
@@ -224,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.i("points", response.toString());
-                points.setText("Total Points: " + response);
+                numpoints.setText(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -252,13 +265,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i("Ads", response.toString());
-                ArrayList<String> pics = new ArrayList<>();
+                //ArrayList<String> pics = new ArrayList<>();
                 try {
                     JSONArray jsonArray = response.getJSONArray("fpaAdds");
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        pics.add("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
+                        adList.add("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
                     }
-                    initSetPic(pics);
+                    adAdapter.notifyDataSetChanged();
+                    //initSetPic(pics);
                     progressbarClose();
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
@@ -285,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
         queue.add(adsRequest);
     }
 
-    private void initSetPic(ArrayList<String> pics) {
+   /* private void initSetPic(ArrayList<String> pics) {
         Log.i("data", pics.toString());
         ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager_default);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator_default);
@@ -293,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
         viewpager.setAdapter(mPageAdapter);
         viewpager.setOffscreenPageLimit(pics.size());
         indicator.setViewPager(viewpager);
-    }
+    }*/
 
     private void setInitBoom() {
         iconList.add(R.drawable.profileicon);
@@ -313,7 +327,6 @@ public class MainActivity extends AppCompatActivity {
         titleList.add("LogOut");
 
     }
-
 
 
     @Override

@@ -13,154 +13,222 @@
         android:alpha="0.3"
         android:background="@color/lightyellow" />
 
+
+    <!--<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">-->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <ScrollView
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/LL_welcome"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#FFC837"
+            android:clickable="true"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/LL_welcome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    card_view:cardCornerRadius="4dp"
-                    card_view:cardElevation="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="230dp"
-                            android:alpha="0.7"
-                            android:background="@drawable/login_back" />
-
-                        <ImageView
-                            android:id="@+id/IV_avatar_main"
-                            android:layout_width="65dp"
-                            android:layout_height="65dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="20dp"
-                            android:src="@drawable/male" />
-
-                        <TextView
-                            android:id="@+id/welcomeMessage"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/IV_avatar_main"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/carter_one"
-                            android:gravity="center"
-                            android:text="Welcome "
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                             />
-
-                        <RelativeLayout
-                            android:id="@+id/status"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/welcomeMessage"
-                            android:gravity="center_horizontal">
-
-                            <TextView
-                                android:id="@+id/status1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:fontFamily="@font/carter_one"
-                                android:text="Status:"
-                                android:textColor="@color/black"
-                                android:textSize="15dp"
-                                />
-
-                            <TextView
-                                android:id="@+id/activate_status"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:layout_toRightOf="@+id/status1"
-                                android:fontFamily="@font/abril_fatface"
-                                android:text=" NOT ACTIVATED"
-                                android:textColor="@color/red"
-                                android:textSize="17dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold" />
-
-                        </RelativeLayout>
-
-
-                        <TextView
-                            android:id="@+id/points"
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/status"
-                            android:layout_centerHorizontal="true"
-                            android:background="@color/lightblack"
-                            android:elevation="10dp"
-                            android:fontFamily="@font/pt_serif"
-                            android:gravity="center"
-                            android:paddingBottom="7dp"
-                            android:paddingTop="7dp"
-                            android:text="Total Points: 0"
-                            android:textColor="@color/white"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                    </RelativeLayout>
-
-                </android.support.v7.widget.CardView>
-
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    android:layout_below="@+id/LL_welcome"
-                    android:layout_margin="10dp"
-                    android:layout_marginBottom="50dp"
-                    android:background="@drawable/adpic_delete"
-                    android:elevation="10dp" />
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    android:layout_below="@+id/LL_welcome"
-                    android:layout_margin="10dp"
-                    android:background="@color/ash">
+                    android:layout_height="100dp" />
 
-                    <me.relex.circleindicator.CircleIndicator
-                        android:id="@+id/indicator_default"
-                        android:layout_width="fill_parent"
-                        android:layout_height="20dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="8dp" />
+                <TextView
+                    android:id="@+id/eat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="EAT!"
+                    android:textColor="#F7B01A"
+                    android:textSize="25dp"
+                    android:textStyle="bold|italic" />
 
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/viewpager_default"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true" />
+                <TextView
+                    android:id="@+id/scan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/eat"
+                    android:layout_marginRight="5dp"
+                    android:text="SCAN!"
+                    android:textColor="#F7B01A"
+                    android:textSize="25dp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/scan"
+                    android:layout_marginRight="5dp"
+                    android:text="GET POINTS!"
+                    android:textColor="#F7B01A"
+                    android:textSize="25dp"
+                    android:textStyle="bold|italic" />
+
+                <ImageView
+                    android:id="@+id/IV_avatar_main"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/male" />
+
+                <TextView
+                    android:id="@+id/welcomeMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/IV_avatar_main"
+                    android:fontFamily="@font/pt_serif"
+                    android:gravity="start"
+                    android:text="Welcome "
+                    android:textColor="@color/lightblack"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/welcomeMessage"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/IV_avatar_main"
+                    android:fontFamily="@font/amaranth"
+                    android:text="Full Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/lightblack" />
+
+                <RelativeLayout
+                    android:id="@+id/status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/IV_avatar_main"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/status1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pt_serif"
+                        android:text="Status:"
+                        android:textColor="@color/black"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/activate_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/status1"
+                        android:fontFamily="@font/abril_fatface"
+                        android:paddingRight="5dp"
+                        android:text=" NOT ACTIVATED"
+                        android:textColor="@color/red"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
                 </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/status"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/IV_avatar_main"
+                    android:fontFamily="@font/pt_serif"
+                    android:gravity="start"
+                    android:paddingBottom="7dp"
+                    android:text="Total\nPoints:"
+                    android:textColor="@color/lightblack"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/numpoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/status"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/points"
+                    android:fontFamily="@font/carter_one"
+                    android:gravity="start"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+
             </RelativeLayout>
-        </ScrollView>
+
+        </android.support.v7.widget.CardView>
+
+
+        <!--<ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_below="@+id/LL_welcome"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/adpic_delete"
+            android:elevation="10dp" />-->
+
+        <!-- <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="220dp"
+             android:layout_below="@+id/LL_welcome"
+             android:layout_margin="10dp"
+             android:background="@color/ash">
+
+             <me.relex.circleindicator.CircleIndicator
+                 android:id="@+id/indicator_default"
+                 android:layout_width="fill_parent"
+                 android:layout_height="20dp"
+                 android:layout_alignParentBottom="true"
+                 android:layout_marginBottom="8dp" />
+
+             <android.support.v4.view.ViewPager
+                 android:id="@+id/viewpager_default"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentStart="true"
+                 android:layout_alignParentTop="true" />
+         </RelativeLayout>-->
+
+        <!--</ScrollView>-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_ad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottombar"
+            android:layout_below="@+id/LL_welcome"
+            />
+
+
 
         <LinearLayout
+            android:id="@+id/bottombar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

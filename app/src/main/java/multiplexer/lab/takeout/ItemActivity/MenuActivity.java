@@ -71,6 +71,7 @@ public class MenuActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         dialogprog = new Dialog(MenuActivity.this);
         progressbarOpen();
+
         recyclerView = findViewById(R.id.category_rv);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(cLayoutManager);
