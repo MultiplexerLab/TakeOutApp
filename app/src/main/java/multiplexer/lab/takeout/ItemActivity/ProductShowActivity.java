@@ -51,7 +51,6 @@ public class ProductShowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_show);
 
-
         foodPic = findViewById(R.id.foodpic_show);
         foodRate = findViewById(R.id.foodratenumber_show);
         foodPrice = findViewById(R.id.foodprice_show);
@@ -169,6 +168,8 @@ public class ProductShowActivity extends AppCompatActivity {
         Intent intent = new Intent(ProductShowActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();
+        MenuActivity.menuActivity.finish();
+        ProductActivity.productActivity.finish();
     }
 
     public void btngetPoints(View view) {
@@ -202,6 +203,8 @@ public class ProductShowActivity extends AppCompatActivity {
             Intent intent = new Intent(ProductShowActivity.this, AddReferralActivity.class);
             startActivity(intent);
             finish();
+            MenuActivity.menuActivity.finish();
+            ProductActivity.productActivity.finish();
         }
     }
 

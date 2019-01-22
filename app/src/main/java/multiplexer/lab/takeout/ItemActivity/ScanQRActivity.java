@@ -73,11 +73,10 @@ public class ScanQRActivity extends AppCompatActivity {
 
     private String getData() {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String Name = pref.getString("fullname", "");
-        String Email = pref.getString("email", "");
+
         String Phone = pref.getString("phone", "");
 
-        return "Name: "+Name+", Email: "+Email+", Phone: "+Phone;
+        return "+88"+Phone;
 
     }
 

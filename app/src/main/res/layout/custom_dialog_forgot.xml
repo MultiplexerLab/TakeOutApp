@@ -13,6 +13,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:text="Forgot Password?"
+        android:fontFamily="@font/pt_serif"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         android:textStyle="bold" />
@@ -22,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:fontFamily="@font/amaranth"
         android:inputType="textEmailAddress"
         android:hint="Insert your email please"
         android:textColorHint="@color/black" />
@@ -37,6 +39,7 @@
         android:backgroundTint="@color/lightblack"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
+        android:fontFamily="@font/pt_serif"
         android:text="Submit"
         android:textColor="@color/white"
         android:textSize="15dp"

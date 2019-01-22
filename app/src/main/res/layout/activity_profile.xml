@@ -12,17 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <!--<ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:onClick="btnEdit"
-        android:background="@drawable/edit_icon"
-        android:backgroundTint="@color/black"
-        android:elevation="10dp" />-->
-
 
     <ImageView
         android:id="@+id/IV_pro_pic"
@@ -39,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/IV_pro_pic"
             android:layout_margin="10dp"
+            android:fontFamily="@font/amaranth"
             android:gravity="center"
             android:editable="false"
             android:elevation="15dp"
@@ -49,37 +39,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="170dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="100dp"
             android:elevation="15dp"
             android:orientation="vertical"
             android:padding="10dp"
             android:stateListAnimator="@null">
 
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="FULL NAME"
-                android:textColor="#212121"
-                android:textSize="13dp" />
-
-            <EditText
-                android:id="@+id/fullName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:text="Monjura Moula Anik"
-                android:textColor="@color/black" />-->
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/pt_serif"
                 android:text="EMAIL"
                 android:textColor="#212121"
                 android:textSize="13dp" />
@@ -89,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
+                android:fontFamily="@font/amaranth"
                 android:textColor="@color/black" />
 
             <TextView
@@ -96,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="PHONE"
+                android:fontFamily="@font/pt_serif"
                 android:textColor="#212121"
                 android:textSize="13dp" />
 
@@ -104,28 +82,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
+                android:fontFamily="@font/amaranth"
                 android:textColor="@color/black" />
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="ADDRESS"
-                android:textColor="#212121"
-                android:textSize="13dp" />
-
-            <EditText
-                android:id="@+id/address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:text=""
-                android:textColor="@color/black" />-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/pt_serif"
                 android:text="ACTIVATION CODE (CLICK TO SHARE)"
                 android:textColor="#212121"
                 android:textSize="13dp" />
@@ -135,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:editable="false"
+                android:fontFamily="@font/amaranth"
                 android:onClick="btnShareCode"
                 android:textColor="#33c70d" />
 

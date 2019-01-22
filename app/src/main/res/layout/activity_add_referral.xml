@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/pt_serif"
             android:gravity="center"
             android:textStyle="bold"
             android:text="Use Code to Activate your Account."
@@ -40,6 +41,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="30dp"
+            android:fontFamily="@font/amaranth"
             android:gravity="center"
             android:hint="Enter your referral code Here"
             android:padding="10dp" />
@@ -55,6 +57,7 @@
         android:background="@drawable/loginbutton"
         android:backgroundTint="@color/lightblack"
         android:elevation="10dp"
+        android:fontFamily="@font/pt_serif"
         android:onClick="btnAddRef"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"

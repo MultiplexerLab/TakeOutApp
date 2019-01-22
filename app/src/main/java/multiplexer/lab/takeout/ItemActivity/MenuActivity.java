@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout.ItemActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -53,6 +54,7 @@ public class MenuActivity extends AppCompatActivity {
     private List<Category> catList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MenuAdapter cAdapter;
+    public static Activity menuActivity;
     RequestQueue queue;
     AlertDialog dialog;
     Dialog dialogprog;
@@ -65,6 +67,7 @@ public class MenuActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        menuActivity = this;
         queue = Volley.newRequestQueue(this);
         dialogprog = new Dialog(MenuActivity.this);
         progressbarOpen();

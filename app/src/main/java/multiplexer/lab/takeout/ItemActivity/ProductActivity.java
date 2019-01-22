@@ -1,5 +1,6 @@
 package multiplexer.lab.takeout.ItemActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -56,6 +57,7 @@ public class ProductActivity extends AppCompatActivity {
     int countrycode = 1, catid;
     private RecyclerView recyclerView;
     private ProductAdapter cAdapter;
+    public static Activity productActivity;
     RequestQueue queue;
     AlertDialog dialog;
     Dialog dialogprog;
@@ -65,6 +67,7 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         dialogprog = new Dialog(ProductActivity.this);
+        productActivity = this;
         progressbarOpen();
         Intent intent = getIntent();
         catid = intent.getIntExtra("CatId", 0);
@@ -209,6 +212,7 @@ public class ProductActivity extends AppCompatActivity {
             Intent intent = new Intent(ProductActivity.this, AddReferralActivity.class);
             startActivity(intent);
             finish();
+            MenuActivity.menuActivity.finish();
         }
     }
 
@@ -262,5 +266,6 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent = new Intent(ProductActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();
+        MenuActivity.menuActivity.finish();
     }
 }
