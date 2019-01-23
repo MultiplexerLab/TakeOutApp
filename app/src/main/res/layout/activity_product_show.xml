@@ -4,133 +4,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightyellow"
+    android:background="#FFFFFF"
     tools:context=".ItemActivity.ProductShowActivity">
 
     <ImageView
         android:id="@+id/foodpic_show"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/food_menu_icon"
         android:adjustViewBounds="true"
-        />
+        android:background="@drawable/food_menu_icon"
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="340dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@color/colorPrimary"
         android:elevation="10dp"
-        android:padding="20dp"
-        android:background="@drawable/squareshape"
-        android:layout_alignParentBottom="true">
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/foodname_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:textStyle="bold"
-            android:fontFamily="@font/amaranth"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Name"
+            android:textColor="@color/lightblack"
             android:textSize="20dp"
-            android:textColor="@color/lightblack"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/foodprice_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Price: "
             android:layout_below="@+id/foodname_show"
+            android:layout_marginLeft="5dp"
             android:fontFamily="@font/amaranth"
-            android:textStyle="bold"
+            android:text="Price: "
+            android:textColor="@color/lightblack"
             android:textSize="15dp"
-            android:textColor="@color/lightblack"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/foodratebtn_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rate it !!"
-            android:layout_marginTop="5dp"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:onClick="btnRate"
-            android:background="@drawable/rate_button"
-            android:layout_marginLeft="5dp"
             android:layout_below="@+id/foodprice_show"
-            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rate_button"
+            android:onClick="btnRate"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="5dp"
+            android:text="Rate it !!"
+            android:textColor="@color/white"
             android:textSize="15dp"
-            android:textColor="@color/white"/>
+            android:textStyle="bold" />
 
         <View
             android:id="@+id/separator"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/lightblack"
             android:layout_below="@+id/foodratebtn_show"
             android:layout_marginTop="30dp"
-            />
+            android:background="@color/lightblack" />
 
         <TextView
             android:id="@+id/foodrate_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating"
-            android:fontFamily="@font/amaranth"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
-            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/amaranth"
+            android:text="Rating"
+            android:textColor="@color/white"
             android:textSize="15dp"
-            android:textColor="@color/lightyellow"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/foodratenumber_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/foodrate_show"
-            android:fontFamily="@font/amaranth"
-            android:layout_marginRight="5dp"
             android:layout_alignParentEnd="true"
-            android:textStyle="bold"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/amaranth"
             android:text="5.0"
+            android:textColor="@color/white"
             android:textSize="25dp"
-            android:textColor="@color/lightyellow"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/foodratetitle_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="VERY GOOD"
             android:layout_below="@+id/foodratenumber_show"
-            android:layout_marginRight="5dp"
             android:layout_alignParentEnd="true"
+            android:layout_marginRight="5dp"
             android:fontFamily="@font/amaranth"
-            android:textStyle="bold"
+            android:text="VERY GOOD"
+            android:textColor="@color/white"
             android:textSize="10dp"
-            android:textColor="@color/lightyellow"/>
+            android:textStyle="bold" />
 
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
             android:layout_below="@+id/separator"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:scrollbars="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true">
 
                 <TextView
                     android:id="@+id/fooddescription_show"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:fontFamily="@font/amaranth"
+                    android:gravity="center"
                     android:text="Description"
                     android:textColor="@color/lightblack"
                     android:textSize="15dp"
@@ -142,7 +143,6 @@
         </ScrollView>
 
 
-
     </RelativeLayout>
 
     <LinearLayout
@@ -151,15 +151,14 @@
         android:layout_alignParentBottom="true"
         android:background="@color/lightblack"
         android:elevation="10dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="btnQR"
             android:background="@drawable/tv_menu_home"
+            android:onClick="btnQR"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -217,8 +216,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="btngetPoints"
             android:background="@drawable/tv_menu_home"
+            android:onClick="btngetPoints"
             android:orientation="vertical"
             android:padding="5dp">
 

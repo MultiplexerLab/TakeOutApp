@@ -4,7 +4,7 @@
     android:id="@+id/Rlayout_category"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_layout">
+    android:background="@color/colorPrimary">
 
 
     <ImageView
@@ -12,9 +12,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:background="@drawable/food_menu_icon"
-
-        />
+        android:background="@drawable/food_menu_icon"/>
 
     <TextView
         android:id="@+id/cat_name"

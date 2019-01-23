@@ -213,9 +213,9 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void animation() {
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b1));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b2));
-        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.iv_b3));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.friesImage));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.burgerImage));
+        YoYo.with(Techniques.FadeIn).duration(2000).playOn(findViewById(R.id.shakesImage));
 
     }
 

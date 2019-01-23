@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("AddError", error.toString());
             }
         }) {
             @Override

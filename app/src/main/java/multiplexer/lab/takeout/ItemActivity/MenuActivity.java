@@ -135,13 +135,14 @@ public class MenuActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
+                    progressbarClose();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("MenuError", error.toString());
+                progressbarClose();
             }
         }) {
             @Override
