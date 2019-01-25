@@ -28,10 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
             android:backgroundTint="#FFC837"
             android:clickable="true"
             card_view:cardCornerRadius="4dp"
@@ -50,8 +50,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
                     android:text="EAT!"
                     android:textColor="#F7B01A"
                     android:textSize="25dp"
@@ -61,8 +61,8 @@
                     android:id="@+id/scan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
                     android:layout_below="@+id/eat"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginRight="5dp"
                     android:text="SCAN!"
                     android:textColor="#F7B01A"
@@ -72,8 +72,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
                     android:layout_below="@+id/scan"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginRight="5dp"
                     android:text="GET POINTS!"
                     android:textColor="#F7B01A"
@@ -170,14 +170,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/status"
+                    android:layout_alignTop="@+id/points"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="4dp"
                     android:layout_toRightOf="@+id/points"
                     android:fontFamily="@font/carter_one"
-                    android:gravity="start"
                     android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/red"
-                    android:textSize="25dp"
                     android:textStyle="bold" />
 
 
@@ -223,9 +223,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottombar"
-            android:layout_below="@+id/LL_welcome"
-            />
-
+            android:layout_below="@+id/LL_welcome" />
 
 
         <LinearLayout

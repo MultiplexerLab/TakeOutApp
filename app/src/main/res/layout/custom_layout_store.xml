@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/RL_custom_store"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/firstLL"
     android:layout_margin="10dp"
     android:layout_marginTop="10dp"
     android:background="@drawable/squareshape"
     android:elevation="10dp"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/IV_burger_pic_art"
-        android:layout_width="70dp"
+        android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="60dp"
         android:layout_centerVertical="true"
-        android:background="@drawable/burgericon" />
-
-    <TextView
-        android:id="@+id/TV_place_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/IV_burger_pic_art"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/IV_burger_pic_art"
-        android:fontFamily="@font/amaranth"
-        android:text="TakeOut"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/TV_store_address"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/TV_place_name"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/IV_burger_pic_art"
-        android:fontFamily="@font/pt_serif"
-        android:text="Address"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/black" />
+        android:src="@drawable/burgericon" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="6"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/TV_store_address"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/TV_place_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/IV_burger_pic_art"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/IV_burger_pic_art"
+            android:fontFamily="@font/amaranth"
+            android:text="TakeOut"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TV_store_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_place_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/IV_burger_pic_art"
+            android:fontFamily="@font/pt_serif"
+            android:text="Address"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
 
         <ImageView
             android:id="@+id/IV_direction"
@@ -67,8 +67,4 @@
             android:layout_toRightOf="@+id/IV_direction"
             android:layout_weight="1"
             android:background="@drawable/call" />
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</LinearLayout>

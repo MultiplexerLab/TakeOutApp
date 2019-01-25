@@ -37,7 +37,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> 
             cat_name = view.findViewById(R.id.cat_name);
             cat_Logo = view.findViewById(R.id.prod_logo);
             relativeLayout = view.findViewById(R.id.Rlayout_category);
-
         }
     }
 

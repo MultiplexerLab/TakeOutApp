@@ -102,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
         mActionBar.setDisplayShowCustomEnabled(true);
         ((Toolbar) actionBar.getParent()).setContentInsetsAbsolute(0, 0);
         bmb1 = actionBar.findViewById(R.id.bmb1);
-
-
         iconList = new ArrayList<>();
         titleList = new ArrayList<>();
         setInitBoom();
@@ -122,10 +120,7 @@ public class MainActivity extends AppCompatActivity {
         getPoints();
         getProfileData();
         getAds();
-
     }
-
-
     /*private boolean internetConnected() {
         boolean haveWifi = false;
         boolean haveMobileData = false;
