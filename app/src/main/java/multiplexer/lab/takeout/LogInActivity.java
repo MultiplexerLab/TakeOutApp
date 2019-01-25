@@ -227,7 +227,14 @@ public class LogInActivity extends AppCompatActivity {
                 }
             }
             if (validation()) {
-                selectAvatar();
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String avatar = pref.getString("Avatar", "");
+                if(avatar.isEmpty()){
+                    selectAvatar();
+                }else{
+                    sendDataToServer();
+                }
+
             } else {
                 YoYo.with(Techniques.Shake)
                         .duration(1000)

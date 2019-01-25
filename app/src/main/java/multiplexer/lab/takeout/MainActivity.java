@@ -10,14 +10,11 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -31,11 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import me.relex.circleindicator.CircleIndicator;
-import multiplexer.lab.takeout.Adapter.AdAdapter;
 import multiplexer.lab.takeout.Adapter.AdAdapterNew;
-import multiplexer.lab.takeout.Adapter.MenuAdapter;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
 import multiplexer.lab.takeout.ItemActivity.AddReferralActivity;
@@ -43,7 +36,6 @@ import multiplexer.lab.takeout.ItemActivity.MenuActivity;
 import multiplexer.lab.takeout.ItemActivity.ProfileActivity;
 import multiplexer.lab.takeout.ItemActivity.ScanQRActivity;
 import multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -93,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         dialogprog = new Dialog(MainActivity.this);
         pic = findViewById(R.id.IV_avatar_main);
         name = findViewById(R.id.name);
+
         numpoints = findViewById(R.id.numpoints);
         status = findViewById(R.id.activate_status);
 
@@ -133,6 +126,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /*private boolean internetConnected() {
+        boolean haveWifi = false;
+        boolean haveMobileData = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo info : netInfo) {
+            if (info.getTypeName().equalsIgnoreCase("WIFI")) {
+                if (info.isConnected()) {
+                    haveWifi = true;
+                }
+            }
+            if (info.getTypeName().equalsIgnoreCase("MOBILE")) {
+                if (info.isConnected()) {
+                    haveMobileData = true;
+                }
+            }
+
+        }
+        return haveMobileData|haveWifi;
+    }
+*/
 
     private void progressbarClose() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -211,7 +226,8 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+progressbarClose();
+Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -242,7 +258,8 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+progressbarClose();
+                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -281,7 +298,9 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("AddError", error.toString());
+                Log.e("AdError", error.toString());
+                progressbarClose();
+                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -345,9 +364,8 @@ public class MainActivity extends AppCompatActivity {
                     .normalText(titleList.get(i))
                     .rippleEffect(true)
                     .normalColorRes(R.color.lightyellow)
-
                     .highlightedColorRes(R.color.lightyellow)
-                    .pieceColorRes(R.color.white)
+                    .pieceColorRes(R.color.black)
                     .textGravity(Gravity.CENTER)
                     .typeface(Typeface.DEFAULT_BOLD)
                     .normalTextColorRes(R.color.lightblack)
@@ -500,6 +518,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
+                progressbarClose();
+                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());

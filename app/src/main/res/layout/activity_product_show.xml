@@ -15,11 +15,18 @@
         android:background="@drawable/food_menu_icon"
         android:scaleType="centerCrop" />
 
+    <TextView
+        android:id="@+id/dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="340dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
+        android:layout_below="@+id/dot"
         android:layout_marginRight="20dp"
         android:background="@color/colorPrimary"
         android:elevation="10dp"
@@ -57,10 +64,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/rate_button"
             android:onClick="btnRate"
-            android:paddingLeft="20dp"
-            android:paddingTop="5dp"
-            android:paddingRight="20dp"
             android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
             android:text="Rate it !!"
             android:textColor="@color/white"
             android:textSize="15dp"
@@ -79,8 +86,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/amaranth"
             android:text="Rating"
             android:textColor="@color/white"
@@ -91,8 +98,8 @@
             android:id="@+id/foodratenumber_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/foodrate_show"
             android:layout_alignParentEnd="true"
+            android:layout_below="@+id/foodrate_show"
             android:layout_marginRight="5dp"
             android:fontFamily="@font/amaranth"
             android:text="5.0"
@@ -104,8 +111,8 @@
             android:id="@+id/foodratetitle_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/foodratenumber_show"
             android:layout_alignParentEnd="true"
+            android:layout_below="@+id/foodratenumber_show"
             android:layout_marginRight="5dp"
             android:fontFamily="@font/amaranth"
             android:text="VERY GOOD"
@@ -123,8 +130,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true">
 
                 <TextView
                     android:id="@+id/fooddescription_show"

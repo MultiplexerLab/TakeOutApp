@@ -143,6 +143,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("MenuError", error.toString());
                 progressbarClose();
+                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -214,6 +215,8 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
+                progressbarClose();
+                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());

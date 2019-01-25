@@ -24,6 +24,23 @@
         android:layout_marginTop="70dp"
         android:gravity="center"
         android:text="@string/aboutus"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        android:layout_above="@+id/btn_fbpage"/>
+
+    <Button
+        android:id="@+id/btn_fbpage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Checkout our fb page"
+        android:textColor="@color/white"
+        android:onClick="btnFbPage"
+        android:textStyle="bold"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@drawable/loginbutton"
+        android:backgroundTint="#3C5A99"
+        android:layout_marginBottom="20dp"/>
 
 </RelativeLayout>
