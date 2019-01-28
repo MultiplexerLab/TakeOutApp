@@ -163,7 +163,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_LONG).show();
 
             }
         }) {
@@ -232,7 +232,7 @@ public class ProductActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());

@@ -89,15 +89,26 @@ public class LogInActivity extends AppCompatActivity {
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (editText.getText().toString().isEmpty()) {
-                            Toast.makeText(LogInActivity.this, "Please insert your email!", Toast.LENGTH_SHORT).show();
-                        } else if (!editText.getText().toString().contains(".com")) {
-                            Toast.makeText(LogInActivity.this, "Email is not valid!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
-                            sendEmail(editText.getText().toString());
+                        if (internetConnected()) {
+                            if (snackbar != null) {
+                                if (snackbar.isShown()) {
+                                    snackbar.dismiss();
+                                }
+                            }
+                            if (editText.getText().toString().isEmpty()) {
+                                Toast.makeText(LogInActivity.this, "Please insert your email!", Toast.LENGTH_SHORT).show();
+                            } else if (!editText.getText().toString().contains(".com")) {
+                                Toast.makeText(LogInActivity.this, "Email is not valid!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                /*Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_LONG).show();*/
+                                dialog.dismiss();
+                                progressbarOpen();
+                                sendEmail(editText.getText().toString());
+                            }
+                        }else {
+                            showSnackBar();
                         }
+
                     }
                 });
                 dialog.show();
@@ -160,17 +171,19 @@ public class LogInActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        progressbarClose();
                         Log.i("EmailResponse", response.toString());
                         if (response.equals("")) {
-                            Toast.makeText(LogInActivity.this, "A email is sent please check.", Toast.LENGTH_LONG).show();
-                            dialog.dismiss();
+                            Toast.makeText(LogInActivity.this, "An email is sent please check.", Toast.LENGTH_LONG).show();
                         }
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
+                progressbarClose();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());
+
                     if (error instanceof ServerError && response != null) {
                         try {
                             String res = new String(response.data,
@@ -178,7 +191,11 @@ public class LogInActivity extends AppCompatActivity {
                             Log.i("resString", res);
                             if (res.contains("unsupported_grant_type")) {
                                 Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                            }else{
+                                res =res.substring(12,res.length()-3);
+                                Toast.makeText(LogInActivity.this, res, Toast.LENGTH_SHORT).show();
                             }
+
                         } catch (UnsupportedEncodingException e1) {
                             e1.printStackTrace();
                         }
@@ -229,9 +246,9 @@ public class LogInActivity extends AppCompatActivity {
             if (validation()) {
                 SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                 String avatar = pref.getString("Avatar", "");
-                if(avatar.isEmpty()){
+                if (avatar.isEmpty()) {
                     selectAvatar();
-                }else{
+                } else {
                     sendDataToServer();
                 }
 
@@ -301,16 +318,7 @@ public class LogInActivity extends AppCompatActivity {
                 }
                 progressbarClose();
             }
-        }) /*{
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username", etEmail.getText().toString());
-                params.put("password", etPassword.getText().toString());
-                params.put("grant_type", "password");
-                return params;
-                }
-            }*/ {
+        }) {
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();

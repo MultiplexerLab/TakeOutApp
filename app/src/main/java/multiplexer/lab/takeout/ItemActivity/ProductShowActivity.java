@@ -105,11 +105,7 @@ public class ProductShowActivity extends AppCompatActivity {
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int rating = smileRating.getRating();
-                personalRate.setBackgroundResource(R.color.green);
-                personalRate.setText("Your Rate: " + rating);
-
                 postRating(intent.getIntExtra("prodid", 0), rating);
                 dlog.dismiss();
             }
@@ -128,19 +124,22 @@ public class ProductShowActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(getApplicationContext(), "Thanks for your rating!", Toast.LENGTH_SHORT).show();
                         dlog.dismiss();
+                        personalRate.setBackgroundResource(R.color.green);
+                        personalRate.setText("Your Rate: " + rating);
                         Log.i("Rate Response", response.toString());
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error occurred! try again later", Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());
                     if (error instanceof ServerError && response != null) {
                         try {
+
                             String res = new String(response.data,
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
-                            Log.i("Rate String", res);
+                            Log.i("RateString", res);
 
                         } catch (UnsupportedEncodingException e1) {
                             e1.printStackTrace();
@@ -222,7 +221,7 @@ public class ProductShowActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please check your internet connection!", Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());

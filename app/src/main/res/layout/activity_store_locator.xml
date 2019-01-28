@@ -16,23 +16,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:paddingLeft="5dp"
         android:background="#CBFCD66F">
 
         <ImageView
+            android:id="@+id/searchicon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/search_icon"
-            android:layout_toLeftOf="@+id/spinnerCountry2"
             android:layout_centerVertical="true"/>
 
         <Spinner
             android:id="@+id/spinnerCountry2"
-            android:layout_width="200dp"
+            android:layout_toRightOf="@+id/searchicon"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-
             android:backgroundTint="@color/white"/>
 
     </RelativeLayout>

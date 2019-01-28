@@ -14,15 +14,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,19 +107,26 @@ public class AddReferralActivity extends AppCompatActivity {
     public void btnAddRef(View view) {
         progressbarOpen();
         if (submit.getText().toString().equalsIgnoreCase("Go Back")) {
+            progressbarClose();
             finish();
         } else {
 
             final String couponcode = coupon.getText().toString();
+            if(couponcode.isEmpty()){
+                Toast.makeText(getApplicationContext(),"Please enter the code to activate",Toast.LENGTH_SHORT).show();
+                progressbarClose();
+                return;
+            }
 
             JsonObjectRequest pointRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_USE_REFERRAL + couponcode, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-
+                    Toast.makeText(getApplicationContext(),"Congrats! Activation Successful.",Toast.LENGTH_SHORT).show();
                     Log.i("data", response.toString());
                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("status", couponcode);
+                    progressbarClose();
                     editor.commit();
                     finish();
                 }
@@ -124,7 +135,7 @@ public class AddReferralActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     Log.e("ParseError", error.toString());
                     progressbarClose();
-                    Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_SHORT).show();
                 }
 
             }) {
@@ -143,8 +154,6 @@ public class AddReferralActivity extends AppCompatActivity {
             queue.add(pointRequest);
 
         }
-
-        progressbarClose();
     }
 
     public void btnQR(View view) {

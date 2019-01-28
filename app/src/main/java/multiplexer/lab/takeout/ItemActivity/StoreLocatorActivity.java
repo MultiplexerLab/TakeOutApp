@@ -147,7 +147,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("ParseError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -203,7 +203,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("ParseError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_LONG).show();
             }
         }) {
 

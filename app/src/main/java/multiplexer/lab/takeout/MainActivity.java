@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import multiplexer.lab.takeout.Adapter.AdAdapterNew;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
@@ -36,6 +37,7 @@ import multiplexer.lab.takeout.ItemActivity.MenuActivity;
 import multiplexer.lab.takeout.ItemActivity.ProfileActivity;
 import multiplexer.lab.takeout.ItemActivity.ScanQRActivity;
 import multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -118,31 +120,9 @@ public class MainActivity extends AppCompatActivity {
         setAvatar();
         setStatus();
         getPoints();
-        getProfileData();
-        getAds();
-    }
-    /*private boolean internetConnected() {
-        boolean haveWifi = false;
-        boolean haveMobileData = false;
 
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo info : netInfo) {
-            if (info.getTypeName().equalsIgnoreCase("WIFI")) {
-                if (info.isConnected()) {
-                    haveWifi = true;
-                }
-            }
-            if (info.getTypeName().equalsIgnoreCase("MOBILE")) {
-                if (info.isConnected()) {
-                    haveMobileData = true;
-                }
-            }
-
-        }
-        return haveMobileData|haveWifi;
     }
-*/
+
 
     private void progressbarClose() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -191,8 +171,6 @@ public class MainActivity extends AppCompatActivity {
         setAvatar();
         setStatus();
         getPoints();
-        getProfileData();
-        getAds();
         super.onResume();
     }
 
@@ -212,17 +190,19 @@ public class MainActivity extends AppCompatActivity {
                     editor.commit();
                     editor.putString("phone", response.getString("Phone"));
                     editor.commit();
-
                     name.setText(response.getString("Fullname"));
+
+
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
+                getAds();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-progressbarClose();
-Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                progressbarClose();
+                Toast.makeText(getApplicationContext(), "An Error occurred! Try again later.", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -249,12 +229,13 @@ Toast.makeText(getApplicationContext(),"Please check your internet connection!",
             public void onResponse(String response) {
                 Log.i("points", response.toString());
                 numpoints.setText(response);
+                getProfileData();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-progressbarClose();
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                progressbarClose();
+                Toast.makeText(getApplicationContext(), "An Error occurred! Try again later.", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -294,8 +275,9 @@ progressbarClose();
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("AdError", error.toString());
+
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "An Error occurred! Try again later.", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -358,8 +340,8 @@ progressbarClose();
                     .normalImageRes(iconList.get(i))
                     .normalText(titleList.get(i))
                     .rippleEffect(true)
-                    .normalColorRes(R.color.lightyellow)
-                    .highlightedColorRes(R.color.lightyellow)
+                    .normalColorRes(R.color.yellow)
+                    .highlightedColorRes(R.color.yellow)
                     .pieceColorRes(R.color.black)
                     .textGravity(Gravity.CENTER)
                     .typeface(Typeface.DEFAULT_BOLD)
@@ -514,7 +496,7 @@ progressbarClose();
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"Please check your internet connection!",Toast.LENGTH_LONG).show();
+
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());
@@ -522,7 +504,7 @@ progressbarClose();
                         try {
                             String res = new String(response.data,
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
-                            Log.i("resString", res);
+                            Log.i("resStringA", res);
                             if (res.contains("account")) {
                                 Toast.makeText(MainActivity.this, "Your account is not activated!", Toast.LENGTH_SHORT).show();
                             }

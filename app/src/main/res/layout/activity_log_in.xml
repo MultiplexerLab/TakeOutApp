@@ -61,6 +61,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:fontFamily="@font/amaranth"
             android:text="@string/text"
             android:textColor="@color/lightblack"
             android:textStyle="bold" />
@@ -99,6 +100,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/lightyellow"
                             android:hint="Email Address"
+                            android:fontFamily="@font/pt_serif"
                             android:inputType="textEmailAddress"
                             android:paddingLeft="10dp"
                             android:textColor="@color/black"
@@ -110,6 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/textInputEmail"
+                        android:fontFamily="@font/unica_one"
                         android:layout_marginTop="10dp"
                         android:textColorHint="@color/lightyellow">
 
@@ -120,6 +123,7 @@
                             android:backgroundTint="@color/lightyellow"
                             android:hint="Password"
                             android:inputType="textPassword"
+                            android:fontFamily="@font/pt_serif"
                             android:paddingLeft="10dp"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
@@ -129,8 +133,8 @@
 
                 <Button
                     android:id="@+id/btn_login"
-                    android:layout_width="180dp"
-                    android:layout_height="50dp"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/buttonlogin"
@@ -138,6 +142,7 @@
                     android:onClick="btnLogIn"
                     android:layout_marginBottom="10dp"
                     android:stateListAnimator="@null"
+                    android:fontFamily="@font/amaranth"
                     android:text="LOG IN"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/black"
@@ -151,6 +156,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_weight="0.5"
+            android:fontFamily="@font/amaranth"
             android:text="Forgot Password? "
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/lightblack"
@@ -170,6 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Don't have an account? "
+                android:fontFamily="@font/amaranth"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/lightblack"
                 android:textStyle="bold" />
@@ -178,6 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Register"
+                android:fontFamily="@font/amaranth"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/black"
                 android:textStyle="bold" />

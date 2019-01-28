@@ -86,16 +86,17 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void btnShareCode(View view) {
-
-        if (!activationcode.getText().toString().isEmpty()) {
-            String code = activationcode.getText().toString();
-            Uri uri = Uri.parse("smsto:");
-            Intent it = new Intent(Intent.ACTION_SENDTO, uri);
-            it.putExtra("sms_body", "To Activate your TakeOut account, Use this code: " + code);
-            startActivity(it);
-        } else {
+        String code = activationcode.getText().toString();
+        if (code.contains("Your Account is not Activated yet")) {
             Toast.makeText(getApplicationContext(), "Please Activate Your Account First", Toast.LENGTH_LONG).show();
+            return;
         }
+
+
+        Uri uri = Uri.parse("smsto:");
+        Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+        it.putExtra("sms_body", "To Activate your TakeOut account, Use this code: " + code);
+        startActivity(it);
 
 
     }

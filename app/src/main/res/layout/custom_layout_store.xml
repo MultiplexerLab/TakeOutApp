@@ -7,6 +7,7 @@
     android:layout_marginTop="10dp"
     android:background="@drawable/squareshape"
     android:elevation="10dp"
+    android:weightSum="7"
     android:orientation="horizontal"
     android:padding="10dp">
 
@@ -14,14 +15,14 @@
         android:id="@+id/IV_burger_pic_art"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:layout_weight="2"
         android:src="@drawable/burgericon" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <TextView
@@ -29,12 +30,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/IV_burger_pic_art"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/IV_burger_pic_art"
             android:fontFamily="@font/amaranth"
             android:text="TakeOut"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/black"
+            android:textColor="@color/lightblack"
             android:textStyle="bold" />
 
         <TextView
@@ -42,28 +43,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TV_place_name"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/IV_burger_pic_art"
             android:fontFamily="@font/pt_serif"
             android:text="Address"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/black" />
+            android:textColor="@color/lightblack" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/IV_direction"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        android:layout_marginRight="2dp"
         android:background="@drawable/direction_icon" />
 
     <ImageView
         android:id="@+id/IV_call"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
         android:layout_toRightOf="@+id/IV_direction"
         android:layout_weight="1"
         android:background="@drawable/call" />
