@@ -240,11 +240,10 @@ public class SignUpActivity extends AppCompatActivity {
     public void showSnackBar() {
         snackbar = Snackbar
                 .make(rootLayout, "Internet is not connected!", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Connect", new View.OnClickListener() {
+                .setAction("Dismiss", new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        Intent settingsIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-                        startActivityForResult(settingsIntent, 9003);
+                    public void onClick(View v) {
+                        snackbar.dismiss();
                     }
                 });
         snackbar.setActionTextColor(Color.RED);

@@ -35,6 +35,7 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     public void btnFbPage(View view) {
+
         String url = "https://www.facebook.com/bdtakeout/";
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));

@@ -2,7 +2,12 @@ package multiplexer.lab.takeout.ItemActivity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,6 +19,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,6 +54,8 @@ public class StoreLocatorActivity extends AppCompatActivity {
     ArrayList<String> countryArrList = new ArrayList<String>();
     ArrayList<Integer> countryIdList = new ArrayList<Integer>();
     String country;
+    RelativeLayout rootLayout;
+    Snackbar snackbar;
     Spinner spinnerCountry2;
     private RecyclerView recyclerView;
     private StoreAdapter storeAdapter;
@@ -65,7 +73,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recycler_view_store);
         spinnerCountry2 = findViewById(R.id.spinnerCountry2);
-
+        rootLayout = findViewById(R.id.storeRootLayout);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(StoreLocatorActivity.this);
         recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -75,8 +83,14 @@ public class StoreLocatorActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, countryArrList);
         spinnerCountry2.setAdapter(adapter);
-        getAllCountries();
-        getStoresByCountry(1);
+        if(internetConnected()){
+            getAllCountries();
+            getStoresByCountry(1);
+        }else{
+            progressbarClose();
+            showSnackBar();
+        }
+
 
         spinnerCountry2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -94,6 +108,41 @@ public class StoreLocatorActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void showSnackBar() {
+        snackbar = Snackbar
+                .make(rootLayout, "Internet is not connected!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Dismiss", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                    }
+                });
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9003) {
+            if (internetConnected()) {
+
+            } else {
+                showSnackBar();
+            }
+        }
+    }
+
+    private boolean internetConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     private void progressbarClose() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -147,7 +196,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("ParseError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -203,7 +252,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("ParseError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
 

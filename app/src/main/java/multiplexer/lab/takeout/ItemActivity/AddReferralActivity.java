@@ -1,8 +1,13 @@
 package multiplexer.lab.takeout.ItemActivity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +47,8 @@ public class AddReferralActivity extends AppCompatActivity {
     EditText coupon;
     RequestQueue queue;
     Button submit;
+    Snackbar snackbar;
+    RelativeLayout rootLayout;
     Dialog dialogprog;
 
     @Override
@@ -53,6 +61,7 @@ public class AddReferralActivity extends AppCompatActivity {
         }
         dialogprog = new Dialog(AddReferralActivity.this);
         progressbarOpen();
+        rootLayout = findViewById(R.id.adRefRootLayout);
         text = findViewById(R.id.TV_referral);
         queue = Volley.newRequestQueue(this);
         coupon = findViewById(R.id.ET_coupon);
@@ -61,6 +70,40 @@ public class AddReferralActivity extends AppCompatActivity {
         activationCheck();
         progressbarClose();
 
+    }
+
+    public void showSnackBar() {
+        snackbar = Snackbar
+                .make(rootLayout, "Internet is not connected!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Dismiss", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                    }
+                });
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9003) {
+            if (internetConnected()) {
+
+            } else {
+                showSnackBar();
+            }
+        }
+    }
+
+    private boolean internetConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void progressbarClose() {
@@ -105,6 +148,7 @@ public class AddReferralActivity extends AppCompatActivity {
     }
 
     public void btnAddRef(View view) {
+
         progressbarOpen();
         if (submit.getText().toString().equalsIgnoreCase("Go Back")) {
             progressbarClose();
@@ -112,16 +156,25 @@ public class AddReferralActivity extends AppCompatActivity {
         } else {
 
             final String couponcode = coupon.getText().toString();
-            if(couponcode.isEmpty()){
-                Toast.makeText(getApplicationContext(),"Please enter the code to activate",Toast.LENGTH_SHORT).show();
+            if (couponcode.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Please enter the code to activate", Toast.LENGTH_SHORT).show();
                 progressbarClose();
                 return;
+            }
+            if (!internetConnected()) {
+                progressbarClose();
+                showSnackBar();
+                return;
+            } else if (snackbar != null) {
+                if (snackbar.isShown()) {
+                    snackbar.dismiss();
+                }
             }
 
             JsonObjectRequest pointRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_USE_REFERRAL + couponcode, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    Toast.makeText(getApplicationContext(),"Congrats! Activation Successful.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Congrats! Activation Successful.", Toast.LENGTH_SHORT).show();
                     Log.i("data", response.toString());
                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
@@ -135,7 +188,7 @@ public class AddReferralActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     Log.e("ParseError", error.toString());
                     progressbarClose();
-                    Toast.makeText(getApplicationContext(),"An Error occurred! Try again later.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
                 }
 
             }) {
@@ -157,6 +210,7 @@ public class AddReferralActivity extends AppCompatActivity {
     }
 
     public void btnQR(View view) {
+        Toast.makeText(getApplicationContext(), "Please wait...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddReferralActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();

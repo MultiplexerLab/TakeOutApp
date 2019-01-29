@@ -9,7 +9,11 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +30,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     TextView numpoints, name, status;
     int value;
     ImageView pic;
+    Snackbar snackbar;
+    RelativeLayout rootLayout;
     private RecyclerView recyclerView;
     private List<String> adList = new ArrayList<>();
     AdAdapterNew adAdapter;
@@ -87,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         dialogprog = new Dialog(MainActivity.this);
         pic = findViewById(R.id.IV_avatar_main);
         name = findViewById(R.id.name);
-
+        rootLayout = findViewById(R.id.mainRootLayout);
         numpoints = findViewById(R.id.numpoints);
         status = findViewById(R.id.activate_status);
 
@@ -117,10 +124,57 @@ public class MainActivity extends AppCompatActivity {
         adAdapter = new AdAdapterNew(MainActivity.this, adList);
         recyclerView.setAdapter(adAdapter);
 
-        setAvatar();
-        setStatus();
-        getPoints();
+        if (internetConnected()) {
+            if (snackbar != null) {
+                if (snackbar.isShown()) {
+                    snackbar.dismiss();
+                }
+            }
+            setAvatar();
+            setStatus();
+            getPoints();
+            getAds();
+            getProfileData();
 
+        } else {
+            progressbarClose();
+            showSnackBar();
+        }
+
+
+    }
+
+    public void showSnackBar() {
+        snackbar = Snackbar
+                .make(rootLayout, "Internet is not connected!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Dismiss", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                    }
+                });
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9003) {
+            if (internetConnected()) {
+
+            } else {
+                showSnackBar();
+            }
+        }
+    }
+
+    private boolean internetConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -168,9 +222,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        setAvatar();
-        setStatus();
-        getPoints();
+        if (internetConnected()) {
+            if (snackbar != null) {
+                if (snackbar.isShown()) {
+                    snackbar.dismiss();
+                }
+            }
+            setAvatar();
+            setStatus();
+            getPoints();
+            getAds();
+            getProfileData();
+        } else {
+            progressbarClose();
+            showSnackBar();
+        }
         super.onResume();
     }
 
@@ -196,13 +262,13 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
-                getAds();
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), "An Error occurred! Try again later.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -229,13 +295,13 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.i("points", response.toString());
                 numpoints.setText(response);
-                getProfileData();
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), "An Error occurred! Try again later.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -277,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("AdError", error.toString());
 
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), "An Error occurred! Try again later.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -364,6 +430,7 @@ public class MainActivity extends AppCompatActivity {
                                     intent = new Intent(MainActivity.this, AboutUsActivity.class);
                                     break;
                                 case 2:
+                                    Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_SHORT).show();
                                     intent = new Intent(MainActivity.this, ScanQRActivity.class);
                                     break;
                                 case 3:
@@ -437,6 +504,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnQR(View view) {
+        Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, ScanQRActivity.class);
         startActivity(intent);
     }

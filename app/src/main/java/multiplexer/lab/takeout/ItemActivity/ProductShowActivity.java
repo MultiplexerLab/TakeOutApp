@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +47,8 @@ public class ProductShowActivity extends AppCompatActivity {
     TextView foodRate, foodPrice, foodDescription, foodName, personalRate;
     RequestQueue queue;
     Intent intent;
+    RelativeLayout rootLayout;
+    Snackbar snackbar;
     AlertDialog dialog;
     Dialog dlog;
 
@@ -57,6 +63,7 @@ public class ProductShowActivity extends AppCompatActivity {
         foodDescription = findViewById(R.id.fooddescription_show);
         foodName = findViewById(R.id.foodname_show);
         personalRate = findViewById(R.id.foodratebtn_show);
+        rootLayout = findViewById(R.id.prodShowRootLayout);
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -78,9 +85,42 @@ public class ProductShowActivity extends AppCompatActivity {
             personalRate.setBackgroundResource(R.color.red);
         }
         queue = Volley.newRequestQueue(getApplicationContext());
-
-
     }
+
+    public void showSnackBar() {
+        snackbar = Snackbar
+                .make(rootLayout, "Internet is not connected!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Dismiss", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                    }
+                });
+        snackbar.setActionTextColor(Color.RED);
+        snackbar.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9003) {
+            if (internetConnected()) {
+
+            } else {
+                showSnackBar();
+            }
+        }
+    }
+
+    private boolean internetConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
@@ -106,8 +146,13 @@ public class ProductShowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int rating = smileRating.getRating();
-                postRating(intent.getIntExtra("prodid", 0), rating);
-                dlog.dismiss();
+                if(internetConnected()){
+                    postRating(intent.getIntExtra("prodid", 0), rating);
+                    dlog.dismiss();
+                }else {
+                    showSnackBar();
+                }
+
             }
         });
         dlog.show();
@@ -130,7 +175,7 @@ public class ProductShowActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error occurred! try again later", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());
@@ -165,6 +210,7 @@ public class ProductShowActivity extends AppCompatActivity {
     }
 
     public void btnQR(View view) {
+        Toast.makeText(getApplicationContext(), "Please wait...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ProductShowActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();
@@ -221,7 +267,7 @@ public class ProductShowActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Please check your internet connection!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());

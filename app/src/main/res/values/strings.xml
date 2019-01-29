@@ -3,6 +3,7 @@
     <string name="open">Open</string>
     <string name="text">Discover the awesome burgers\nwith your friends at \nTakeout </string>
     <string name="close">Close</string>
+    <string name="ToastError">Server error, please try again!</string>
     <string name="aboutus">We started our journey 8th June, 2014.
         An idea of a delicious burger became the brand it is today because of our fans
         and the hardwork of the team behind the burgers. Our menu consists of Burgers of various flavors with spices and tastes that would make you come for more. Takeout�s French Fries are renowned on their own right and our milkshakes just complete the food experience you are looking for.
