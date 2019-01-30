@@ -165,11 +165,18 @@ public class SignUpActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("fullName", etFullname.getText().toString());
                 params.put("email", etEmail.getText().toString());
-                params.put("phoneNumber", etPhone.getText().toString());
-                params.put("countryName", spinnerCountry.getSelectedItem().toString());
+
+                String country = spinnerCountry.getSelectedItem().toString();
+                params.put("countryName", country);
+                if(country.equals("Bangladesh")){
+                    params.put("phoneNumber", "+88"+etPhone.getText().toString());
+                }else{
+                    params.put("phoneNumber", "+94"+etPhone.getText().toString());
+                }
                 params.put("password", etPassword.getText().toString());
                 params.put("confirmPassword", etConPassword.getText().toString());
 
+                Log.i("signUpParams", params.toString());
                 return params;
             }
         };

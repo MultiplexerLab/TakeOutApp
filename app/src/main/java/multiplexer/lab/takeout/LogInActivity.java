@@ -298,7 +298,7 @@ public class LogInActivity extends AppCompatActivity {
                             String res = new String(response.data,
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
                             Log.i("resString", res);
-                            if (res.contains("unsupported_grant_type")) {
+                            if (res.contains("unsupported_grant_type") || res.contains("invalid_grant")) {
                                 Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
                             } else if (res.contains("password")) {
 

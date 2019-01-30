@@ -268,7 +268,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
+                Log.e("VolleyError", error.toString());
+                //Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -324,6 +325,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i("Ads", response.toString());
+                adList.clear();
                 //ArrayList<String> pics = new ArrayList<>();
                 try {
                     JSONArray jsonArray = response.getJSONArray("fpaAdds");

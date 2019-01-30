@@ -170,10 +170,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/red"
                     android:textStyle="bold" />
-
-
             </RelativeLayout>
-
         </android.support.v7.widget.CardView>
 
 
@@ -214,7 +211,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottombar"
-            android:layout_below="@+id/LL_welcome" />
+            android:layout_below="@+id/LL_welcome"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="20dp"/>
 
 
         <LinearLayout

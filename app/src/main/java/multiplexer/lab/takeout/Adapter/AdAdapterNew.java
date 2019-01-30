@@ -58,9 +58,4 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
             super(view);
             adPic = view.findViewById(R.id.IV_ad);
         }
-    }
-
-
-
-
-}
+    }}
