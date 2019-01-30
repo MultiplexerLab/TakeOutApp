@@ -287,9 +287,6 @@ public class LogInActivity extends AppCompatActivity {
                         }
 
                         Toast.makeText(LogInActivity.this, "Welcome to TakeOut!", Toast.LENGTH_SHORT).show();
-                        /*Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();*/
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
