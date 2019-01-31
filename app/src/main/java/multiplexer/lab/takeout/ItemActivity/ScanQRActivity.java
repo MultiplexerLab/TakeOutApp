@@ -76,7 +76,7 @@ public class ScanQRActivity extends AppCompatActivity {
 
         String Phone = pref.getString("phone", "");
 
-        return "+88"+Phone;
+        return Phone;
 
     }
 

@@ -181,19 +181,20 @@ public class MenuActivity extends AppCompatActivity {
                         catList.add(category);
                         cAdapter.notifyDataSetChanged();
                     }
-                    progressbarClose();
+
 
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
-                    progressbarClose();
+
                 }
+                progressbarClose();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("MenuError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -267,7 +268,7 @@ public class MenuActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());

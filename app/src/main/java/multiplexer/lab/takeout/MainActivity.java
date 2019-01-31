@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("AdError", error.toString());
 
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

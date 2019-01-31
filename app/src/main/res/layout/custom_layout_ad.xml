@@ -7,7 +7,7 @@
         android:id="@+id/LL_welcome"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         android:clickable="true"
         android:layout_marginRight="10dp"
         card_view:cardCornerRadius="5dp"
