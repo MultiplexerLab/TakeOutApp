@@ -76,7 +76,6 @@ public class SignUpActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arr);
         spinnerCountry.setAdapter(adapter);
-
     }
 
     private void progressbarClose() {
@@ -94,9 +93,6 @@ public class SignUpActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         dialogprog.show();
     }
-
-
-
     public void btnSignUp(View view) {
 
         if (internetConnected()) {
@@ -114,7 +110,6 @@ public class SignUpActivity extends AppCompatActivity {
             showSnackBar();
         }
     }
-
 
 
     private void sendDataToServer() {
@@ -142,9 +137,9 @@ public class SignUpActivity extends AppCompatActivity {
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
                             Log.i("resString", res);
                             if(res.contains("Phone")){
-                                Toast.makeText(SignUpActivity.this, "This phone number is already taken!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "This Phone Number is already taken!", Toast.LENGTH_SHORT).show();
                             }else if(res.contains("Email")){
-                                Toast.makeText(SignUpActivity.this, "This email Id is already registered!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "This Email Id is already registered!", Toast.LENGTH_SHORT).show();
                             }
                             JSONObject obj = new JSONObject(res);
 
