@@ -1,6 +1,7 @@
 package multiplexer.lab.takeout.ItemActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,6 +50,7 @@ public class ScanQRActivity extends AppCompatActivity {
     AlertDialog dialog;
     RequestQueue queue;
     private ImageView qrCode;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,9 @@ public class ScanQRActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+        dialogprog = new Dialog(ScanQRActivity.this);
+        progressbarClose();
+        //progressbarOpen();
         qrCode = findViewById(R.id.qrcode);
         String data =getData();
         try {
@@ -69,6 +74,21 @@ public class ScanQRActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
 
 
+    }
+    private void progressbarClose() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.setCanceledOnTouchOutside(true);
+        dialogprog.setCancelable(true);
+        dialogprog.dismiss();
+    }
+
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
     }
 
     private String getData() {
@@ -117,6 +137,7 @@ public class ScanQRActivity extends AppCompatActivity {
         Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
 
         bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight);
+        progressbarClose();
         return bitmap;
     }
 

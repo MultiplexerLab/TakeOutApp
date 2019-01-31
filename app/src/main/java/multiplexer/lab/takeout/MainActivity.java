@@ -506,7 +506,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnQR(View view) {
-        Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_SHORT).show();
+        progressbarOpen();
         Intent intent = new Intent(MainActivity.this, ScanQRActivity.class);
         startActivity(intent);
     }
