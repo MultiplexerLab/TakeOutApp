@@ -142,6 +142,7 @@ public class ScanQRActivity extends AppCompatActivity {
     }
 
     public void btnMenu(View view) {
+        progressbarOpen();
         Intent intent = new Intent(ScanQRActivity.this, MenuActivity.class);
         startActivity(intent);
         finish();

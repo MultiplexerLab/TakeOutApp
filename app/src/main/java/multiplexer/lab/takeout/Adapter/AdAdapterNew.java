@@ -15,15 +15,16 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import multiplexer.lab.takeout.ItemActivity.ProductActivity;
+import multiplexer.lab.takeout.Model.Ad;
 import multiplexer.lab.takeout.Model.Category;
 import multiplexer.lab.takeout.R;
 
 public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder>{
-    List<String> adList;
+    List<Ad> adList;
     Context context;
     private static final int MAX_WIDTH = 1366;
     private static final int MAX_HEIGHT = 768;
-    public AdAdapterNew(Context context, List<String> List) {
+    public AdAdapterNew(Context context, List<Ad> List) {
         this.adList = List;
         this.context = context;
     }
@@ -36,14 +37,15 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
 
     @Override
     public void onBindViewHolder(AdAdapterNew.MyViewHolder holder, int position) {
-        final String str = adList.get(position);
+        final Ad ad = adList.get(position);
         int sizeBM = (int) Math.ceil(Math.sqrt(MAX_WIDTH * MAX_HEIGHT));
-        Picasso.with(context).load(str)
+        Picasso.with(context).load(ad.getPic())
                 .skipMemoryCache()
                 .resize(sizeBM, sizeBM)
                 .onlyScaleDown()
                 .centerInside()
                 .into(holder.adPic);
+        holder.text.setText(ad.getText());
     }
 
     @Override
@@ -53,9 +55,10 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView adPic;
-
+        TextView text;
         public MyViewHolder(View view) {
             super(view);
             adPic = view.findViewById(R.id.IV_ad);
+            text = view.findViewById(R.id.text);
         }
     }}

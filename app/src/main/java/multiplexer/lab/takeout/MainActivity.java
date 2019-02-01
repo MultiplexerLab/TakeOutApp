@@ -42,6 +42,7 @@ import multiplexer.lab.takeout.ItemActivity.MenuActivity;
 import multiplexer.lab.takeout.ItemActivity.ProfileActivity;
 import multiplexer.lab.takeout.ItemActivity.ScanQRActivity;
 import multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity;
+import multiplexer.lab.takeout.Model.Ad;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     Snackbar snackbar;
     RelativeLayout rootLayout;
     private RecyclerView recyclerView;
-    private List<String> adList = new ArrayList<>();
+    private List<Ad> adList = new ArrayList<>();
     AdAdapterNew adAdapter;
     RequestQueue queue;
     BoomMenuButton bmb;
@@ -327,10 +328,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Ads", response.toString());
                 adList.clear();
                 //ArrayList<String> pics = new ArrayList<>();
+
                 try {
                     JSONArray jsonArray = response.getJSONArray("fpaAdds");
+                    JSONObject obj = response.getJSONObject("fOffer");
+                    String str =obj.getString("message");
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        adList.add("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
+                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"),str);
+                        adList.add(ad);
                     }
                     adAdapter.notifyDataSetChanged();
                     //initSetPic(pics);
@@ -501,6 +506,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnMenu(View view) {
+        progressbarOpen();
         Intent intent = new Intent(MainActivity.this, MenuActivity.class);
         startActivity(intent);
     }

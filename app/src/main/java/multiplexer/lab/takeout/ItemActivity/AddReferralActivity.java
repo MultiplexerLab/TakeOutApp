@@ -210,7 +210,7 @@ public class AddReferralActivity extends AppCompatActivity {
     }
 
     public void btnQR(View view) {
-        Toast.makeText(getApplicationContext(), "Please wait...", Toast.LENGTH_SHORT).show();
+        progressbarOpen();
         Intent intent = new Intent(AddReferralActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();
@@ -218,6 +218,7 @@ public class AddReferralActivity extends AppCompatActivity {
     }
 
     public void btnMenu(View view) {
+        progressbarOpen();
         Intent intent = new Intent(AddReferralActivity.this, MenuActivity.class);
         startActivity(intent);
         finish();

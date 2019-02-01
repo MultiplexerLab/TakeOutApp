@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,12 +52,13 @@ public class ProductShowActivity extends AppCompatActivity {
     Snackbar snackbar;
     AlertDialog dialog;
     Dialog dlog;
+    Dialog dialogprog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_show);
-
+        dialogprog = new Dialog(ProductShowActivity.this);
         foodPic = findViewById(R.id.foodpic_show);
         foodRate = findViewById(R.id.foodratenumber_show);
         foodPrice = findViewById(R.id.foodprice_show);
@@ -210,12 +212,20 @@ public class ProductShowActivity extends AppCompatActivity {
     }
 
     public void btnQR(View view) {
-        Toast.makeText(getApplicationContext(), "Please wait...", Toast.LENGTH_SHORT).show();
+        progressbarOpen();
         Intent intent = new Intent(ProductShowActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();
         MenuActivity.menuActivity.finish();
         ProductActivity.productActivity.finish();
+    }
+    private void progressbarOpen() {
+        dialogprog.setContentView(R.layout.custom_dialog_progressbar);
+        dialogprog.setCanceledOnTouchOutside(false);
+        dialogprog.setCancelable(false);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        dialogprog.show();
     }
 
     public void btngetPoints(View view) {

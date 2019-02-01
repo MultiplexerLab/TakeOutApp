@@ -76,24 +76,23 @@ public class MenuActivity extends AppCompatActivity {
         menuActivity = this;
         queue = Volley.newRequestQueue(this);
         dialogprog = new Dialog(MenuActivity.this);
-        progressbarOpen();
         rootLayout = findViewById(R.id.menuRootLayout);
         recyclerView = findViewById(R.id.category_rv);
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        progressbarOpen();
         cAdapter = new MenuAdapter(MenuActivity.this, catList);
         recyclerView.setAdapter(cAdapter);
 
-        if(internetConnected()){
+        if (internetConnected()) {
             if (snackbar != null) {
                 if (snackbar.isShown()) {
                     snackbar.dismiss();
                 }
             }
             addMenu();
-        } else{
+        } else {
             progressbarClose();
             showSnackBar();
         }
@@ -113,6 +112,7 @@ public class MenuActivity extends AppCompatActivity {
         snackbar.setActionTextColor(Color.RED);
         snackbar.show();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 9003) {
@@ -123,6 +123,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         }
     }
+
     private boolean internetConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -179,9 +180,9 @@ public class MenuActivity extends AppCompatActivity {
                         id = response.getJSONObject(i).getString("Id");
                         Category category = new Category(name, image, id, catid);
                         catList.add(category);
-                        cAdapter.notifyDataSetChanged();
-                    }
 
+                    }
+                    cAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
@@ -214,7 +215,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void btnQR(View view) {
-        Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_SHORT).show();
+        progressbarOpen();
         Intent intent = new Intent(MenuActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();
