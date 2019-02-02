@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = response.getJSONObject("fOffer");
                     String str =obj.getString("message");
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
+                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"), "Nothing to show");
                         adList.add(ad);
                     }
                     adAdapter.notifyDataSetChanged();
@@ -390,9 +390,7 @@ public class MainActivity extends AppCompatActivity {
         titleList.add("Home Delivery");
         titleList.add("Add Referral");
         titleList.add("LogOut");
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -401,7 +399,6 @@ public class MainActivity extends AppCompatActivity {
         }*/
         return super.onOptionsItemSelected(item);
     }
-
 
     public void boomCustomizebmb1() {
         for (int i = 0; i < bmb1.getPiecePlaceEnum().pieceNumber(); i++) {
@@ -462,7 +459,6 @@ public class MainActivity extends AppCompatActivity {
             bmb1.addBuilder(builder);
         }
     }
-
 
     public void btnScanQR(MenuItem item) {
         Intent intent = new Intent(MainActivity.this, ScanQRActivity.class);

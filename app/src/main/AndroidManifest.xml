@@ -149,6 +149,14 @@
                 android:value=".ItemActivity.ProductActivity" />
         </activity>
 
+        <activity android:name=".AdShowActvity"
+            android:label="Ad Details"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdShowActvity" />
+        </activity>
     </application>
 
 </manifest>

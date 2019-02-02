@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Checkout our fb page"
+        android:text="Checkout our Facebook page"
         android:textColor="@color/white"
         android:onClick="btnFbPage"
         android:textStyle="bold"

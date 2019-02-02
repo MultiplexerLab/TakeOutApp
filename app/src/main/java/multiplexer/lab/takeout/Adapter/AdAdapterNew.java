@@ -15,20 +15,21 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import multiplexer.lab.takeout.ItemActivity.ProductActivity;
+import multiplexer.lab.takeout.AdShowActvity;
 import multiplexer.lab.takeout.Model.Ad;
-import multiplexer.lab.takeout.Model.Category;
 import multiplexer.lab.takeout.R;
 
-public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder>{
+public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder> {
     List<Ad> adList;
     Context context;
     private static final int MAX_WIDTH = 1366;
     private static final int MAX_HEIGHT = 768;
+
     public AdAdapterNew(Context context, List<Ad> List) {
         this.adList = List;
         this.context = context;
     }
+
     @Override
     public AdAdapterNew.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context)
@@ -47,6 +48,16 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
                 .onlyScaleDown()
                 .centerInside()
                 .into(holder.adPic);
+        holder.message.setText(ad.getMessage());
+
+        holder.adPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AdShowActvity.class);
+                intent.putExtra("imageUrl", ad.getPic());
+                intent.putExtra("message", ad.getMessage());
+                context.startActivity(intent);            }
+        });
     }
 
     @Override
@@ -56,10 +67,14 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView adPic;
-        TextView text;
+        RelativeLayout relativeLayout;
+        TextView message;
+
         public MyViewHolder(View view) {
             super(view);
             adPic = view.findViewById(R.id.IV_ad);
-            //text = view.findViewById(R.id.text);
+            message = view.findViewById(R.id.message);
+            relativeLayout = view.findViewById(R.id.relativeLayout);
         }
-    }}
+    }
+}
