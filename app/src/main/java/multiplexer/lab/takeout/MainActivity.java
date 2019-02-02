@@ -258,8 +258,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("phone", response.getString("Phone"));
                     editor.commit();
                     name.setText(response.getString("Fullname"));
-
-
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
@@ -285,9 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(jsonObjectRequest);
-
     }
 
     private void getPoints() {
@@ -334,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = response.getJSONObject("fOffer");
                     String str =obj.getString("message");
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"),str);
+                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"));
                         adList.add(ad);
                     }
                     adAdapter.notifyDataSetChanged();

@@ -299,10 +299,11 @@ public class LogInActivity extends AppCompatActivity {
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
                             Log.i("resString", res);
                             if (res.contains("unsupported_grant_type")) {
-                                Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LogInActivity.this, "Server Error! Please try again!", Toast.LENGTH_SHORT).show();
                             } else if (res.contains("password")) {
-
                                 Toast.makeText(LogInActivity.this, "Username or Password is incorrect!", Toast.LENGTH_SHORT).show();
+                            }else if(res.contains("<!DOCTYPE html>")){
+                                Toast.makeText(LogInActivity.this, "Server Error! Please try again!", Toast.LENGTH_SHORT).show();
                             }
                             JSONObject obj = new JSONObject(res);
 

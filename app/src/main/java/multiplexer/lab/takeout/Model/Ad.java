@@ -1,11 +1,10 @@
 package multiplexer.lab.takeout.Model;
 
 public class Ad {
-    String pic, text;
+    String pic;
 
-    public Ad(String pic, String text) {
+    public Ad(String pic) {
         this.pic = pic;
-        this.text = text;
     }
 
     public String getPic() {
@@ -16,11 +15,4 @@ public class Ad {
         this.pic = pic;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 }

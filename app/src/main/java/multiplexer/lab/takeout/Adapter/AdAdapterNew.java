@@ -3,6 +3,7 @@ package multiplexer.lab.takeout.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +40,13 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
     public void onBindViewHolder(AdAdapterNew.MyViewHolder holder, int position) {
         final Ad ad = adList.get(position);
         int sizeBM = (int) Math.ceil(Math.sqrt(MAX_WIDTH * MAX_HEIGHT));
+        Log.i("Adlink", ad.getPic());
         Picasso.with(context).load(ad.getPic())
                 .skipMemoryCache()
                 .resize(sizeBM, sizeBM)
                 .onlyScaleDown()
                 .centerInside()
                 .into(holder.adPic);
-        holder.text.setText(ad.getText());
     }
 
     @Override
@@ -59,6 +60,6 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
         public MyViewHolder(View view) {
             super(view);
             adPic = view.findViewById(R.id.IV_ad);
-            text = view.findViewById(R.id.text);
+            //text = view.findViewById(R.id.text);
         }
     }}
