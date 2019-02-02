@@ -10,9 +10,8 @@
         android:id="@+id/LL_welcome"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:clickable="true"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="5dp">
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="10dp">
 
         <ImageView
             android:id="@+id/IV_ad"
@@ -25,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:alpha="0.7"
-            android:background="#9B9898"
+            android:background="#D6D5D5"
+            android:alpha="0.8"
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="@color/white" />

@@ -81,6 +81,7 @@ public class MenuActivity extends AppCompatActivity {
         RecyclerView.LayoutManager cLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, 0));
         progressbarOpen();
         cAdapter = new MenuAdapter(MenuActivity.this, catList);
         recyclerView.setAdapter(cAdapter);

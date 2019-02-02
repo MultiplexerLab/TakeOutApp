@@ -94,12 +94,11 @@ public class ProductActivity extends AppCompatActivity {
         recyclerView.setAdapter(cAdapter);
 
         if(internetConnected()){
-            input();
+            getProductData();
         }else {
             progressbarClose();
             showSnackBar();
         }
-
     }
 
     public void showSnackBar() {
@@ -167,7 +166,7 @@ public class ProductActivity extends AppCompatActivity {
         return true;
     }
 
-    public void input() {
+    public void getProductData() {
         JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_PRODUCT_DATA + catid + '/' + countrycode, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -178,9 +177,7 @@ public class ProductActivity extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         name = response.getJSONObject(i).getString("Name");
                         id = response.getJSONObject(i).getInt("FinId");
-                        // need to change the url
-                        image = "http://store.bdtakeout.com/images/categoryimage/" + response.getJSONObject(i).getString("Image");
-
+                        image = "http://store.bdtakeout.com/images/productimage/" + response.getJSONObject(i).getString("Image");
                         description = response.getJSONObject(i).getString("Desc");
                         if (response.getJSONObject(i).isNull("Rating")) {
                             rating = 0;
@@ -193,7 +190,6 @@ public class ProductActivity extends AppCompatActivity {
                         } else {
                             customer_rating = response.getJSONObject(i).getInt("CustomerRating");
                         }
-
                         JSONObject finobj = response.getJSONObject(i).getJSONObject("FinishedMaterial");
                         price = finobj.getInt("price");
                         countryid = finobj.getInt("country");
@@ -213,7 +209,6 @@ public class ProductActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
                 Toast.makeText(getApplicationContext(),getString(R.string.ToastError),Toast.LENGTH_LONG).show();
-
             }
         }) {
             @Override
@@ -221,18 +216,16 @@ public class ProductActivity extends AppCompatActivity {
                 SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                 String accessToken = pref.getString("accessToken", "");
                 Log.i("accessToken", accessToken);
-
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/json");
                 params.put("Authorization", "Bearer " + accessToken);
-
                 return params;
             }
         };
         queue.add(catRequest);
     }
 
-    public void btngetPoints(View view) {
+    public void btnGetPoints(View view) {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         String status = pref.getString("status", "");
 

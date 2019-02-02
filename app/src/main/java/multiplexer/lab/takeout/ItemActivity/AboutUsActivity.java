@@ -21,7 +21,7 @@ public class AboutUsActivity extends AppCompatActivity {
         }
     }
 
-    public boolean onOptionsItemSelected(android.view.MenuItem item){
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
@@ -35,7 +35,6 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     public void btnFbPage(View view) {
-
         String url = "https://www.facebook.com/bdtakeout/";
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));

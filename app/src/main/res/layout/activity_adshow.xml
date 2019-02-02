@@ -35,13 +35,13 @@
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:layout_weight="0.1"
-        android:background="@drawable/loginbutton"
-        android:backgroundTint="#3C5A99"
+        android:background="@color/colorPrimary"
         android:onClick="btnFbPage"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="Checkout our Facebook page"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/fb_icon"
         android:textStyle="bold" />
 
 
