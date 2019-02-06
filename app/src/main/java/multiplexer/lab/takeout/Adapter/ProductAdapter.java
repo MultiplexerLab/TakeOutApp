@@ -90,7 +90,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 intent.putExtra("price", product.getPrice());
                 intent.putExtra("description", product.getDescription());
                 intent.putExtra("picaddress", product.getImage());
-                intent.putExtra("prodid", product.getId());
+                intent.putExtra("productId", product.getId());
                 intent.putExtra("customerrate", product.getCustomer_rating());
                 context.startActivity(intent);
             }

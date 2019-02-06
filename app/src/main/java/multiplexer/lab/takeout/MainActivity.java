@@ -427,24 +427,29 @@ public class MainActivity extends AppCompatActivity {
                             switch (i) {
                                 case 0:
                                     intent = new Intent(MainActivity.this, ProfileActivity.class);
+                                    startActivity(intent);
                                     break;
                                 case 1:
                                     intent = new Intent(MainActivity.this, AboutUsActivity.class);
+                                    startActivity(intent);
                                     break;
                                 case 2:
                                     Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_SHORT).show();
                                     intent = new Intent(MainActivity.this, ScanQRActivity.class);
+                                    startActivity(intent);
                                     break;
                                 case 3:
                                     intent = new Intent(MainActivity.this, StoreLocatorActivity.class);
+                                    startActivity(intent);
                                     break;
                                 case 4:
                                     String url = "https://www.foodpanda.com.bd/";
                                     intent = new Intent(Intent.ACTION_VIEW);
                                     intent.setData(Uri.parse(url));
+                                    startActivity(intent);
                                     break;
                                 case 5:
-                                    intent = new Intent(MainActivity.this, AddReferralActivity.class);
+                                    btnAddReferral();
                                     break;
                                 case 6:
                                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
@@ -452,10 +457,10 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("accessToken", "");
                                     editor.apply();
                                     intent = new Intent(MainActivity.this, LogInActivity.class);
+                                    startActivity(intent);
                                     finish();
                                     break;
                             }
-                            startActivity(intent);
                         }
                     });
             bmb1.addBuilder(builder);
@@ -477,21 +482,38 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void btnStoreLocator(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, StoreLocatorActivity.class);
-        startActivity(intent);
-    }
+    public void btnAddReferral() {
 
-    public void btnHomeDelivery(MenuItem item) {
-        String url = "https://www.foodpanda.com.bd/";
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
-    }
+        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        boolean isValid = pref.getBoolean("isValid", false);
 
-    public void btnAddReferral(MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
-        startActivity(intent);
+        if (isValid==true) {
+            dialog = new AlertDialog.Builder(MainActivity.this).create();
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View customView = inflater.inflate(R.layout.custom_dialog_points, null);
+            dialog.setView(customView);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setCancelable(true);
+
+            Button btn = customView.findViewById(R.id.btn_bonus_points);
+            final EditText editText = customView.findViewById(R.id.invoiceNo);
+
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (editText.getText().toString().isEmpty()) {
+                        Toast.makeText(MainActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        sendInvoiceNo(editText.getText().toString());
+                    }
+                }
+            });
+            dialog.show();
+        } else {
+            Toast.makeText(this, "You need to activate your account first!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void btnLogOut(MenuItem item) {

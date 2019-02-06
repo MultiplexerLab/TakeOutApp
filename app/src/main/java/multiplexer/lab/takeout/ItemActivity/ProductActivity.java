@@ -171,7 +171,7 @@ public class ProductActivity extends AppCompatActivity {
         JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_PRODUCT_DATA + catid + '/' + countrycode, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.i("Product", response.toString());
+                Log.i("ProductData", response.toString());
                 int id, rating, customer_rating, price, countryid;
                 String name, image, description;
                 try {
@@ -181,13 +181,13 @@ public class ProductActivity extends AppCompatActivity {
                         image = "http://store.bdtakeout.com/images/productimage/" + response.getJSONObject(i).getString("Image");
                         description = response.getJSONObject(i).getString("Desc");
                         if (response.getJSONObject(i).isNull("Rating")) {
-                            rating = 0;
+                            rating = 5;
                         } else {
                             rating = response.getJSONObject(i).getInt("Rating");
                         }
 
                         if (response.getJSONObject(i).isNull("CustomerRating")) {
-                            customer_rating = 5;
+                            customer_rating = 0;
                         } else {
                             customer_rating = response.getJSONObject(i).getInt("CustomerRating");
                         }

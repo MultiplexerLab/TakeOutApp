@@ -75,14 +75,14 @@ public class ProductShowActivity extends AppCompatActivity {
         intent = getIntent();
         Picasso.with(getApplicationContext()).load(intent.getStringExtra("picaddress")).into(foodPic);
         foodName.setText(intent.getStringExtra("name"));
-        foodRate.setText(intent.getIntExtra("customerrate", 5) + ".0");
+        foodRate.setText(intent.getIntExtra("rating", 5) + ".0");
         foodPrice.setText("Price: " + intent.getIntExtra("price", 0) + " BDT");
         foodDescription.setText(intent.getStringExtra("description"));
-        int rate = intent.getIntExtra("rating", 0);
+        int customerrate = intent.getIntExtra("customerrate", 0);
 
-        if (rate != 0) {
+        if (customerrate != 0) {
             personalRate.setBackgroundResource(R.color.green);
-            personalRate.setText("Your Rate: " + intent.getIntExtra("rating", 5) + ".0");
+            personalRate.setText("Your Rate: " + customerrate + ".0");
         } else {
             personalRate.setBackgroundResource(R.color.red);
         }
@@ -148,13 +148,12 @@ public class ProductShowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int rating = smileRating.getRating();
-                if(internetConnected()){
-                    postRating(intent.getIntExtra("prodid", 0), rating);
+                if (internetConnected()) {
+                    postRating(intent.getIntExtra("productId", 0), rating);
                     dlog.dismiss();
-                }else {
+                } else {
                     showSnackBar();
                 }
-
             }
         });
         dlog.show();
@@ -162,10 +161,10 @@ public class ProductShowActivity extends AppCompatActivity {
 
     public void postRating(final int productid, final int rating) {
 
-        android.content.SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String personid = pref.getString("id", "");
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.POST_PRODUCT_RATING + personid,
+        String url = EndPoints.POST_PRODUCT_RATING + "/" + productid + "/"
+                + rating;
+        Log.i("rateUrl", url);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -173,17 +172,16 @@ public class ProductShowActivity extends AppCompatActivity {
                         dlog.dismiss();
                         personalRate.setBackgroundResource(R.color.green);
                         personalRate.setText("Your Rate: " + rating);
-                        Log.i("Rate Response", response.toString());
+                        Log.i("RateResponse", response.toString());
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
-                    Log.e("networkResponse", response.toString());
+                    Log.e("networkResponse", error.toString());
                     if (error instanceof ServerError && response != null) {
                         try {
-
                             String res = new String(response.data,
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
                             Log.i("RateString", res);
@@ -194,16 +192,16 @@ public class ProductShowActivity extends AppCompatActivity {
                     }
                 }
             }
-        })
-
-        {
+        }) {
             @Override
-            protected Map<String, String> getParams() {
-
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
 
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Prodctid", String.valueOf(productid));
-                params.put("Rating", String.valueOf(rating));
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
 
                 return params;
             }
@@ -219,6 +217,7 @@ public class ProductShowActivity extends AppCompatActivity {
         MenuActivity.menuActivity.finish();
         ProductActivity.productActivity.finish();
     }
+
     private void progressbarOpen() {
         dialogprog.setContentView(R.layout.custom_dialog_progressbar);
         dialogprog.setCanceledOnTouchOutside(false);

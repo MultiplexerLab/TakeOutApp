@@ -149,38 +149,38 @@ public class ScanQRActivity extends AppCompatActivity {
     }
 
     public void getPoints(View view) {
-        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String status = pref.getString("status", "");
+        {
+            SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+            boolean isValid = pref.getBoolean("isValid", false);
 
-        if (!status.isEmpty()) {
+            if (isValid==true) {
+                dialog = new AlertDialog.Builder(ScanQRActivity.this).create();
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = inflater.inflate(R.layout.custom_dialog_points, null);
+                dialog.setView(customView);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setCancelable(true);
 
-            dialog = new AlertDialog.Builder(ScanQRActivity.this).create();
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View customView = inflater.inflate(R.layout.custom_dialog_points, null);
-            dialog.setView(customView);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.setCancelable(true);
+                Button btn = customView.findViewById(R.id.btn_bonus_points);
+                final EditText editText = customView.findViewById(R.id.invoiceNo);
 
-            Button btn = customView.findViewById(R.id.btn_bonus_points);
-            final EditText editText = customView.findViewById(R.id.invoiceNo);
-
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (editText.getText().toString().isEmpty()) {
-                        Toast.makeText(ScanQRActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        sendInvoiceNo(editText.getText().toString());
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (editText.getText().toString().isEmpty()) {
+                            Toast.makeText(ScanQRActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            sendInvoiceNo(editText.getText().toString());
+                        }
                     }
-                }
-            });
-            dialog.show();
-        } else {
-            Intent intent = new Intent(ScanQRActivity.this, AddReferralActivity.class);
-            startActivity(intent);
-            finish();
+                });
+                dialog.show();
+            } else {
+                Toast.makeText(this, "You need to activate your account first!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ScanQRActivity.this, AddReferralActivity.class);
+                startActivity(intent);
+            }
         }
-
     }
 
     private void sendInvoiceNo(final String invoiceNo) {

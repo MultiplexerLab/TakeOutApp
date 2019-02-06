@@ -20,6 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -51,6 +52,7 @@ import java.util.Map;
 
 import multiplexer.lab.takeout.Adapter.MenuAdapter;
 import multiplexer.lab.takeout.Helper.EndPoints;
+import multiplexer.lab.takeout.MainActivity;
 import multiplexer.lab.takeout.Model.Category;
 import multiplexer.lab.takeout.R;
 
@@ -188,7 +190,7 @@ public class MenuActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
 
-                }finally {
+                } finally {
                     progressbarClose();
                 }
 
@@ -242,10 +244,9 @@ public class MenuActivity extends AppCompatActivity {
 
     public void btngetPoints(View view) {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String status = pref.getString("status", "");
+        boolean isValid = pref.getBoolean("isValid", false);
 
-        if (!status.isEmpty()) {
-
+        if (isValid == true) {
             dialog = new AlertDialog.Builder(MenuActivity.this).create();
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View customView = inflater.inflate(R.layout.custom_dialog_points, null);
@@ -268,9 +269,9 @@ public class MenuActivity extends AppCompatActivity {
             });
             dialog.show();
         } else {
+            Toast.makeText(this, "You need to activate your account first!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MenuActivity.this, AddReferralActivity.class);
             startActivity(intent);
-            finish();
         }
     }
 

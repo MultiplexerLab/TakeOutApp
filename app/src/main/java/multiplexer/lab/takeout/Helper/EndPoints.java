@@ -13,7 +13,7 @@ public class EndPoints {
     public static final String GET_COUNTRY_DATA = BASE_URL+"api/country/getAll";
     public static final String GET_CATEGORY_DATA = BASE_URL+"api/menu/Catagory";
     public static final String GET_PRODUCT_DATA = BASE_URL+"api/menu/Finished/";
-    public static final String POST_PRODUCT_RATING = BASE_URL+ "api/menu/rate/";
+    public static final String POST_PRODUCT_RATING = BASE_URL+ "api/menu/rate";
     public static final String GET_USE_COUPON= BASE_URL+ "api/invoice/useinvoice/";
     public static final String GET_CHECK_REFERENCE= BASE_URL+ "api/referral/checkRef";
     public static final String GET_USE_REFERRAL= BASE_URL+ "api/referral/userReferral/";
