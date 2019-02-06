@@ -31,8 +31,8 @@ import multiplexer.lab.takeout.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    EditText fullName, email, phoneno;
-    TextView activationcode;
+    EditText email, phoneno;
+    TextView activationcode, fullName;
     RequestQueue queue;
 
     @Override

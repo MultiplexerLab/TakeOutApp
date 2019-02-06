@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,20 +15,6 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/male"
         android:elevation="1dp" />
-
-    <EditText
-        android:id="@+id/fullName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/IV_pro_pic"
-        android:layout_margin="10dp"
-        android:editable="false"
-        android:elevation="1dp"
-        android:fontFamily="@font/amaranth"
-        android:gravity="center"
-        android:text="Full Name"
-        android:textColor="@color/black" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,71 +22,92 @@
         android:layout_marginTop="170dp"
         android:background="@color/white">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:stateListAnimator="@null">
+            app:cardCornerRadius="10dp"
+            android:layout_margin="20dp"
+            app:cardElevation="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/pt_serif"
-                android:text="EMAIL"
-                android:textColor="#212121"
-                android:textSize="13dp" />
-
-            <EditText
-                android:id="@+id/profileEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:fontFamily="@font/amaranth"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/pt_serif"
-                android:text="PHONE"
-                android:textColor="#212121"
-                android:textSize="13dp" />
-
-            <EditText
-                android:id="@+id/phoneNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:fontFamily="@font/amaranth"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/pt_serif"
-                android:text="ACTIVATION CODE (CLICK TO SHARE)"
-                android:textColor="#212121"
-                android:textSize="13dp" />
-
-            <TextView
-                android:id="@+id/ET_activationcode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:enabled="false"
-                android:fontFamily="@font/amaranth"
-                android:onClick="btnShareCode"
+                android:background="@color/white"
+                android:orientation="vertical"
                 android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#33c70d" />
+                android:stateListAnimator="@null">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/fullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/IV_pro_pic"
+                    android:fontFamily="@font/amaranth"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:text="Full Name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/pt_serif"
+                    android:text="EMAIL"
+                    android:textColor="#212121"
+                    android:textSize="13dp" />
+
+                <EditText
+                    android:id="@+id/profileEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:fontFamily="@font/amaranth"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/pt_serif"
+                    android:text="PHONE"
+                    android:textColor="#212121"
+                    android:textSize="13dp" />
+
+                <EditText
+                    android:id="@+id/phoneNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:fontFamily="@font/amaranth"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pt_serif"
+                    android:text="ACTIVATION CODE (CLICK TO SHARE)"
+                    android:textColor="#212121"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/ET_activationcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary"
+                    android:enabled="false"
+                    android:fontFamily="@font/amaranth"
+                    android:onClick="btnShareCode"
+                    android:padding="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#33c70d" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     </RelativeLayout>
 </RelativeLayout>

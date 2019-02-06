@@ -41,7 +41,6 @@ import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.MainActivity;
 import multiplexer.lab.takeout.R;
 
-
 public class AddReferralActivity extends AppCompatActivity {
 
     TextView text;
@@ -70,7 +69,6 @@ public class AddReferralActivity extends AppCompatActivity {
 
         activationCheck();
         progressbarClose();
-
     }
 
     public void showSnackBar() {
@@ -189,7 +187,6 @@ public class AddReferralActivity extends AppCompatActivity {
                     progressbarClose();
                     Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
                 }
-
             }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
@@ -203,7 +200,6 @@ public class AddReferralActivity extends AppCompatActivity {
                 }
             };
             queue.add(pointRequest);
-
         }
     }
 
@@ -212,7 +208,6 @@ public class AddReferralActivity extends AppCompatActivity {
         Intent intent = new Intent(AddReferralActivity.this, ScanQRActivity.class);
         startActivity(intent);
         finish();
-
     }
 
     public void btnMenu(View view) {
