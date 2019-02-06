@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,12 +31,16 @@ import multiplexer.lab.takeout.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    EditText activationcode, fullName, email, phoneno;
+    EditText fullName, email, phoneno;
+    TextView activationcode;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        queue = Volley.newRequestQueue(this);
+
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -70,18 +75,48 @@ public class ProfileActivity extends AppCompatActivity {
         String Name = pref.getString("fullname", "");
         String Email = pref.getString("email", "");
         String Phone = pref.getString("phone", "");
-        String Status = pref.getString("status", "");
+        boolean isValid = pref.getBoolean("isValid", false);
 
         fullName.setText(Name);
         email.setText(Email);
         phoneno.setText(Phone);
-        if (Status.isEmpty()) {
+        if (isValid==false) {
             activationcode.setText("Your Account is not Activated yet");
             activationcode.setTextColor(this.getResources().getColor(R.color.red));
         } else {
-            activationcode.setText(Status);
-
+            getReferralCode();
         }
+    }
+
+    private void getReferralCode() {
+        StringRequest pointRequest = new StringRequest(Request.Method.GET, EndPoints.GET_CHECK_REFERENCE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("referralCode", response);
+                editor.commit();
+                activationcode.setText(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ParseError", error.toString());
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
+        queue.add(pointRequest);
 
     }
 
@@ -91,15 +126,9 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please Activate Your Account First", Toast.LENGTH_LONG).show();
             return;
         }
-
-
         Uri uri = Uri.parse("smsto:");
         Intent it = new Intent(Intent.ACTION_SENDTO, uri);
         it.putExtra("sms_body", "To Activate your TakeOut account, Use this code: " + code);
         startActivity(it);
-
-
     }
-
-
 }

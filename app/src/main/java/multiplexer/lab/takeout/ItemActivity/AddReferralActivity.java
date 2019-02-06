@@ -28,6 +28,7 @@ import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
@@ -169,14 +170,13 @@ public class AddReferralActivity extends AppCompatActivity {
                 }
             }
 
-            JsonObjectRequest pointRequest = new JsonObjectRequest(Request.Method.GET, EndPoints.GET_USE_REFERRAL + couponcode, new Response.Listener<JSONObject>() {
+            StringRequest pointRequest = new StringRequest(Request.Method.GET, EndPoints.GET_USE_REFERRAL + couponcode, new Response.Listener<String>() {
                 @Override
-                public void onResponse(JSONObject response) {
+                public void onResponse(String response) {
                     Toast.makeText(getApplicationContext(), "Congrats! Activation Successful.", Toast.LENGTH_SHORT).show();
-                    Log.i("data", response.toString());
+                    Log.i("referralData", response.toString());
                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("couponcode", couponcode);
                     editor.putBoolean("isValid", true);
                     progressbarClose();
                     editor.commit();

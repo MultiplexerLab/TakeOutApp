@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putBoolean("isValid", response.getBoolean("isValid"));
                     editor.commit();
                     name.setText(response.getString("Fullname"));
-                    if(response.getBoolean("isValid")){
+                    if(response.getBoolean("isValid")==true){
                         status.setText(" ACTIVATED");
                     }else{
                         status.setText(" NOT ACTIVATED");
@@ -522,7 +522,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         boolean isValid = pref.getBoolean("isValid", false);
 
-        if (isValid) {
+        if (isValid==true) {
             dialog = new AlertDialog.Builder(MainActivity.this).create();
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View customView = inflater.inflate(R.layout.custom_dialog_points, null);
