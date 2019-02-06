@@ -49,6 +49,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -132,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             setAvatar();
-            setStatus();
             getPoints();
             getAds();
             getProfileData();
@@ -195,20 +195,6 @@ public class MainActivity extends AppCompatActivity {
         dialogprog.show();
     }
 
-    private void setStatus() {
-
-        //here will be the code to check if the user already activated the account by using referral code
-
-        //if activated
-        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("status", "");
-        //editor.putString("status", "activatedCode");
-        editor.commit();
-        //status.setText("Activated");
-        //status.setTextColor(this.getResources().getColor(R.color.green));
-    }
-
     private void setAvatar() {
 
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
@@ -230,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             setAvatar();
-            setStatus();
             getPoints();
             getAds();
             getProfileData();
@@ -250,14 +235,17 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("id", response.getString("Id"));
-                    editor.commit();
                     editor.putString("fullname", response.getString("Fullname"));
-                    editor.commit();
                     editor.putString("email", response.getString("Email"));
-                    editor.commit();
                     editor.putString("phone", response.getString("Phone"));
+                    editor.putBoolean("isValid", response.getBoolean("isValid"));
                     editor.commit();
                     name.setText(response.getString("Fullname"));
+                    if(response.getBoolean("isValid")){
+                        status.setText(" ACTIVATED");
+                    }else{
+                        status.setText(" NOT ACTIVATED");
+                    }
                 } catch (JSONException e) {
                     Log.e("JsonException", e.toString());
                 }
@@ -299,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -323,18 +311,16 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.i("Ads", response.toString());
                 adList.clear();
-                //ArrayList<String> pics = new ArrayList<>();
 
                 try {
                     JSONArray jsonArray = response.getJSONArray("fpaAdds");
                     JSONObject obj = response.getJSONObject("fOffer");
                     String str =obj.getString("message");
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"), "Nothing to show");
+                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"), jsonArray.getJSONObject(i).getString("detail"));
                         adList.add(ad);
                     }
                     adAdapter.notifyDataSetChanged();
-                    //initSetPic(pics);
                     progressbarClose();
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
@@ -346,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("AdError", error.toString());
 
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -361,6 +347,22 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
+        adsRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 1000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 1000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(adsRequest);
     }
 
@@ -518,9 +520,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getPoints(View view) {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String status = pref.getString("status", "");
+        boolean isValid = pref.getBoolean("isValid", false);
 
-        if (!status.isEmpty()) {
+        if (isValid) {
             dialog = new AlertDialog.Builder(MainActivity.this).create();
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View customView = inflater.inflate(R.layout.custom_dialog_points, null);
@@ -543,11 +545,10 @@ public class MainActivity extends AppCompatActivity {
             });
             dialog.show();
         } else {
+            Toast.makeText(this, "You need to activate your account first!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
             startActivity(intent);
         }
-
-
     }
 
     private void sendInvoiceNo(final String invoiceNo) {

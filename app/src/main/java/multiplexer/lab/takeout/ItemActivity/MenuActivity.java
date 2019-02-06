@@ -32,6 +32,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -82,7 +83,7 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(cLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, 0));
-        progressbarOpen();
+
         cAdapter = new MenuAdapter(MenuActivity.this, catList);
         recyclerView.setAdapter(cAdapter);
 
@@ -94,7 +95,7 @@ public class MenuActivity extends AppCompatActivity {
             }
             addMenu();
         } else {
-            progressbarClose();
+            //progressbarClose();
             showSnackBar();
         }
 
@@ -166,7 +167,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void addMenu() {
-
+        progressbarOpen();
         JsonArrayRequest productRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_CATEGORY_DATA, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -181,15 +182,16 @@ public class MenuActivity extends AppCompatActivity {
                         id = response.getJSONObject(i).getString("Id");
                         Category category = new Category(name, image, id, catid);
                         catList.add(category);
-
                     }
                     cAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
 
+                }finally {
+                    progressbarClose();
                 }
-                progressbarClose();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -212,6 +214,22 @@ public class MenuActivity extends AppCompatActivity {
                 return params;
             }
         };
+        productRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 1000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 1000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(productRequest);
     }
 
@@ -270,7 +288,7 @@ public class MenuActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());

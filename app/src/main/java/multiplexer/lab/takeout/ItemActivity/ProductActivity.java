@@ -32,6 +32,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -208,7 +209,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),getString(R.string.ToastError),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.ToastWait),Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -222,6 +223,22 @@ public class ProductActivity extends AppCompatActivity {
                 return params;
             }
         };
+        catRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 1000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 1000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(catRequest);
     }
 

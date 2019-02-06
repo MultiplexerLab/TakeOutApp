@@ -124,13 +124,12 @@ public class AddReferralActivity extends AppCompatActivity {
 
     private void activationCheck() {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String status = pref.getString("status", "");
+        boolean status = pref.getBoolean("isValid", false);
 
-        if (!status.isEmpty()) {
+        if (status) {
             coupon.setText("Your Account is already Activated");
             coupon.setEnabled(false);
             submit.setText("Go Back");
-
         }
     }
 
@@ -154,7 +153,6 @@ public class AddReferralActivity extends AppCompatActivity {
             progressbarClose();
             finish();
         } else {
-
             final String couponcode = coupon.getText().toString();
             if (couponcode.isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Please enter the code to activate", Toast.LENGTH_SHORT).show();
@@ -178,7 +176,8 @@ public class AddReferralActivity extends AppCompatActivity {
                     Log.i("data", response.toString());
                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("status", couponcode);
+                    editor.putString("couponcode", couponcode);
+                    editor.putBoolean("isValid", true);
                     progressbarClose();
                     editor.commit();
                     finish();
@@ -197,7 +196,6 @@ public class AddReferralActivity extends AppCompatActivity {
                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                     String accessToken = pref.getString("accessToken", "");
                     Log.i("accessToken", accessToken);
-
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("Content-Type", "application/json");
                     params.put("Authorization", "Bearer " + accessToken);
