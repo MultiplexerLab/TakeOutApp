@@ -196,9 +196,14 @@ public class ScanQRActivity extends AppCompatActivity {
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
+                /*NetworkResponse response = error.networkResponse;
                 if (response != null) {
-                    Log.e("networkResponse", response.toString());
+                */    int response = error.networkResponse.statusCode;
+                    Log.i("statusCode", response+"");
+                    if(response==400 || response==404){
+                        Toast.makeText(ScanQRActivity.this, "This code is invalid!", Toast.LENGTH_SHORT).show();
+                    }
+                    /*Log.e("networkResponse", response.toString());
                     if (error instanceof ServerError && response != null) {
                         try {
                             String res = new String(response.data,
@@ -210,8 +215,7 @@ public class ScanQRActivity extends AppCompatActivity {
                         } catch (UnsupportedEncodingException e1) {
                             e1.printStackTrace();
                         }
-                    }
-                }
+                    }*/
             }
         }) {
             @Override

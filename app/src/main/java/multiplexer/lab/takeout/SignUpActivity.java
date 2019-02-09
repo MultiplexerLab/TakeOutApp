@@ -93,6 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         dialogprog.show();
     }
+
     public void btnSignUp(View view) {
 
         if (internetConnected()) {
@@ -129,24 +130,23 @@ public class SignUpActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 NetworkResponse response = error.networkResponse;
-                if(response!=null) {
+                if (response != null) {
                     Log.e("networkResponse", response.toString());
                     if (error instanceof ServerError && response != null) {
                         try {
                             String res = new String(response.data,
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
                             Log.i("resString", res);
-                            if(res.contains("Phone")){
-                                Toast.makeText(SignUpActivity.this, "This Phone Number is already taken!", Toast.LENGTH_SHORT).show();
-                            }else if(res.contains("Email")){
+                            if (res.contains("Phone")) {
+                                Toast.makeText(SignUpActivity.this, "This Mobile Number is already taken!", Toast.LENGTH_SHORT).show();
+                            } else if (res.contains("Email")) {
                                 Toast.makeText(SignUpActivity.this, "This Email Id is already registered!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, R.string.ToastError, Toast.LENGTH_SHORT).show();
                             }
-                            JSONObject obj = new JSONObject(res);
 
                         } catch (UnsupportedEncodingException e1) {
                             e1.printStackTrace();
-                        } catch (JSONException e2) {
-                            e2.printStackTrace();
                         }
                     }
                 }
@@ -163,10 +163,10 @@ public class SignUpActivity extends AppCompatActivity {
 
                 String country = spinnerCountry.getSelectedItem().toString();
                 params.put("countryName", country);
-                if(country.equals("Bangladesh")){
-                    params.put("phoneNumber", "+88"+etPhone.getText().toString());
-                }else{
-                    params.put("phoneNumber", "+94"+etPhone.getText().toString());
+                if (country.equals("Bangladesh")) {
+                    params.put("phoneNumber", "+88" + etPhone.getText().toString());
+                } else {
+                    params.put("phoneNumber", "+94" + etPhone.getText().toString());
                 }
                 params.put("password", etPassword.getText().toString());
                 params.put("confirmPassword", etConPassword.getText().toString());
@@ -200,7 +200,7 @@ public class SignUpActivity extends AppCompatActivity {
             etEmail.setError("Email Address is missing");
             error = false;
         }
-        if(!email.contains(".com")){
+        if (!email.contains(".com")) {
             etEmail.setError("Enter an Email Address with .com");
             error = false;
         }

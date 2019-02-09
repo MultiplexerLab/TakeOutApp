@@ -157,6 +157,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AdShowActvity" />
         </activity>
+
+        <activity android:name=".JumpActivity"
+            android:label="Home Delivery"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

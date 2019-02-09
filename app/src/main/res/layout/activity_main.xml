@@ -41,11 +41,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:text="EAT!"
                     android:textColor="#F7B01A"
-                    android:textSize="25dp"
+                    android:textSize="24dp"
                     android:textStyle="bold|italic" />
 
                 <TextView
@@ -57,7 +56,7 @@
                     android:layout_marginRight="5dp"
                     android:text="SCAN!"
                     android:textColor="#F7B01A"
-                    android:textSize="25dp"
+                    android:textSize="24dp"
                     android:textStyle="bold|italic" />
 
                 <TextView
@@ -68,17 +67,16 @@
                     android:layout_marginRight="5dp"
                     android:text="GET POINTS!"
                     android:textColor="#F7B01A"
-                    android:textSize="25dp"
+                    android:textSize="24dp"
                     android:textStyle="bold|italic" />
 
                 <ImageView
                     android:id="@+id/IV_avatar_main"
-                    android:layout_width="85dp"
-                    android:layout_height="85dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
                     android:src="@drawable/male" />
 
                 <TextView
@@ -91,8 +89,8 @@
                     android:fontFamily="@font/pt_serif"
                     android:gravity="start"
                     android:text="Welcome "
-                    android:textColor="@color/lightblack"
-                    android:textSize="10dp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/lightblack" />
 
                 <TextView
                     android:id="@+id/name"
@@ -103,7 +101,7 @@
                     android:layout_toRightOf="@+id/IV_avatar_main"
                     android:fontFamily="@font/amaranth"
                     android:text="Full Name"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/lightblack" />
 
                 <RelativeLayout
@@ -121,8 +119,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pt_serif"
                         android:text="Status:"
-                        android:textColor="@color/black"
-                        android:textSize="10dp" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/activate_status"
@@ -132,8 +130,8 @@
                         android:fontFamily="@font/abril_fatface"
                         android:paddingRight="5dp"
                         android:text=""
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/red"
-                        android:textSize="10dp"
                         android:textStyle="bold" />
 
                 </RelativeLayout>
@@ -146,27 +144,23 @@
                     android:layout_below="@+id/status"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@+id/IV_avatar_main"
                     android:fontFamily="@font/pt_serif"
                     android:gravity="start"
                     android:paddingBottom="7dp"
-                    android:text="Total\nPoints:"
-                    android:textColor="@color/lightblack"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    android:text="Points:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/lightblack" />
 
                 <TextView
                     android:id="@+id/numpoints"
-                    android:layout_width="wrap_content"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/status"
-                    android:layout_alignTop="@+id/points"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="4dp"
                     android:layout_toRightOf="@+id/points"
                     android:fontFamily="@font/carter_one"
                     android:text="0"
+                    android:layout_alignTop="@+id/points"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/red"
                     android:textStyle="bold" />
@@ -212,8 +206,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottombar"
             android:layout_below="@+id/LL_welcome"
-            android:paddingLeft="10dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:paddingLeft="10dp" />
 
 
         <LinearLayout

@@ -83,10 +83,10 @@ public class StoreLocatorActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, countryArrList);
         spinnerCountry2.setAdapter(adapter);
-        if(internetConnected()){
+        if (internetConnected()) {
             getAllCountries();
             getStoresByCountry(1);
-        }else{
+        } else {
             progressbarClose();
             showSnackBar();
         }
@@ -196,7 +196,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("ParseError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -212,7 +212,6 @@ public class StoreLocatorActivity extends AppCompatActivity {
             }
         };
         queue.add(countryRequest);
-
     }
 
 
@@ -252,7 +251,7 @@ public class StoreLocatorActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("ParseError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_LONG).show();
             }
         }) {
 
@@ -271,5 +270,4 @@ public class StoreLocatorActivity extends AppCompatActivity {
         };
         queue.add(storeRequest);
     }
-
 }

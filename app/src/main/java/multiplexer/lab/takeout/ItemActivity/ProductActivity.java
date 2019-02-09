@@ -209,7 +209,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),getString(R.string.ToastWait),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),getString(R.string.ToastWait),Toast.LENGTH_LONG).show();
             }
         }) {
             @Override

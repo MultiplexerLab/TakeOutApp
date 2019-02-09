@@ -53,8 +53,6 @@ public class ProfileActivity extends AppCompatActivity {
         phoneno = findViewById(R.id.phoneNo);
 
         setInfo();
-
-
     }
 
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
@@ -80,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity {
         fullName.setText(Name);
         email.setText(Email);
         phoneno.setText(Phone);
-        if (isValid==false) {
+        if (isValid == false) {
             activationcode.setText("Your Account is not Activated yet");
             activationcode.setTextColor(this.getResources().getColor(R.color.red));
         } else {
@@ -126,9 +124,12 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please Activate Your Account First", Toast.LENGTH_LONG).show();
             return;
         }
-        Uri uri = Uri.parse("smsto:");
-        Intent it = new Intent(Intent.ACTION_SENDTO, uri);
-        it.putExtra("sms_body", "To Activate your TakeOut account, Use this code: " + code);
-        startActivity(it);
+        else {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "To Activate your TakeOut account, Use this code: " + code);
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        }
     }
 }

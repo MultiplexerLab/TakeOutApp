@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightblack"
-                android:hint="Password ( >8 )"
+                android:hint="Password ( >7 )"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black" />
@@ -123,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/lightblack"
-                android:hint="Phone No (01XXX)"
+                android:hint="Mobile No (01XXX)"
                 android:inputType="number"
                 android:paddingLeft="10dp"
                 android:layout_marginBottom="40dp"

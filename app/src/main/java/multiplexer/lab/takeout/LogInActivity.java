@@ -32,6 +32,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -190,7 +191,7 @@ public class LogInActivity extends AppCompatActivity {
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
                             Log.i("resString", res);
                             if (res.contains("unsupported_grant_type")) {
-                                Toast.makeText(LogInActivity.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LogInActivity.this, R.string.ToastWait, Toast.LENGTH_SHORT).show();
                             }else{
                                 res =res.substring(12,res.length()-3);
                                 Toast.makeText(LogInActivity.this, res, Toast.LENGTH_SHORT).show();
@@ -210,6 +211,22 @@ public class LogInActivity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 1000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 1000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(stringRequest);
     }
 
@@ -264,6 +281,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void sendDataToServer() {
+        Log.i("Entered", "entered");
         progressbarOpen();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, EndPoints.SIGNIN_URL,
                 new Response.Listener<String>() {
@@ -291,6 +309,7 @@ public class LogInActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 NetworkResponse response = error.networkResponse;
+                Log.e("VolleyError", error.toString());
                 if (response != null) {
                     Log.e("networkResponse", response.toString());
                     if (error instanceof ServerError && response != null) {
@@ -299,7 +318,7 @@ public class LogInActivity extends AppCompatActivity {
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
                             Log.i("resString", res);
                             if (res.contains("unsupported_grant_type")) {
-                                Toast.makeText(LogInActivity.this, "Server Error! Please try again!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LogInActivity.this, R.string.ToastError, Toast.LENGTH_SHORT).show();
                             } else if (res.contains("password")) {
                                 Toast.makeText(LogInActivity.this, "Username or Password is incorrect!", Toast.LENGTH_SHORT).show();
                             }else if(res.contains("<!DOCTYPE html>")){
@@ -326,6 +345,22 @@ public class LogInActivity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 2000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 2000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(stringRequest);
     }
 

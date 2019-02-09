@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
     private List<Ad> adList = new ArrayList<>();
     AdAdapterNew adAdapter;
     RequestQueue queue;
-    BoomMenuButton bmb;
     BoomMenuButton bmb1;
     AlertDialog dialog;
     Dialog dialogprog;
@@ -141,8 +140,6 @@ public class MainActivity extends AppCompatActivity {
             progressbarClose();
             showSnackBar();
         }
-
-
     }
 
     public void showSnackBar() {
@@ -157,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
         snackbar.setActionTextColor(Color.RED);
         snackbar.show();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 9003) {
@@ -241,9 +239,9 @@ public class MainActivity extends AppCompatActivity {
                     editor.putBoolean("isValid", response.getBoolean("isValid"));
                     editor.commit();
                     name.setText(response.getString("Fullname"));
-                    if(response.getBoolean("isValid")==true){
+                    if (response.getBoolean("isValid") == true) {
                         status.setText(" ACTIVATED");
-                    }else{
+                    } else {
                         status.setText(" NOT ACTIVATED");
                     }
                 } catch (JSONException e) {
@@ -287,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -315,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = response.getJSONArray("fpaAdds");
                     JSONObject obj = response.getJSONObject("fOffer");
-                    String str =obj.getString("message");
+                    String str = obj.getString("message");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"), jsonArray.getJSONObject(i).getString("detail"));
                         adList.add(ad);
@@ -332,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("AdError", error.toString());
 
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -390,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
         titleList.add("Scan QR");
         titleList.add("Store Locator");
         titleList.add("Home Delivery");
-        titleList.add("Add Referral");
+        titleList.add("Referral");
         titleList.add("LogOut");
     }
 
@@ -434,7 +432,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     break;
                                 case 2:
-                                    Toast.makeText(getApplicationContext(),"Please wait...",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Please wait...", Toast.LENGTH_SHORT).show();
                                     intent = new Intent(MainActivity.this, ScanQRActivity.class);
                                     startActivity(intent);
                                     break;
@@ -443,9 +441,11 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     break;
                                 case 4:
-                                    String url = "https://www.foodpanda.com.bd/";
+                                    /*String url = "https://www.foodpanda.com.bd/";
                                     intent = new Intent(Intent.ACTION_VIEW);
                                     intent.setData(Uri.parse(url));
+                                    startActivity(intent);*/
+                                    intent = new Intent(MainActivity.this, JumpActivity.class);
                                     startActivity(intent);
                                     break;
                                 case 5:
@@ -483,37 +483,56 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnAddReferral() {
-
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         boolean isValid = pref.getBoolean("isValid", false);
 
-        if (isValid==true) {
-            dialog = new AlertDialog.Builder(MainActivity.this).create();
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View customView = inflater.inflate(R.layout.custom_dialog_points, null);
-            dialog.setView(customView);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.setCancelable(true);
-
-            Button btn = customView.findViewById(R.id.btn_bonus_points);
-            final EditText editText = customView.findViewById(R.id.invoiceNo);
-
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (editText.getText().toString().isEmpty()) {
-                        Toast.makeText(MainActivity.this, "Please insert your invoice no!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        sendInvoiceNo(editText.getText().toString());
-                    }
-                }
-            });
-            dialog.show();
+        if (isValid == true) {
+            getReferralCode();
         } else {
             Toast.makeText(this, "You need to activate your account first!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, AddReferralActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void getReferralCode() {
+        StringRequest pointRequest = new StringRequest(Request.Method.GET, EndPoints.GET_CHECK_REFERENCE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("referralCode", response);
+                editor.commit();
+                /*Uri uri = Uri.parse("smsto:");
+                Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+                it.putExtra("sms_body", "To Activate your TakeOut account, Use this code: " + response);
+                startActivity(it);*/
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "To Activate your TakeOut account, Use this code: " + response);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("ParseError", error.toString());
+                //Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+                String accessToken = pref.getString("accessToken", "");
+                Log.i("accessToken", accessToken);
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json");
+                params.put("Authorization", "Bearer " + accessToken);
+                return params;
+            }
+        };
+        queue.add(pointRequest);
+
     }
 
     public void btnLogOut(MenuItem item) {
@@ -544,7 +563,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
         boolean isValid = pref.getBoolean("isValid", false);
 
-        if (isValid==true) {
+        if (isValid == true) {
             dialog = new AlertDialog.Builder(MainActivity.this).create();
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View customView = inflater.inflate(R.layout.custom_dialog_points, null);
@@ -580,30 +599,33 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.i("PointsResponse", response.toString());
                         if (!response.equals("")) {
-                            Toast.makeText(MainActivity.this, "Congrats! You have got " + invoiceNo + " points!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Congrats! You have got some points!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-
-                NetworkResponse response = error.networkResponse;
-                if (response != null) {
-                    Log.e("networkResponse", response.toString());
-                    if (error instanceof ServerError && response != null) {
-                        try {
-                            String res = new String(response.data,
-                                    HttpHeaderParser.parseCharset(response.headers, "application/json"));
-                            Log.i("resStringA", res);
-                            if (res.contains("account")) {
-                                Toast.makeText(MainActivity.this, "Your account is not activated!", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (UnsupportedEncodingException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
+                int response = error.networkResponse.statusCode;
+                Log.i("statusCode", response + "");
+                if (response == 400 || response == 404) {
+                    Toast.makeText(MainActivity.this, "This code is invalid!", Toast.LENGTH_SHORT).show();
                 }
+                /*if (response != null) {
+                    Log.e("networkResponse", response.toString());
+                    try {
+                        String res = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers, "application/json"));
+                        Log.i("resStringA", res);
+                        if (res.contains("account")) {
+                            Toast.makeText(MainActivity.this, "Your account is not activated!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, R.string.ToastError, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (UnsupportedEncodingException e1) {
+                        Log.e("ExceptionPoints", e1.toString());
+                    }
+                }*/
             }
         }) {
             @Override

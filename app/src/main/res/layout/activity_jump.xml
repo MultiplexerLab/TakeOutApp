@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/foodpanda"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:elevation="10dp"
+        android:onClick="jumpToWebsite"
+        android:scaleType="fitXY"
+        android:src="@drawable/foddpanda" />
+
+    <ImageView
+        android:id="@+id/hungrynaki"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:elevation="10dp"
+        android:onClick="jumpToWebsite"
+        android:scaleType="fitXY"
+        android:src="@drawable/hungrynaki" />
+
+
+    <ImageView
+        android:id="@+id/pathaofood"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:onClick="jumpToWebsite"
+        android:scaleType="fitXY"
+        android:src="@drawable/pathao" />
+
+    <ImageView
+        android:id="@+id/ubereats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:onClick="jumpToWebsite"
+        android:scaleType="fitXY"
+        android:src="@drawable/ubereats" />
+</LinearLayout>

@@ -200,7 +200,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("MenuError", error.toString());
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), getString(R.string.ToastError), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -289,7 +289,12 @@ public class MenuActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
+                int response = error.networkResponse.statusCode;
+                Log.i("statusCode", response+"");
+                if(response==400 || response==404){
+                    Toast.makeText(MenuActivity.this, "This code is invalid!", Toast.LENGTH_SHORT).show();
+                }
+                /*Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
                 NetworkResponse response = error.networkResponse;
                 if (response != null) {
                     Log.e("networkResponse", response.toString());
@@ -305,7 +310,7 @@ public class MenuActivity extends AppCompatActivity {
                             e1.printStackTrace();
                         }
                     }
-                }
+                }*/
             }
         }) {
             @Override

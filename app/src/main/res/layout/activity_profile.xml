@@ -100,7 +100,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@color/colorPrimary"
-                    android:enabled="false"
                     android:fontFamily="@font/amaranth"
                     android:onClick="btnShareCode"
                     android:padding="10dp"
