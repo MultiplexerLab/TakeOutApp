@@ -11,8 +11,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
-import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +36,7 @@ import multiplexer.lab.takeout.Adapter.AdAdapterNew;
 import multiplexer.lab.takeout.Helper.EndPoints;
 import multiplexer.lab.takeout.ItemActivity.AboutUsActivity;
 import multiplexer.lab.takeout.ItemActivity.AddReferralActivity;
+import multiplexer.lab.takeout.ItemActivity.HelpActivity;
 import multiplexer.lab.takeout.ItemActivity.MenuActivity;
 import multiplexer.lab.takeout.ItemActivity.ProfileActivity;
 import multiplexer.lab.takeout.ItemActivity.ScanQRActivity;
@@ -45,27 +44,22 @@ import multiplexer.lab.takeout.ItemActivity.StoreLocatorActivity;
 import multiplexer.lab.takeout.Model.Ad;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
-import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
-
 import com.nightonke.boommenu.BoomMenuButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -381,6 +375,7 @@ public class MainActivity extends AppCompatActivity {
         iconList.add(R.drawable.store_locator_icon);
         iconList.add(R.drawable.home_delivery_icon);
         iconList.add(R.drawable.referral_icon);
+        iconList.add(R.drawable.help);
         iconList.add(R.drawable.logout_icon);
 
         titleList.add("Profile");
@@ -389,15 +384,8 @@ public class MainActivity extends AppCompatActivity {
         titleList.add("Store Locator");
         titleList.add("Home Delivery");
         titleList.add("Referral");
+        titleList.add("Help");
         titleList.add("LogOut");
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-       /* if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }*/
-        return super.onOptionsItemSelected(item);
     }
 
     public void boomCustomizebmb1() {
@@ -406,8 +394,8 @@ public class MainActivity extends AppCompatActivity {
                     .normalImageRes(iconList.get(i))
                     .normalText(titleList.get(i))
                     .rippleEffect(true)
-                    .normalColorRes(R.color.yellow)
-                    .highlightedColorRes(R.color.yellow)
+                    .normalColorRes(R.color.colorPrimary)
+                    .highlightedColorRes(R.color.colorPrimary)
                     .pieceColorRes(R.color.black)
                     .textGravity(Gravity.CENTER)
                     .typeface(Typeface.DEFAULT_BOLD)
@@ -441,10 +429,6 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     break;
                                 case 4:
-                                    /*String url = "https://www.foodpanda.com.bd/";
-                                    intent = new Intent(Intent.ACTION_VIEW);
-                                    intent.setData(Uri.parse(url));
-                                    startActivity(intent);*/
                                     intent = new Intent(MainActivity.this, JumpActivity.class);
                                     startActivity(intent);
                                     break;
@@ -452,6 +436,10 @@ public class MainActivity extends AppCompatActivity {
                                     btnAddReferral();
                                     break;
                                 case 6:
+                                    intent = new Intent(MainActivity.this, HelpActivity.class);
+                                    startActivity(intent);
+                                    break;
+                                case 7:
                                     SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("accessToken", "");

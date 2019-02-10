@@ -32,10 +32,7 @@ import multiplexer.lab.takeout.ItemActivity.ProductShowActivity;
 import multiplexer.lab.takeout.Model.Product;
 import multiplexer.lab.takeout.R;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
 

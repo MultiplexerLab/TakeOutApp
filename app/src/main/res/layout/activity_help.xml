@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/pt_serif"
+        android:padding="5dp"
+        android:text="Install the App"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pt_serif"
+        android:padding="5dp"
+        android:text="•	To find the app manually, navigate to the Google Play Store and search 'Takeout Burger'.\n
+•	Select Install to begin the download.  Please wait while the mobile app is being downloaded and installed.\n
+•	 Select open to start the Takeout Mobile App."
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/pt_serif"
+        android:padding="5dp"
+        android:text="User Registration and Login"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pt_serif"
+        android:padding="5dp"
+        android:text="•	Do the sign up by providing necessary information.\n
+•	Once your registration is done, login with your email and password.\n
+•	Select your appropriate avatar."
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black" />
+
+</LinearLayout>

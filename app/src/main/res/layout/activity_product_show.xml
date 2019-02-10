@@ -224,7 +224,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/tv_menu_home"
-            android:onClick="btngetPoints"
+            android:onClick="btnGetPoints"
             android:orientation="vertical"
             android:padding="5dp">
 

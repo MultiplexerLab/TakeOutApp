@@ -14,10 +14,10 @@
         app:bmb_boomEnum="boomParabola_1"
         app:bmb_boomInWholeScreen="true"
         app:bmb_buttonEnum="textInsideCircle"
-        app:bmb_buttonPlaceEnum="buttonPlace_sc_7_1"
+        app:bmb_buttonPlaceEnum="buttonPlace_sc_8_1"
         app:bmb_frames="100"
         app:bmb_hideDuration="500"
-        app:bmb_piecePlaceEnum="piecePlace_dot_7_1"
+        app:bmb_piecePlaceEnum="piecePlace_dot_8_1"
         app:bmb_rotateDegree="1080"
         app:bmb_backgroundEffect="false"
         app:bmb_showDuration="900" />

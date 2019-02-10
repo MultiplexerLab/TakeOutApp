@@ -76,7 +76,6 @@
                     android:layout_height="75dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
                     android:src="@drawable/male" />
 
                 <TextView

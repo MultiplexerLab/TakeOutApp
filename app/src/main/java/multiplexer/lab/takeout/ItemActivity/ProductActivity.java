@@ -244,10 +244,9 @@ public class ProductActivity extends AppCompatActivity {
 
     public void btnGetPoints(View view) {
         SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
-        String status = pref.getString("status", "");
+        boolean isValid = pref.getBoolean("isValid", false);
 
-        if (!status.isEmpty()) {
-
+        if (isValid == true) {
             dialog = new AlertDialog.Builder(ProductActivity.this).create();
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View customView = inflater.inflate(R.layout.custom_dialog_points, null);
@@ -270,10 +269,9 @@ public class ProductActivity extends AppCompatActivity {
             });
             dialog.show();
         } else {
+            Toast.makeText(this, "You need to activate your account first!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ProductActivity.this, AddReferralActivity.class);
             startActivity(intent);
-            finish();
-            MenuActivity.menuActivity.finish();
         }
     }
 
@@ -284,29 +282,17 @@ public class ProductActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.i("PointsResponse", response.toString());
                         if (!response.equals("")) {
-                            Toast.makeText(ProductActivity.this, "Congrats! You have got " + invoiceNo + " points!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductActivity.this, "Congrats! You have got some bonus points!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 progressbarClose();
-                Toast.makeText(getApplicationContext(),getString(R.string.ToastError),Toast.LENGTH_LONG).show();
-                NetworkResponse response = error.networkResponse;
-                if (response != null) {
-                    Log.e("networkResponse", response.toString());
-                    if (error instanceof ServerError && response != null) {
-                        try {
-                            String res = new String(response.data,
-                                    HttpHeaderParser.parseCharset(response.headers, "application/json"));
-                            Log.i("resString", res);
-                            if (res.contains("account")) {
-                                Toast.makeText(ProductActivity.this, "Your account is not activated!", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (UnsupportedEncodingException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
+                int response = error.networkResponse.statusCode;
+                Log.i("statusCode", response+"");
+                if(response==400 || response==404){
+                    Toast.makeText(ProductActivity.this, "This code is invalid!", Toast.LENGTH_SHORT).show();
                 }
             }
         }) {

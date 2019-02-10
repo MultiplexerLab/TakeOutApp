@@ -282,7 +282,7 @@ public class MenuActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.i("PointsResponse", response.toString());
                         if (!response.equals("")) {
-                            Toast.makeText(MenuActivity.this, "Congrats! You have got " + invoiceNo + " points!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MenuActivity.this, "Congrats! You have got some bonus points!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
                     }
@@ -294,23 +294,6 @@ public class MenuActivity extends AppCompatActivity {
                 if(response==400 || response==404){
                     Toast.makeText(MenuActivity.this, "This code is invalid!", Toast.LENGTH_SHORT).show();
                 }
-                /*Toast.makeText(getApplicationContext(), getString(R.string.ToastWait), Toast.LENGTH_SHORT).show();
-                NetworkResponse response = error.networkResponse;
-                if (response != null) {
-                    Log.e("networkResponse", response.toString());
-                    if (error instanceof ServerError && response != null) {
-                        try {
-                            String res = new String(response.data,
-                                    HttpHeaderParser.parseCharset(response.headers, "application/json"));
-                            Log.i("resString", res);
-                            if (res.contains("account")) {
-                                Toast.makeText(MenuActivity.this, "Your account is not activated!", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (UnsupportedEncodingException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                }*/
             }
         }) {
             @Override

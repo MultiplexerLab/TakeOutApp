@@ -49,8 +49,4 @@
             android:stateListAnimator="@null" />
     </RelativeLayout>
 
-
-
-
-
 </RelativeLayout>
