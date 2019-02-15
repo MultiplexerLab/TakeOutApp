@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:text="Welcome to the TAKEOUT Ltd “Burger Points” collecting and redeeming Application!"
+            android:fontFamily="@font/pt_serif"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pt_serif"
+            android:layout_marginTop="20dp"
+            android:text="This app is published by TAKEOUT LTD for customers to collect and redeem points via Android devices. Customers are required to register with their email and mobile number to collect points from their purchases. Points can be redeemed by the customers from any Takeout outlets.
+Rules for “Burger Points”:\n\n1.	“Burger Points” service will start once an activated user shares their referral code or TAKEOUT Ltd provides the user with a referral code as a token of gift.\n\n2.	For every purchase from the outlet an encrypted code will be provided in the order receipts\n\n3.	Once the encrypted code is inserted in the app points will be stored in your account\n\n
+4.	Customers can collect one point for every 50 TK purchase\n\n5.	Each point is equivalent to 1TK (one point = one taka)\n\n6.	Points can be redeemed by showing their QR code at the outlet counter\n\nDownload now and discover the reasons why this app compliments your taste and loyalty with TAKEOUT. Information right at your fingertips.\n\nFeatures:\n\n
+•	Find TAKEOUT Branches\n\n•	Find the newest, hottest and top rated items to eat and drink\n\n
+•	Get notification of new updates\n\n•	Rate your favorite Burgers, Fries and Shakes\n\n
+•	Get Home Delivery information\n\n"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+</ScrollView>

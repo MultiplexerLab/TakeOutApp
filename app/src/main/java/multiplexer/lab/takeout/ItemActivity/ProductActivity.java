@@ -93,13 +93,6 @@ public class ProductActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(cAdapter);
-
-        if(internetConnected()){
-            getProductData();
-        }else {
-            progressbarClose();
-            showSnackBar();
-        }
     }
 
     public void showSnackBar() {
@@ -168,6 +161,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void getProductData() {
+        productList.clear();
         JsonArrayRequest catRequest = new JsonArrayRequest(Request.Method.GET, EndPoints.GET_PRODUCT_DATA + catid + '/' + countrycode, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -317,5 +311,16 @@ public class ProductActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
         MenuActivity.menuActivity.finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(internetConnected()){
+            getProductData();
+        }else {
+            progressbarClose();
+            showSnackBar();
+        }
     }
 }

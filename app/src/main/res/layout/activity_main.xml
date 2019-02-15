@@ -29,12 +29,9 @@
             card_view:cardElevation="10dp">
 
             <RelativeLayout
+                android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/eat"
@@ -44,7 +41,7 @@
                     android:layout_marginRight="5dp"
                     android:text="EAT!"
                     android:textColor="#F7B01A"
-                    android:textSize="24dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textStyle="bold|italic" />
 
                 <TextView
@@ -56,18 +53,18 @@
                     android:layout_marginRight="5dp"
                     android:text="SCAN!"
                     android:textColor="#F7B01A"
-                    android:textSize="24dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textStyle="bold|italic" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/scan"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
                     android:text="GET POINTS!"
                     android:textColor="#F7B01A"
-                    android:textSize="24dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textStyle="bold|italic" />
 
                 <ImageView
@@ -100,12 +97,12 @@
                     android:layout_toRightOf="@+id/IV_avatar_main"
                     android:fontFamily="@font/amaranth"
                     android:text="Full Name"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/lightblack" />
 
                 <RelativeLayout
                     android:id="@+id/status"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/name"
                     android:layout_marginLeft="10dp"
@@ -128,7 +125,8 @@
                         android:layout_toRightOf="@+id/status1"
                         android:fontFamily="@font/abril_fatface"
                         android:paddingRight="5dp"
-                        android:text=""
+                        android:text="NOT ACTIVATED"
+                        android:layout_alignBottom="@+id/status1"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/red"
                         android:textStyle="bold" />

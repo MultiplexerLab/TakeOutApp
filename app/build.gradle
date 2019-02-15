@@ -7,8 +7,8 @@ android {
         applicationId "multiplexer.lab.takeout"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 19
-        versionName "0.9.19"
+        versionCode 21
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

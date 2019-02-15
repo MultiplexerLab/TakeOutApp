@@ -142,7 +142,7 @@ public class ProductShowActivity extends AppCompatActivity {
         dlog.setContentView(R.layout.custom_rating_dialog);
         Button dialogButton = dlog.findViewById(R.id.btn_submit);
         final SmileRating smileRating = dlog.findViewById(R.id.smile_rating);
-        smileRating.setSelectedSmile(intent.getIntExtra("rating", 0));
+        //smileRating.setSelectedSmile(intent.getIntExtra("rating", 0));
 
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override

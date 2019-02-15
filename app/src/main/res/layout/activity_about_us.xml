@@ -1,46 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="multiplexer.lab.takeout.ItemActivity.AboutUsActivity">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_back" />
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context="multiplexer.lab.takeout.ItemActivity.AboutUsActivity">
 
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/logo" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/logo" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
-        android:text="@string/aboutus"
-        android:textSize="15dp"
-        android:layout_above="@+id/btn_fbpage"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/pt_serif"
+            android:padding="5dp"
+            android:text="About Us"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/btn_fbpage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Checkout our Facebook page"
-        android:background="@color/colorPrimary"
-        android:onClick="btnFbPage"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textColor="@color/lightblack"
-        android:drawableLeft="@drawable/fb_icon"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pt_serif"
+            android:layout_marginTop="10dp"
+            android:text="TAKEOUT is a Fast Casual Restaurant that sells Burgers, Fries and Shakes. However, we are simply not just that, we are many versions of innovation and have successfully created a unique world of tantalizing taste, heartfelt emotions and saga of achievements. These achievements are yours and so is this your official TAKEOUT app.\nWe started our journey on 8th June 2004. An idea of a delicious burger became the brand it is today because of our fans and the hard work of the team behind the burgers. Our menu consists of Burgers of various flavors and taste that would make you come for more. Our French fries and Milk Shakes are renowned on their own rights and it will definitely complete your food experience that you have been starving for.\nWe would like thank and show our gratitude to these teams for developing the app into a unique medium to reach our beloved fans:\n\nApplication Developer: Multiplexer Lab\n\n
+Backend Developer: WebNSofTech\n\nConcept Developer: Takeout Ltd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black" />
 
-</RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/fb_icon"
+            android:gravity="center"
+            android:onClick="btnFbPage"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Checkout our Facebook page"
+            android:textColor="@color/lightblack"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

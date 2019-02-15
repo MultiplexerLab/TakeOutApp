@@ -1,15 +1,9 @@
 <resources>
-    <string name="app_name">TakeOut</string>
+    <string name="app_name">Takeout Burger Points</string>
     <string name="open">Open</string>
     <string name="text">Discover the awesome burgers\nwith your friends at \nTakeout </string>
     <string name="close">Close</string>
     <string name="ToastWait">Server Error! Please wait a while!</string>
     <string name="ToastError">Server Error! Please try again!</string>
-    <string name="aboutus">We started our journey 8th June, 2014.
-        An idea of a delicious burger became the brand it is today because of our fans
-        and the hardwork of the team behind the burgers. Our menu consists of Burgers of various flavors with spices and tastes that would make you come for more. Takeout�s French Fries are renowned on their own right and our milkshakes just complete the food experience you are looking for.
-        It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged.
-        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="aboutus"></string>
 </resources>

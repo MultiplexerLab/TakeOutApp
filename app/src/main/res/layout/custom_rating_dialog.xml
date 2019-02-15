@@ -43,6 +43,7 @@
                 app:isIndicator="false"
                 app:normalColor="@color/lightyellow"
                 app:textNonSelectionColor="@color/lightyellow"
+                android:paddingRight="10dp"
                 app:textSelectionColor="@color/white" />
 
             <Button
