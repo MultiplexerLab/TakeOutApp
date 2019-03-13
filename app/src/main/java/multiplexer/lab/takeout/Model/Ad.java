@@ -3,10 +3,20 @@ package multiplexer.lab.takeout.Model;
 public class Ad {
     String pic;
     String message;
+    String url;
 
-    public Ad(String pic, String message) {
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Ad(String pic, String message, String url) {
         this.pic = pic;
         this.message = message;
+        this.url = url;
     }
 
     public String getPic() {

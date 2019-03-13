@@ -179,7 +179,7 @@ public class MenuActivity extends AppCompatActivity {
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         name = response.getJSONObject(i).getString("Name");
-                        image = "http://store.bdtakeout.com/images/categoryimage/" + response.getJSONObject(i).getString("Image");
+                        image = "http://109.203.124.76:90/images/categoryimage/" + response.getJSONObject(i).getString("Image");
                         catid = response.getJSONObject(i).getInt("CatId");
                         id = response.getJSONObject(i).getString("Id");
                         Category category = new Category(name, image, id, catid);

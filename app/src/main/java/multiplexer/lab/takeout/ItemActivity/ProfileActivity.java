@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText email, phoneno;
     TextView activationcode, fullName;
     RequestQueue queue;
+    ImageView proPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +47,11 @@ public class ProfileActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-
         activationcode = findViewById(R.id.ET_activationcode);
         fullName = findViewById(R.id.fullName);
         email = findViewById(R.id.profileEmail);
         phoneno = findViewById(R.id.phoneNo);
+        proPic = findViewById(R.id.IV_pro_pic);
 
         setInfo();
     }
@@ -118,13 +119,24 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    private void setAvatar() {
+
+        SharedPreferences pref = getSharedPreferences("user", MODE_PRIVATE);
+        String avatar = pref.getString("Avatar", "male");
+        if (avatar.equalsIgnoreCase("male")) {
+            proPic.setImageResource(R.drawable.male);
+        } else {
+            proPic.setImageResource(R.drawable.female);
+        }
+
+    }
+
     public void btnShareCode(View view) {
         String code = activationcode.getText().toString();
         if (code.contains("Your Account is not Activated yet")) {
             Toast.makeText(getApplicationContext(), "Please Activate Your Account First", Toast.LENGTH_LONG).show();
             return;
-        }
-        else {
+        } else {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, "To Activate your TakeOut account, Use this code: " + code);

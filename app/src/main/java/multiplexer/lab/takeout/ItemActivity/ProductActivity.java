@@ -172,7 +172,7 @@ public class ProductActivity extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         name = response.getJSONObject(i).getString("Name");
                         id = response.getJSONObject(i).getInt("FinId");
-                        image = "http://store.bdtakeout.com/images/productimage/" + response.getJSONObject(i).getString("Image");
+                        image = "http://109.203.124.76:90/images/productimage/" + response.getJSONObject(i).getString("Image");
                         description = response.getJSONObject(i).getString("Desc");
                         if (response.getJSONObject(i).isNull("Rating")) {
                             rating = 5;

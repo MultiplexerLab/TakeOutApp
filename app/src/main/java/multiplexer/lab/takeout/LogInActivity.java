@@ -312,7 +312,6 @@ public class LogInActivity extends AppCompatActivity {
                 Log.e("VolleyError", error.toString());
                 if (response != null) {
                     Log.e("networkResponse", response.toString());
-                    if (error instanceof ServerError && response != null) {
                         try {
                             String res = new String(response.data,
                                     HttpHeaderParser.parseCharset(response.headers, "application/json"));
@@ -327,11 +326,11 @@ public class LogInActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(res);
 
                         } catch (UnsupportedEncodingException e1) {
-                            e1.printStackTrace();
+                            Log.e("UnsupportedEncoding", e1.toString());
                         } catch (JSONException e2) {
+                            Log.e("JSONException", e2.toString());
                             e2.printStackTrace();
                         }
-                    }
                 }
                 progressbarClose();
             }

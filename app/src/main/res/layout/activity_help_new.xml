@@ -35,5 +35,25 @@ Rules for “Burger Points”:\n\n1.	“Burger Points” service will start once
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/black" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="Email: takeoutburgerpoint@bdtakeout.com"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="Mobile No: +8801847290010"/>
+
     </LinearLayout>
 </ScrollView>

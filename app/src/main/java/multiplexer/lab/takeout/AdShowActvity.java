@@ -29,9 +29,15 @@ public class AdShowActvity extends AppCompatActivity {
     }
     public void btnFbPage(View view) {
 
-        String url = "https://www.facebook.com/bdtakeout/";
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
+        if(getIntent().getStringExtra("url").isEmpty()) {
+            String url = "https://www.facebook.com/bdtakeout/";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(getIntent().getStringExtra("url")));
+            startActivity(intent);
+        }
     }
 }

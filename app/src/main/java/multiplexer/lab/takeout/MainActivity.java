@@ -309,13 +309,15 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = response.getJSONObject("fOffer");
                     String str = obj.getString("message");
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        Ad ad = new Ad("http://store.bdtakeout.com/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"), jsonArray.getJSONObject(i).getString("detail"));
+                        Ad ad = new Ad("http://109.203.124.76:90/images/advertiseimage/" + jsonArray.getJSONObject(i).getString("image"), jsonArray.getJSONObject(i).getString("detail")
+                        , jsonArray.getJSONObject(i).getString("url"));
                         adList.add(ad);
                     }
-                    adAdapter.notifyDataSetChanged();
                     progressbarClose();
                 } catch (JSONException e) {
                     Log.e("ParseError", e.toString());
+                }finally {
+                    adAdapter.notifyDataSetChanged();
                 }
             }
         }, new Response.ErrorListener() {

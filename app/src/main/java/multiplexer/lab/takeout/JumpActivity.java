@@ -19,13 +19,13 @@ public class JumpActivity extends AppCompatActivity {
         String url = "";
         if (id == R.id.foodpanda) {
             url = "https://www.foodpanda.com.bd/";
-        } else if (id == R.id.hungrynaki) {
+        } /*else if (id == R.id.hungrynaki) {
             url = "https://hungrynaki.com/";
         } else if (id == R.id.ubereats) {
             url = "https://www.uber.com/en-BD/cities/dhaka/";
         } else if (id == R.id.pathaofood) {
             url = "https://pathao.com/food";
-        }
+        }*/
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);

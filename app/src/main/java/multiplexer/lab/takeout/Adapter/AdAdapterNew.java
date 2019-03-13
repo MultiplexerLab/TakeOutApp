@@ -48,7 +48,16 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
                 .onlyScaleDown()
                 .centerInside()
                 .into(holder.adPic);
-        holder.message.setText(ad.getMessage());
+        String message[] = ad.getMessage().split(" ");
+        try {
+            if (message.length < 2) {
+                holder.message.setText(message[0]);
+            } else {
+                holder.message.setText(message[0] + " " + message[1] + " " + message[2]);
+            }
+        } catch (Exception e) {
+
+        }
 
         holder.adPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +65,9 @@ public class AdAdapterNew extends RecyclerView.Adapter<AdAdapterNew.MyViewHolder
                 Intent intent = new Intent(context, AdShowActvity.class);
                 intent.putExtra("imageUrl", ad.getPic());
                 intent.putExtra("message", ad.getMessage());
-                context.startActivity(intent);            }
+                intent.putExtra("url", ad.getUrl());
+                context.startActivity(intent);
+            }
         });
     }
 
